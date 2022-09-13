@@ -1,6 +1,6 @@
 # INF301
 
-Vous pouvez acceder à chaque dossier pour voir les fichiers associé. Les dossiers APPX ont l;organisation suivante:
+Vous pouvez acceder à chaque dossier pour voir les fichiers associé. Les dossiers APPX ont l'organisation suivante:
 
 * Calendar: Tous les details sur le probleme d'APP, notes et discussions, organisé par semaine et dates
 * Versions des codes par les binomes, trinomes pendant les TPs
