@@ -20,4 +20,3 @@
           ```
           ((lettre-'a')+decalage)%26 + 'a'
           ```
-    - On applique la formule suivante
