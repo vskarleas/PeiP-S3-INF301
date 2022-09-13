@@ -12,6 +12,12 @@
     - On verifie si c'est un lettre majuscule ou miniscule et on avance selon:
       - Si c'est un lettre majuscule, alors on reste entre les limites des indices de code d'ASCII pour les lettres najuscules
         - On applique la formule qu'on a trouvé:
-          lettre-'A'
+          ```
+          ((lettre-'A')+decalage)%26 + 'A'
+          ```
       - Si c'est un lettre miniscule, alors on reste entre les limites des indices de code d'ASCII pour les lettres miniscules
+        - On applique la formule qu'on a trouvé:
+          ```
+          ((lettre-'a')+decalage)%26 + 'a'
+          ```
     - On applique la formule suivante
