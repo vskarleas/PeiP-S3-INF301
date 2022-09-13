@@ -7,4 +7,12 @@ Vous pouvez acceder à chaque dossier pour voir les fichiers associé. Les dossi
 * Schema de l'algorithme (possibilité)
 * Fichiers associés à cet APP
 
-Le dossier Programs inclue des programs qui etaient presenté pendant l'amphi. Ils sont ecrit en Python ou en C
+Le dossier Programs inclue des programs qui etaient presenté pendant l'amphi. Ils sont ecrit en Python ou en C.
+
+
+## Connection sur Turing 
+
+1. Choissiesez une session SSH
+   * Sur Mac ou linux vous pouvez utiliser le terminal end ecrivant ssh identifiant_agalant@im2ag-turing.univ-grenoble-alpes.fr
+   * Sinon vous pouvez utliser l'extension sur VScode qui s'appele SSH Remote Server.
+   * Mettre votre mot de passe agalant
