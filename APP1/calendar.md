@@ -20,6 +20,7 @@
           ```
           ((lettre-'a')+decalage)%26 + 'a'
           ```
+- Creation du programme qui prend un message et qui le decrypte selon un decalage donne pour l'alphabet. Le code est sur le fichier **algo1.c**.
 
 ## 15/9/2022 Premier seance de TP
 
@@ -27,7 +28,25 @@
 * Travail sur le decodage du programme
 * tutoriel est terminé
 * TUTORIEL est terminé
-* Le premier message de Bob et Alice est decrypté
+* projectX est terminé
+* But pour la prochaine seance est de trouver an algorythm qui crypte un message.
+* Le message projectX de Bob et Alice est decrypté
   * ```
-    ddd
+    Chere Alice,
+
+    Je crois que nous sommes sur ecoute, nous allons devoir changer notre methode 
+    de chiffrement. J'ai une petite idee derriere la tete pour cela. Vu la 
+    situation, nous ne pouvons etre trop prudents avant de passer au plan prevu.
+    Je te laisse un prochain message dans l'exercice 'crypteMove', reste vigilante 
+    et efface tes traces.
+
+    Au fait, la solution pour reussir projetX est d'envoyer "veni vidi vici" au serveur. Tu 
+    auras ainsi acces a l'exercice 'crypteMove'.
+
+    Bien a toi,
+    Bob.
+
+    PS : Si tu as le temps, j'ai mis des codes secrets pour ce que tu sais dans 
+    l'exercice challenge 'planB' mais ce n'est pas la priorite pour l'instant. En 
+    cas de doute, retrouve-moi plutot rapidement sur crypteMove.
     ```

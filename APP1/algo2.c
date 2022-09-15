@@ -1,24 +1,33 @@
 #include<stdio.h>
+#include <string.h>
 
-char* encode(char* str) {
-   int j = 0;
-
-   while (str[j] != '\0') {
-      str[j] = str[j] - 30;  // Subtract 30 From Charcter
-      j++;
-   }
-   return (str);
+char remplacer_lettre(char lettre, int decalage){
+    return (lettre + decalage);
 }
 
-void main() {
+void remplacer_texte(char* nom_fichier_code){
+    FILE* fichier_code = fopen(nom_fichier_code,"r");
+    char nom_fichier_decode[512];
+    strcpy(nom_fichier_decode,nom_fichier_code);
+    strcat(nom_fichier_decode, "_encode");
+    FILE *fichier_decode = fopen(nom_fichier_decode, "w");
+    char lettre;
+    fscanf(fichier_code, "%c", &lettre);
+    while(!feof(fichier_code)){
+        if (lettre == 'a'||lettre == 'e'||lettre == 'i'||lettre == 'o'||lettre == 'u') {
+            char lettre_encode = remplacer_lettre(lettre, 3);
+            fprintf(fichier_decode, "%c", lettre_encode);
+            fscanf(fichier_code, "%c", &lettre);
+        }
+        else {
+            fprintf(fichier_decode, "%c", lettre);
+        }
+    }
+    fclose(fichier_code);
+    fclose(fichier_decode);
+}
 
-   char *str;
 
-   printf("\nEnter the String to be Encode : ");
-   gets(str);
-
-   str = encode(str);
-   printf("\nEncoded String : %s", str);
-
-   getch();
+int main() {
+    remplacer_texte("texte2.txt");
 }
