@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 char remplacer_lettre(char lettre, int decalage){
     if(lettre>='A' && lettre<='Z'){
         return (((lettre-'A')+decalage)%26+'A');

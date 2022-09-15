@@ -20,3 +20,14 @@
           ```
           ((lettre-'a')+decalage)%26 + 'a'
           ```
+
+## 15/9/2022 Premier seance de TP
+
+* Exercise pereparatoire est veirfié avec des tests
+* Travail sur le decodage du programme
+* tutoriel est terminé
+* TUTORIEL est terminé
+* Le premier message de Bob et Alice est decrypté
+  * ```
+    ddd
+    ```
