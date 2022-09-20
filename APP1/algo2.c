@@ -20,7 +20,7 @@ void premierLettre(char *str, char *coded) {
     coded[0]=premlettre;
 }
 int main() {
-    char texte_originale[50000]="Petit message court.";
+    char texte_originale[50000]="Petit message court."; //On doit trouver une maniere pour l'appliquer sur le texte d'aide qui normalment doit le metttre dans un fichier, mais je ne suis pas sure.
     char texte_code[10000];
     premierLettre(texte_originale, texte_code);
     remove_lettre(texte_originale);
