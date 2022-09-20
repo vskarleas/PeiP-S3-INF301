@@ -77,8 +77,38 @@
 * Le texte qu'on doit crypter est le suivante:
 
   * ```
-    Alice,
-    J'espere que c'est bien toi. Je t'ai mis un message personnel dans l'aide de cet exercice. Une fois l'exercice demarre, il faut que tu m'envoies ce message d'aide au complet encrypte a l'aide de mon nouvel algorithme a base de deplacements de caracteres. Une fois que tu m'auras prouve ainsi que c'est bien toi, nous pourrons continuer notre conversation de maniere securisee.
+    >>>recu >>> Chere Alice,
+    >>>recu >>> 
+    >>>recu >>> Nous devons etre plus prudents, il faut anticiper avant que nous ne soyons 
+    >>>recu >>> reperes. J'ai termine dans l'urgence mon nouveau schema de chiffrement que j'ai 
+    >>>recu >>> appele 'crypteMove'.
+    >>>recu >>> Durant l'encryption, nous allons modifier l'ordre des lettres du texte selon 
+    >>>recu >>> des regles bien etablies. Voici le principe :
+    >>>recu >>> - soit TXT la sequence des caracteres a encrypter
+    >>>recu >>> - soit ENC la sequence de sortie
+    >>>recu >>>   (au debut, ENC est vide)
+    >>>recu >>> - j'effectue ensuite la manipulation suivante:
+    >>>recu >>>   * je prends C le premier caractere de TXT et le rajoute a la fin de ENC
+    >>>recu >>>   * soit X le code ASCII de C modulo 8 (par exemple pour la lettre 'b', son 
+    >>>recu >>>     code ASCII est 98 donc X = 2)
+    >>>recu >>>   * je prends les X premiers caracteres de TXT et les deplace a la fin de TXT
+    >>>recu >>>     (s'il reste au moins X caracteres dans TXT)
+    >>>recu >>>   * je recommence jusqu'a ce que TXT soit vide
+    >>>recu >>> - a la fin, ENC contiendra le message encrypte.
+    >>>recu >>> 
+    >>>recu >>> Je te donne un exemple sur le message suivant :
+    >>>recu >>>       "Petit message court."
+    >>>recu >>> Devient :
+    >>>recu >>>       "Pee ct mosusriae.ttg"
+    >>>recu >>> 
+    >>>recu >>> Je sais que tu es l'une des rares personnes a pouvoir mettre en oeuvre une 
+    >>>recu >>> technique complexe comme celle-ci, cela devrait mieux nous proteger que le code 
+    >>>recu >>> de cesar que nous utilisions jusqu'a present. Cependant, pour me montrer que tu 
+    >>>recu >>> as bien compris ma methode, il faut dans un premier temps que tu me renvoies ce 
+    >>>recu >>> message complet crypte comme je viens de te l'expliquer.
+    >>>recu >>> 
+    >>>recu >>> Bien a toi,
+    >>>recu >>> Bob.
     ```
 * L'algorithme est le suivante:
 
