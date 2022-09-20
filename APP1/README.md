@@ -21,6 +21,41 @@
           ((lettre-'a')+decalage)%26 + 'a'
           ```
 - Creation du programme qui prend un message et qui le decrypte selon un decalage donne pour l'alphabet. Le code est sur le fichier **algo1.c**.
+- L'algorythme est le suivante:
+  - ```
+    #include <stdio.h>
+    #include <string.h>
+    char remplacer_lettre(char lettre, int decalage){
+        if(lettre>='A' && lettre<='Z'){
+            return (((lettre-'A')+decalage)%26+'A');
+        }else if(lettre>='a' && lettre<='z'){
+            return (((lettre - 'a') + decalage) % 26 + 'a');
+        }else{
+            return lettre;
+        }
+    }
+
+    void remplacer_texte(char* nom_fichier_code, int decalage){
+        FILE* fichier_code = fopen(nom_fichier_code,"r");
+        char nom_fichier_decode[512];
+        strcpy(nom_fichier_decode,nom_fichier_code);
+        strcat(nom_fichier_decode, "_decode");
+        FILE *fichier_decode = fopen(nom_fichier_decode, "w");
+        char lettre;
+        fscanf(fichier_code, "%c", &lettre);
+        while(!feof(fichier_code)){
+            char lettre_decode = remplacer_lettre(lettre, decalage);
+            fprintf(fichier_decode, "%c", lettre_decode);
+            fscanf(fichier_code, "%c", &lettre);
+        }
+        fclose(fichier_code);
+        fclose(fichier_decode);
+    }
+
+    int main() {
+        remplacer_texte("message-secret_Caseine.txt", 21);
+    }
+    ```
 
 ## 15/9/2022 Premier seance de TP
 
@@ -113,37 +148,51 @@
 * L'algorithme est le suivante:
 
   * ```
-    #include <stdio.h>
+    #include <stdlib.h>
     #include <string.h>
-    char remplacer_lettre(char lettre, int decalage){
-        if(lettre>='A' && lettre<='Z'){
-            return (((lettre-'A')+decalage)%26+'A');
-        }else if(lettre>='a' && lettre<='z'){
-            return (((lettre - 'a') + decalage) % 26 + 'a');
-        }else{
-            return lettre;
+    #include <stdio.h>
+    void remove_lettre(char *str){
+        memmove(str, str+1, strlen(str));
+    }
+    void swap_last(char *str) {
+        const size_t len = strlen(str);
+        if (len >1) {
+            const char first=str[0];
+            memmove(str, str+1, len-1);
+            str[len-1]=first;
         }
     }
-
-    void remplacer_texte(char* nom_fichier_code, int decalage){
-        FILE* fichier_code = fopen(nom_fichier_code,"r");
-        char nom_fichier_decode[512];
-        strcpy(nom_fichier_decode,nom_fichier_code);
-        strcat(nom_fichier_decode, "_decode");
-        FILE *fichier_decode = fopen(nom_fichier_decode, "w");
-        char lettre;
-        fscanf(fichier_code, "%c", &lettre);
-        while(!feof(fichier_code)){
-            char lettre_decode = remplacer_lettre(lettre, decalage);
-            fprintf(fichier_decode, "%c", lettre_decode);
-            fscanf(fichier_code, "%c", &lettre);
-        }
-        fclose(fichier_code);
-        fclose(fichier_decode);
+    int decalage(char *str) {
+        return str[0]%8;
     }
-
+    void premierLettre(char *str, char *coded) {
+        char premlettre = str[0];
+        coded[0]=premlettre;
+    }
     int main() {
-        remplacer_texte("texte.txt", 21);
+        char texte_originale[50000]="Petit message court."; //On doit trouver une maniere pour l'appliquer sur le texte d'aide qui normalment doit le metttre dans un fichier, mais je ne suis pas sure.
+        char texte_code[10000];
+        premierLettre(texte_originale, texte_code);
+        remove_lettre(texte_originale);
+        const size_t len = strlen(texte_originale);
+        int dec;
+        char lte;
+        while(texte_originale[0]!='\0'){
+            lte=texte_originale[0];
+            dec=decalage(texte_originale);
+            if (dec<strlen(texte_originale)){
+                texte_code[strlen(texte_code)]=lte;
+                remove_lettre(texte_originale);
+                for (int i=0; i<dec; i++){
+                    swap_last(texte_originale);
+                }
+            }
+            else {
+                remove_lettre(texte_originale);
+                texte_code[strlen(texte_code)]=lte;
+            }
+        }
+        printf("%s\n", texte_code);
     }
     ```
 
