@@ -1,0 +1,13 @@
+{
+  "configurations": [
+    {
+      "name": "Run and debug C Program",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "cwd": "${fileDirname}",
+      "preLaunchTask": "makelldb: make"
+    }
+  ]
+}
