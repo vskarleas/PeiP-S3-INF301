@@ -116,3 +116,52 @@
         remplacer_texte("texte.txt", 21);
     }
     ```
+
+
+# Caseine
+
+Ici vous pouvez trouver tous les resolutions des exercises du Caseine. Les membres de l'equipe ont contribué.
+
+## Exercice préparatoire (C) : Décalage de César
+
+```
+#include <stdio.h>
+
+/*
+ *  Auteur(s) :
+ *  Date :
+ *
+ */
+
+
+int main (void)
+{
+    char lettreLue;
+    char lettreSuivante3;
+
+    printf ("Donner une lettre \n");
+    scanf ("%c",&lettreLue);
+    if (lettreLue >= 'A' && lettreLue <= 'Z') {
+        lettreSuivante3 = (((lettreLue - 'A')+3)%26+'A');
+    
+    }
+    else if (lettreLue >= 'a' && lettreLue <= 'z') {
+        lettreSuivante3 = (((lettreLue-'a')+3)%26+'a');
+    }
+    else {
+        lettreSuivante3 = lettreLue;
+    }
+    //completer ici le calcul de la lettre suivante (3 rang plus loin)
+  
+    printf("\n%c\n",lettreSuivante3);
+
+    return 0;
+}
+
+```
+
+## Decryption V1.0
+
+```
+
+```
