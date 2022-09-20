@@ -56,84 +56,63 @@
 
 * Discussion sur l'agorithme CrypteMove par l'APP1.
 * Les indices de l'agorytme sont les suivantes (on a les pris via l'AppoLab):
-  * `>>>recu >>> Durant l'encryption, nous allons modifier l'ordre des lettres du texte selon
-    >>> recu >>> des regles bien etablies. Voici le principe :
-    >>> recu >>> - soit TXT la sequence des caracteres a encrypter
-    >>> recu >>> - soit ENC la sequence de sortie
-    >>> recu >>>   (au debut, ENC est vide)
-    >>> recu >>> - j'effectue ensuite la manipulation suivante:
-    >>> recu >>>   * je prends C le premier caractere de TXT et le rajoute a la fin de ENC
-    >>> recu >>>   * soit X le code ASCII de C modulo 8 (par exemple pour la lettre 'b', son
-    >>> recu >>>     code ASCII est 98 donc X = 2)
-    >>> recu >>>   * je prends les X premiers caracteres de TXT et les deplace a la fin de TXT
-    >>> recu >>>     (s'il reste au moins X caracteres dans TXT)
-    >>> recu >>>   * je recommence jusqu'a ce que TXT soit vide
-    >>> recu >>> - a la fin, ENC contiendra le message encrypte.
-    >>> recu >>>
-    >>> recu >>> Je te donne un exemple sur le message suivant :
-    >>> recu >>>       "Petit message court."`
-    >>>
-    >>
-    >
+
+  ```
+  >>>recu >>> Durant l'encryption, nous allons modifier l'ordre des lettres du texte selon>>> recu >>> des regles bien etablies. Voici le principe :
+  >>> recu >>> - soit TXT la sequence des caracteres a encrypter
+  >>> recu >>> - soit ENC la sequence de sortie
+  >>> recu >>>   (au debut, ENC est vide)
+  >>> recu >>> - j'effectue ensuite la manipulation suivante:
+  >>> recu >>>   * je prends C le premier caractere de TXT et le rajoute a la fin de ENC
+  >>> recu >>>   * soit X le code ASCII de C modulo 8 (par exemple pour la lettre 'b', son
+  >>> recu >>>     code ASCII est 98 donc X = 2)
+  >>> recu >>>   * je prends les X premiers caracteres de TXT et les deplace a la fin de TXT
+  >>> recu >>>     (s'il reste au moins X caracteres dans TXT)
+  >>> recu >>>   * je recommence jusqu'a ce que TXT soit vide
+  >>> recu >>> - a la fin, ENC contiendra le message encrypte.
+  >>> recu >>>
+  >>> recu >>> Je te donne un exemple sur le message suivant :
+  >>> recu >>>       "Petit message court."
+  ```
 * Le texte qu'on doit crypter est le suivante:
-  * `>>>recu >>> Alice,
-    >>> recu >>> J'espere que c'est bien toi. Je t'ai mis un message personnel dans l'aide de cet
-    >>> recu >>> exercice. Une fois l'exercice demarre, il faut que tu m'envoies ce message
-    >>> recu >>> d'aide au complet encrypte a l'aide de mon nouvel algorithme a base de
-    >>> recu >>> deplacements de caracteres. Une fois que tu m'auras prouve ainsi que c'est bien
-    >>> recu >>> toi, nous pourrons continuer notre conversation de maniere securisee.`
-    >>>
-    >>
-    >
+
+  * ```
+    Alice,
+    J'espere que c'est bien toi. Je t'ai mis un message personnel dans l'aide de cet exercice. Une fois l'exercice demarre, il faut que tu m'envoies ce message d'aide au complet encrypte a l'aide de mon nouvel algorithme a base de deplacements de caracteres. Une fois que tu m'auras prouve ainsi que c'est bien toi, nous pourrons continuer notre conversation de maniere securisee.
+    ```
 * L'algorithme est le suivante:
-  * `#include <stdlib.h>
-    #include <string.h>
+
+  * ```
     #include <stdio.h>
-
-    void remove_lettre(char *str){
-    memmove(str, str+1, strlen(str));
+    #include <string.h>
+    char remplacer_lettre(char lettre, int decalage){
+        if(lettre>='A' && lettre<='Z'){
+            return (((lettre-'A')+decalage)%26+'A');
+        }else if(lettre>='a' && lettre<='z'){
+            return (((lettre - 'a') + decalage) % 26 + 'a');
+        }else{
+            return lettre;
+        }
     }
 
-    void swap_last(char *str) {
-    const size_t len = strlen(str);
-    if (len >1) {
-    const char first=str[0];
-    memmove(str, str+1, len-1);
-    str[len-1]=first;
-    }
-    }
-
-    int decalage(char *str) {
-    return str[0]%8;
-    }
-
-    void premierLettre(char *str, char *coded) {
-    char premlettre = str[0];
-    coded[0]=premlettre;
+    void remplacer_texte(char* nom_fichier_code, int decalage){
+        FILE* fichier_code = fopen(nom_fichier_code,"r");
+        char nom_fichier_decode[512];
+        strcpy(nom_fichier_decode,nom_fichier_code);
+        strcat(nom_fichier_decode, "_decode");
+        FILE *fichier_decode = fopen(nom_fichier_decode, "w");
+        char lettre;
+        fscanf(fichier_code, "%c", &lettre);
+        while(!feof(fichier_code)){
+            char lettre_decode = remplacer_lettre(lettre, decalage);
+            fprintf(fichier_decode, "%c", lettre_decode);
+            fscanf(fichier_code, "%c", &lettre);
+        }
+        fclose(fichier_code);
+        fclose(fichier_decode);
     }
 
     int main() {
-    char texte_originale[10000]="Petit message court.";
-    char texte_code[10000];
-    premierLettre(texte_originale, texte_code);
-    remove_lettre(texte_originale);
-    const size_t len = strlen(texte_originale);
-    int dec;
-    char lte;
-    while(texte_originale[0]!='\0'){
-    lte=texte_originale[0];
-    dec=decalage(texte_originale);
-    if (dec<strlen(texte_originale)){
-    texte_code[strlen(texte_code)]=lte;
-    remove_lettre(texte_originale);
-    for (int i=0; i<dec; i++){
-    swap_last(texte_originale);
+        remplacer_texte("texte.txt", 21);
     }
-    }
-    else {
-    remove_lettre(texte_originale);
-    texte_code[strlen(texte_code)]=lte;
-    }
-    }
-    printf("%s\n", texte_code);
-    }`
+    ```
