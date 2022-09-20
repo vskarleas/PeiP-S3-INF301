@@ -1,11 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
 void remove_lettre(char *str){
     memmove(str, str+1, strlen(str));
 }
-
 void swap_last(char *str) {
     const size_t len = strlen(str);
     if (len >1) {
@@ -14,16 +12,13 @@ void swap_last(char *str) {
         str[len-1]=first;
     }
 }
-
 int decalage(char *str) {
     return str[0]%8;
 }
-
 void premierLettre(char *str, char *coded) {
     char premlettre = str[0];
     coded[0]=premlettre;
 }
-
 int main() {
     char texte_originale[10000]="Petit message court.";
     char texte_code[10000];
