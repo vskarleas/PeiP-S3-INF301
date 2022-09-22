@@ -93,6 +93,7 @@
 * Les indices de l'agorytme sont les suivantes (on a les pris via l'AppoLab):
 
   ```
+
   >>>recu >>> Durant l'encryption, nous allons modifier l'ordre des lettres du texte selon>>> recu >>> des regles bien etablies. Voici le principe :
   >>> recu >>> - soit TXT la sequence des caracteres a encrypter
   >>> recu >>> - soit ENC la sequence de sortie
@@ -108,6 +109,91 @@
   >>> recu >>>
   >>> recu >>> Je te donne un exemple sur le message suivant :
   >>> recu >>>       "Petit message court."
+
+  >>>recu >>> PS: Pour t'aider, voici la trace d'execution sur "Petit message court."
+  >>>recu >>> 
+  >>>recu >>> TXT:Petit message court.
+  >>>recu >>> ENC: <vide>
+  >>>recu >>> C = P
+  >>>recu >>> 
+  >>>recu >>> TXT:etit message court.
+  >>>recu >>> ENC:P
+  >>>recu >>> C = e
+  >>>recu >>> 
+  >>>recu >>> TXT:essage court.tit m
+  >>>recu >>> ENC:Pe
+  >>>recu >>> C = e
+  >>>recu >>> 
+  >>>recu >>> TXT: court.tit mssage
+  >>>recu >>> ENC:Pee
+  >>>recu >>> C =  
+  >>>recu >>> 
+  >>>recu >>> TXT:court.tit mssage
+  >>>recu >>> ENC:Pee 
+  >>>recu >>> C = c
+  >>>recu >>> 
+  >>>recu >>> TXT:t.tit mssageour
+  >>>recu >>> ENC:Pee c
+  >>>recu >>> C = t
+  >>>recu >>> 
+  >>>recu >>> TXT: mssageour.tit
+  >>>recu >>> ENC:Pee ct
+  >>>recu >>> C =  
+  >>>recu >>> 
+  >>>recu >>> TXT:mssageour.tit
+  >>>recu >>> ENC:Pee ct 
+  >>>recu >>> C = m
+  >>>recu >>> 
+  >>>recu >>> TXT:our.titssage
+  >>>recu >>> ENC:Pee ct m
+  >>>recu >>> C = o
+  >>>recu >>> 
+  >>>recu >>> TXT:sageur.tits
+  >>>recu >>> ENC:Pee ct mo
+  >>>recu >>> C = s
+  >>>recu >>> 
+  >>>recu >>> TXT:ur.titsage
+  >>>recu >>> ENC:Pee ct mos
+  >>>recu >>> C = u
+  >>>recu >>> 
+  >>>recu >>> TXT:sager.tit
+  >>>recu >>> ENC:Pee ct mosu
+  >>>recu >>> C = s
+  >>>recu >>> 
+  >>>recu >>> TXT:r.titage
+  >>>recu >>> ENC:Pee ct mosus
+  >>>recu >>> C = r
+  >>>recu >>> 
+  >>>recu >>> TXT:itage.t
+  >>>recu >>> ENC:Pee ct mosusr
+  >>>recu >>> C = i
+  >>>recu >>> 
+  >>>recu >>> TXT:age.tt
+  >>>recu >>> ENC:Pee ct mosusri
+  >>>recu >>> C = a
+  >>>recu >>> 
+  >>>recu >>> TXT:e.ttg
+  >>>recu >>> ENC:Pee ct mosusria
+  >>>recu >>> C = e
+  >>>recu >>> 
+  >>>recu >>> TXT:.ttg
+  >>>recu >>> ENC:Pee ct mosusriae
+  >>>recu >>> C = .
+  >>>recu >>> 
+  >>>recu >>> TXT:ttg
+  >>>recu >>> ENC:Pee ct mosusriae.
+  >>>recu >>> C = t
+  >>>recu >>> 
+  >>>recu >>> TXT:tg
+  >>>recu >>> ENC:Pee ct mosusriae.t
+  >>>recu >>> C = t
+  >>>recu >>> 
+  >>>recu >>> TXT:g
+  >>>recu >>> ENC:Pee ct mosusriae.tt
+  >>>recu >>> C = g
+  >>>recu >>> 
+  >>>recu >>> TXT: <vide>
+  >>>recu >>> ENC:Pee ct mosusriae.ttg
   ```
 * Le texte qu'on doit crypter est le suivante:
 
@@ -196,7 +282,6 @@
     }
     ```
 
-
 # Caseine
 
 Ici vous pouvez trouver tous les resolutions des exercises du Caseine. Les membres de l'equipe ont contribué.
@@ -222,7 +307,7 @@ int main (void)
     scanf ("%c",&lettreLue);
     if (lettreLue >= 'A' && lettreLue <= 'Z') {
         lettreSuivante3 = (((lettreLue - 'A')+3)%26+'A');
-    
+  
     }
     else if (lettreLue >= 'a' && lettreLue <= 'z') {
         lettreSuivante3 = (((lettreLue-'a')+3)%26+'a');
