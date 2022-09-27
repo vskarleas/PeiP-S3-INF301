@@ -2,7 +2,7 @@
 #include <string.h>
 
 
-void coder_texte(char* nom_fichier_a_code){
+void remplacer_texte(char* nom_fichier_a_code){
     FILE* fichier_a_code = fopen(nom_fichier_a_code,"r");
     char nom_fichier_code[512];
     strcpy(nom_fichier_code,nom_fichier_a_code);
