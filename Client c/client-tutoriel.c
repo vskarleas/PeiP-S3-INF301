@@ -27,7 +27,7 @@ int main() {
         envoyer_recevoir(messages[i], reponse);
     }
 
-    printf ("Réponse du serveur: %s", reponse);
+    printf ("Reponse du serveur: %s", reponse);
 
     printf ("Fin de la connection au serveur\n");
     return 0;
