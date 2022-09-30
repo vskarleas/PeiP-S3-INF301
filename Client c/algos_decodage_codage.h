@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "tableaux.h"
 
 
 char remplacer_lettre(char lettre, int decalage);
@@ -23,6 +24,8 @@ void ecrire_bloc_de_lettres_au_debut(char *texte_source, char *texte_destination
 void ajouter_au_debut(char *texte, int longueur_texte, char lettre_a_ajouter);
 
 void decoder_texte_decrypteMove(char *texte_code, char* texte_decode);
+
+void decoder_texte_decrypteMove_rapide(char *texte_code, char *texte_decode);
 
 void crypter_txt_crypteSeq(char *txt, char *txt_crypte);
 

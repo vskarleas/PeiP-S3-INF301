@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "tableaux.h"
 
 char remplacer_lettre(char lettre, int decalage)
 {
@@ -146,6 +147,84 @@ void decoder_texte_decrypteMove(char *texte_code, char *texte_decode)
     }
 }
 
+void ajouter_debut(struct liste_chainee texte_decode, int valeur_decalage)
+{
+    struct cellule *precedent;
+    struct cellule *actuel = texte_decode.queue;
+    struct cellule *nvlle_queue;
+    struct cellule *nvlle_tete;
+    struct cellule *ancienne_queue = texte_decode.queue;
+    struct cellule *ancienne_tete = texte_decode.tete;
+    for (int i = 0; i < valeur_decalage - 1; i++)
+    {
+        precedent = actuel->precedent;
+    }
+    nvlle_tete = precedent;
+    nvlle_queue = nvlle_tete->precedent;
+    ancienne_queue->suivant = ancienne_tete;
+    ancienne_tete->precedent = ancienne_queue;
+    nvlle_tete->precedent = NULL;
+    nvlle_queue->suivant = NULL;
+    texte_decode.tete = nvlle_tete;
+    texte_decode.queue = nvlle_queue;
+}
+
+void ajouter_lettre_au_debut(char lettre, struct liste_chainee texte_decode)
+{
+    struct cellule ancienne_tete;
+    ancienne_tete.precedent = texte_decode.tete->precedent;
+    ancienne_tete.suivant = texte_decode.tete->suivant;
+    ancienne_tete.valeur = texte_decode.tete->valeur;
+    struct cellule nvlle_tete;
+
+    nvlle_tete.valeur = lettre;
+    nvlle_tete.suivant = &ancienne_tete;
+    ancienne_tete.precedent = &nvlle_tete;
+    texte_decode.tete = &nvlle_tete;
+}
+
+void decoder_texte_decrypteMove_rapide(char *texte_code, char *texte_decode)
+/*
+ * Fonction:
+ *  decoder_texte_decrypteMove
+ *
+ * Description:
+ *  Décrypte un texte crypté à l'aide de l'agorithme crypteMove
+ *
+ * Arguments
+ *  texte_code: le texte que l'on cherche a décoder
+ *  texte_decode: le texte dans lequel on veut stoquer le texte decodé
+ *
+ * return: vide
+ */
+{
+    char lettre;
+    struct liste_chainee texte_decode_chainee;
+    texte_decode_chainee.tete = NULL;
+    texte_decode_chainee.queue = NULL;
+    texte_decode_chainee.longueur = 0;
+    int longueur_texte_code = strlen(texte_code) - 1;
+    int longueur_texte_decode_chainee = 0; // initialement le texte decode est vide et sera rempli au fur et a mesure
+    for (int index_texte_code = longueur_texte_code; index_texte_code >= 0; index_texte_code--)
+    {
+        lettre = texte_code[index_texte_code];
+        int valeur_decalage = lettre % 8;
+        if (longueur_texte_decode_chainee > valeur_decalage) // On vérifie si le texte est suffisamment long pour effectuer le Décalage
+        {
+            ajouter_debut(texte_decode_chainee, valeur_decalage);
+        }
+        ajouter_lettre_au_debut(lettre, texte_decode_chainee);
+        longueur_texte_decode_chainee++;
+    }
+
+    struct cellule *cellule_actuelle = NULL;
+    for (int i = 0; cellule_actuelle != texte_decode_chainee.queue; i++)
+    {
+        texte_decode[i] = cellule_actuelle->valeur;
+        cellule_actuelle = cellule_actuelle->suivant;
+    }
+}
+
 int dans(char lettre, char *seq)
 {
     for (int i = 0; seq[i] != '\0'; i++)
@@ -236,7 +315,7 @@ void crypter_txt_crypteSeq(char *txt, char *txt_crypte)
 
 int indice_lettre_doublesaut(char lettre, char *seq)
 {
-    for (int i = 0; seq[i] != '\0'; i=i+2)
+    for (int i = 0; seq[i] != '\0'; i = i + 2)
     {
         if (lettre == seq[i])
         {
@@ -246,7 +325,7 @@ int indice_lettre_doublesaut(char lettre, char *seq)
     return -1;
 }
 
-char trouver_lettre_assoc(char lettre, char* seq_assoc)
+char trouver_lettre_assoc(char lettre, char *seq_assoc)
 {
     return seq_assoc[indice_lettre_doublesaut(lettre, seq_assoc) + 1];
 }
@@ -265,11 +344,11 @@ void crypter_txt_crypteAssoc(char *txt, char *txt_crypte)
 
     char lettre;
     char lettre_cryptee;
-    char seq[1000] = ""; // lettres déjà trouvée
+    char seq[1000] = "";       // lettres déjà trouvée
     char seq_assoc[1000] = ""; // lettres déjà trouvée
     int lg_seq_assoc = 0;
-    
-    int lg_seq = 0;      // longueur de seq
+
+    int lg_seq = 0; // longueur de seq
 
     int i;
     for (i = 0; txt[i] != '\0'; i++)
@@ -292,7 +371,7 @@ void crypter_txt_crypteAssoc(char *txt, char *txt_crypte)
             deplacer_fin(lettre, seq, &lg_seq);
         }
     }
-    txt_crypte[i+1]= '\0';
+    txt_crypte[i + 1] = '\0';
 }
 
 void ajouter_lettre_debut(char lettre, char *txt, int *lg_txt)
@@ -363,7 +442,7 @@ void decrypter_txt_crypteSeq(char *txt_crypte, char *txt_decrypte)
             deplacer_fin(lettre_decrypte, seq, &lg_seq);
         }
     }
-    txt_decrypte[i+1] = '\0';
+    txt_decrypte[i + 1] = '\0';
 }
 
 void recuperer_mdp(char *txt, char *mdp)
@@ -375,7 +454,7 @@ void recuperer_mdp(char *txt, char *mdp)
         {
             nb_guillemets_simple++;
         }
-        if (nb_guillemets_simple==3)
+        if (nb_guillemets_simple == 3)
         {
             for (int j = 0; txt[j + i + 1] != '\''; j++)
             {

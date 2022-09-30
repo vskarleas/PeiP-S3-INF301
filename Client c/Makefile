@@ -1,7 +1,7 @@
 CC=clang
 CFLAGS=-g -Wall -Wextra -Werror
 
-EXEC=client-introduction client-tutoriel client-interactif client-TUTORIEL client-projetX client-crypteMove client-BayOfPigs client-planB client-crypteSeq client-Northwoods client-LostCause
+EXEC=client-introduction client-tutoriel client-interactif client-TUTORIEL client-projetX client-crypteMove client-BayOfPigs client-planB client-crypteSeq client-Northwoods client-LostCause client-OneMillion
 
 all: $(EXEC)
 
@@ -22,6 +22,8 @@ client-BayOfPigs: client-BayOfPigs.o client.o algos_decodage_codage.o
 client-crypteSeq: client-crypteSeq.o client.o algos_decodage_codage.o
 
 client-LostCause: client-LostCause.o client.o algos_decodage_codage.o
+
+client-OneMillion: client-OneMillion.o client.o algos_decodage_codage.o
 
 client-introduction: client-introduction.o client.o
 
