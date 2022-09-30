@@ -1,6 +1,6 @@
 # Calendar
 
-## 13/9/2022 Premier seance
+## 13/9/2022 Premier seance TD
 
 - Departition des roles
 - Probleme
@@ -231,7 +231,7 @@
     >>>recu >>> Bien a toi,
     >>>recu >>> Bob.
     ```
-* L'algorithme est le suivante:
+* Une des algorithmes est le suivante:
 
   * ```
     #include <stdlib.h>
@@ -281,6 +281,12 @@
         printf("%s\n", texte_code);
     }
     ```
+
+# 22/9/22 Seance TP No 2
+
+* On a travaillé sur la correction de l'agorythme CrypteMove
+* On a cree l'agorytme de decryptage de CrypteMove
+* On a finnis avec le programme BayOfPigs
 
 # Caseine
 
