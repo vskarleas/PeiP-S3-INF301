@@ -1,4 +1,4 @@
-# Calendar
+# Calendrier
 
 ## 13/9/2022 Premier seance TD
 
@@ -287,6 +287,25 @@
 * On a travaillé sur la correction de l'agorythme CrypteMove
 * On a cree l'agorytme de decryptage de CrypteMove
 * On a finnis avec le programme BayOfPigs
+
+# 27/9/2022 Seance TD No 3
+
+* On a designe le tableu pour l'algorithme "Decrypter CrypteMove"
+
+# 28/9/2022
+
+* Creation d'algorithme pour cryptage de l'exercice crypteSeq
+
+# 29/9/2022 Seance TP No 3
+
+* On a avance sur le programme de CrypteSeq cryptage et decryptage
+* On a commence avec le programme Northwoods
+
+# 30/9/2022
+
+* Northwoods est complet
+* On a commencé avec Last Cause mais on n'a pas reussi 100% pour le moment
+* Addition des commentaires sur le code
 
 # Caseine
 

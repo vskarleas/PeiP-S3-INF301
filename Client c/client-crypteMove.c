@@ -32,7 +32,7 @@ int main() {
     coder_texte_crypteMove(texte, texte_code);
     envoyer_recevoir(texte_code, reponse);
 
-    printf("Réponse du serveur: %s", reponse);
+    printf("Reponse du serveur: %s", reponse);
 
     printf ("Fin de la connection au serveur\n");
     return 0;

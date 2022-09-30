@@ -42,5 +42,7 @@ int main() {
             texte_code[strlen(texte_code)]=lte;
         }
     }
+
+    
     printf("%s\n", texte_code);
 }
