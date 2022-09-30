@@ -3,11 +3,13 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <string.h>
+#include "algos_decodage_codage.h"
 
 #define MAXMSG MAXREP
 
 int main() {
     char reponse[MAXREP]; // pour stocker la réponse du serveur
+    //char message[MAXMSG]; // pour stocker le message à envoyer au serveur
 
     // Affiche les échanges avec le serveur (false pour désactiver)
     mode_debug(true);
@@ -19,19 +21,28 @@ int main() {
 
     // Remplacez <identifiant> et <mot de passe> ci dessous.
     envoyer_recevoir("login 12108112 TREHIN", reponse);
-    //On evoie en order les commandes suivantes
-    char messages[100][100] = {"load projetX", "aide", "start", "veni vidi vici"}; //veni vidi vici etait decrypte en utilisant le l'agolirthme decryptage cesar pour le text de caseine
-    int messages_len = 4;
-    for (int i = 0; i < messages_len; i++)
-    {
-        envoyer_recevoir(messages[i], reponse);
-    }
-
     
+
+    char texte[10000];
+    envoyer_recevoir("load planB", reponse);
+    envoyer_recevoir("aide", reponse);
+    strcpy(texte, reponse);
+    int decalage = trouver_decalage(texte);
+    remplacer_texte_cesar_automatique(texte);
+    printf("%s\n", texte);
+
+    envoyer_recevoir("start", reponse);
+    printf("%d\n", decalage);
+    char mot_de_passe[] = "hasta la revolucion";
+    remplacer_texte_cesar(mot_de_passe, decalage);
+    envoyer_recevoir(mot_de_passe, reponse);
+
+    strcpy(texte, reponse);
+    remplacer_texte_cesar(texte, decalage);
+    printf("%s\n", texte);
 
     printf ("Réponse du serveur: %s", reponse);
 
-    //Connection termine
     printf ("Fin de la connection au serveur\n");
     return 0;
 }
