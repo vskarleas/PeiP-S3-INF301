@@ -5,15 +5,15 @@ char remplacer_lettre(char lettre, int decalage)
 {
     if (lettre >= 'A' && lettre <= 'Z')
     {
-        return (((lettre - 'A') + decalage) % 26 + 'A');
+        return (((lettre - 'A') + decalage) % 26 + 'A'); //Il permet de faire le decalage pour les lettres majuscules
     }
     else if (lettre >= 'a' && lettre <= 'z')
     {
-        return (((lettre - 'a') + decalage) % 26 + 'a');
+        return (((lettre - 'a') + decalage) % 26 + 'a'); //Il permet de faire le decalage pour les lettres miniscules
     }
     else
     {
-        return lettre;
+        return lettre; //Si ce n'est pas un lettre, on retourne le character
     }
 }
 
@@ -22,9 +22,9 @@ void remplacer_texte_cesar(char *texte, int decalage)
     char lettre;
     for (int i = 0; texte[i] != '\0'; i++)
     {
-        lettre = texte[i];
-        char lettre_decode = remplacer_lettre(lettre, decalage);
-        texte[i] = lettre_decode;
+        lettre = texte[i]; //On recupere chaque lettre par le chaine des characters
+        char lettre_decode = remplacer_lettre(lettre, decalage); //On decode le character en utilisant la logique d'alogirithme pour le decalage de cesar
+        texte[i] = lettre_decode; //Le character decode replace le character code
     }
 }
 
@@ -32,7 +32,8 @@ int trouver_decalage(char *texte)
 {
     for (int i = 0; i <= 25; i++)
     {
-        if (remplacer_lettre(texte[0], i) == 'C')
+        if (remplacer_lettre(texte[0], i) == 'C') //Les messages qui demande un decryptace de Ceasar commence toujours par le mot "Cher". 
+                                                  //On trouver la difference entre le character lu et le character "C" pour qu'il peut etre utilise par l'aglgo 'remplacer_texte_cesar' 
         {
             return i;
         }
@@ -40,10 +41,10 @@ int trouver_decalage(char *texte)
     return 0;
 }
 
-void remplacer_texte_cesar_automatique(char *texte)
+void remplacer_texte_cesar_automatique(char *texte) //Fonction pour automatiser le decryptage des quelques messages sur Appolab
 {
-    int decalage = trouver_decalage(texte);
-    remplacer_texte_cesar(texte, decalage);
+    int decalage = trouver_decalage(texte); //trouve le decalage automatiquement selon 'trouver_decalage'
+    remplacer_texte_cesar(texte, decalage); //il execute l'algo 'remplacer_texte_cesar'
 }
 
 void decalage_a_gauche(char *texte, int n)
@@ -51,9 +52,9 @@ void decalage_a_gauche(char *texte, int n)
     int j;
     for (j = n; texte[j] != '\0'; j++)
     {
-        texte[j - n] = texte[j];
+        texte[j - n] = texte[j]; //Le premier character avant le decalage est suprime apres le decalage a gauche
     }
-    texte[j - n] = '\0';
+    texte[j - n] = '\0'; //On ajoute le nouvele fin du chaine de character
 }
 
 void decalage_a_droite(char *texte, int longueur_texte, int n)
@@ -80,12 +81,12 @@ void coder_texte_crypteMove(char *texte, char *texte_code)
     int index_texte_code = 0;
     while (texte[0] != '\0')
     {
-        lettre = texte[0];
+        lettre = texte[0]; //(*1)
         texte_code[index_texte_code] = lettre;
         int valeur_decalage = lettre % 8;
-        decalage_a_gauche(texte, 1);
+        decalage_a_gauche(texte, 1); //Grace au decalage a gauche, on peut utiliser toujours la meme idice [0] (voir (*1)) pour lire le lettre qu'on doit coder
         char texte_a_bouger[9];
-        int longueur_texte = strlen(texte);
+        int longueur_texte = strlen(texte); //on doit verifier qu'il y a un nombre suffisant des lettres pour faire le decalage
         if (longueur_texte >= valeur_decalage)
         {
             copier_bloc_de_lettres(texte, texte_a_bouger, 0, valeur_decalage - 1);
