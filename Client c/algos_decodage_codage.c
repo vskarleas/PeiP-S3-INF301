@@ -196,10 +196,23 @@ void deplacer_fin(char lettre, char *seq, int *lg_seq)
     seq[*lg_seq - 1] = lettre;
 }
 
+char trouver_lettre_precedente(char lettre, char *seq, int lg_seq)
+{
+    if (indice_lettre(lettre, seq) == 0)
+    {
+        return dernier_char(seq, lg_seq);
+    }
+    else
+    {
+        return lettre_precedente(lettre, seq);
+    }
+}
+
 void crypter_txt_crypteSeq(char *txt, char *txt_crypte)
 {
 
     char lettre;
+    char lettre_cryptee;
     char seq[1000] = ""; // lettres déjà trouvée
     int lg_seq = 0;      // longueur de seq
 
@@ -214,17 +227,72 @@ void crypter_txt_crypteSeq(char *txt, char *txt_crypte)
         }
         else
         {
-            if (indice_lettre(lettre, seq) == 0)
-            {
-                ajouter_lettre(dernier_char(seq, lg_seq), txt_crypte, &lg_txt_crypte);
-            }
-            else
-            {
-                ajouter_lettre(lettre_precedente(lettre, seq), txt_crypte, &lg_txt_crypte);
-            }
+            lettre_cryptee = trouver_lettre_precedente(lettre, seq, lg_seq);
+            ajouter_lettre(lettre_cryptee, txt_crypte, &lg_txt_crypte);
             deplacer_fin(lettre, seq, &lg_seq);
         }
     }
+}
+
+int indice_lettre_doublesaut(char lettre, char *seq)
+{
+    for (int i = 0; seq[i] != '\0'; i=i+2)
+    {
+        if (lettre == seq[i])
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+char trouver_lettre_assoc(char lettre, char* seq_assoc)
+{
+    return seq_assoc[indice_lettre_doublesaut(lettre, seq_assoc) + 1];
+}
+
+void modifier_assoc(char lettre, char *seq, int lg_seq, char *seq_assoc)
+{
+    char lettre_pre = trouver_lettre_precedente(lettre, seq, lg_seq);
+    char lettre_associee_a_lettre = trouver_lettre_assoc(lettre, seq_assoc);
+    char lettre_associee_a_lettre_pre = trouver_lettre_assoc(lettre_pre, seq_assoc);
+    seq_assoc[indice_lettre_doublesaut(lettre, seq_assoc) + 1] = lettre_associee_a_lettre_pre;
+    seq_assoc[indice_lettre_doublesaut(lettre_pre, seq_assoc) + 1] = lettre_associee_a_lettre;
+}
+
+void crypter_txt_crypteAssoc(char *txt, char *txt_crypte)
+{
+
+    char lettre;
+    char lettre_cryptee;
+    char seq[1000] = ""; // lettres déjà trouvée
+    char seq_assoc[1000] = ""; // lettres déjà trouvée
+    int lg_seq_assoc = 0;
+    
+    int lg_seq = 0;      // longueur de seq
+
+    int i;
+    for (i = 0; txt[i] != '\0'; i++)
+    {
+        lettre = txt[i];
+        int lg_txt_crypte = i;
+        if (!dans(lettre, seq))
+        {
+            ajouter_lettre(lettre, seq, &lg_seq);
+            ajouter_lettre(lettre, seq_assoc, &lg_seq_assoc);
+            ajouter_lettre(lettre, seq_assoc, &lg_seq_assoc);
+            ajouter_lettre(lettre, txt_crypte, &lg_txt_crypte);
+        }
+        else
+        {
+            modifier_assoc(lettre, seq, lg_seq, seq_assoc);
+
+            lettre_cryptee = trouver_lettre_assoc(lettre, seq_assoc);
+            ajouter_lettre(lettre_cryptee, txt_crypte, &lg_txt_crypte);
+            deplacer_fin(lettre, seq, &lg_seq);
+        }
+    }
+    txt_crypte[i+1]= '\0';
 }
 
 void ajouter_lettre_debut(char lettre, char *txt, int *lg_txt)
@@ -271,8 +339,8 @@ void decrypter_txt_crypteSeq(char *txt_crypte, char *txt_decrypte)
     char lettre_decrypte;
     char seq[1000] = ""; // lettres déjà trouvée
     int lg_seq = 0;      // longueur de seq
-
-    for (int i = 0; txt_crypte[i] != '\0'; i++)
+    int i;
+    for (i = 0; txt_crypte[i] != '\0'; i++)
     {
         lettre_crypte = txt_crypte[i];
         int lg_txt_decrypte = i;
@@ -295,6 +363,7 @@ void decrypter_txt_crypteSeq(char *txt_crypte, char *txt_decrypte)
             deplacer_fin(lettre_decrypte, seq, &lg_seq);
         }
     }
+    txt_decrypte[i+1] = '\0';
 }
 
 void recuperer_mdp(char *txt, char *mdp)

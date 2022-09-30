@@ -26,6 +26,8 @@ void decoder_texte_decrypteMove(char *texte_code, char* texte_decode);
 
 void crypter_txt_crypteSeq(char *txt, char *txt_crypte);
 
+void crypter_txt_crypteAssoc(char *txt, char *txt_crypte);
+
 void decrypter_txt_crypteSeq(char *txt_crypte, char *txt_decrypte);
 
 void recuperer_mdp(char *txt, char *mdp);
