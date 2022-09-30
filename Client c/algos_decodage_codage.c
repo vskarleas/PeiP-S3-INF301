@@ -115,11 +115,11 @@ void decoder_texte_decrypteMove(char *texte_code, char *texte_decode)
  *  decoder_texte_decrypteMove
  *
  * Description:
- *  Decrypte un texte crypte à l'aide de l'agorithme crypteMove
+ *  Décrypte un texte crypté à l'aide de l'agorithme crypteMove
  *
  * Arguments
- *  texte_code: le texte que l'on cherche a decoder
- *  texte_decode: le texte dans lequel on veut stoquer le texte decode
+ *  texte_code: le texte que l'on cherche a décoder
+ *  texte_decode: le texte dans lequel on veut stoquer le texte decodé
  *
  * return: vide
  */
@@ -131,7 +131,7 @@ void decoder_texte_decrypteMove(char *texte_code, char *texte_decode)
     {
         lettre = texte_code[index_texte_code];
         int valeur_decalage = lettre % 8;
-        if (longueur_texte_decode > valeur_decalage) // On verifie si le texte est suffisamment long pour effectuer le Decalage
+        if (longueur_texte_decode > valeur_decalage) // On vérifie si le texte est suffisamment long pour effectuer le Décalage
         {
             char texte_a_bouger[9];
             copier_bloc_de_lettres(texte_decode, texte_a_bouger, longueur_texte_decode - valeur_decalage, longueur_texte_decode);
@@ -214,7 +214,7 @@ void crypter_txt_crypteSeq(char *txt, char *txt_crypte)
 
     char lettre;
     char lettre_cryptee;
-    char seq[1000] = ""; // lettres dejà trouvee
+    char seq[1000] = ""; // lettres déjà trouvée
     int lg_seq = 0;      // longueur de seq
 
     for (int i = 0; txt[i] != '\0'; i++)
@@ -266,8 +266,8 @@ void crypter_txt_crypteAssoc(char *txt, char *txt_crypte)
 
     char lettre;
     char lettre_cryptee;
-    char seq[1000] = ""; // lettres dejà trouvee
-    char seq_assoc[1000] = ""; // lettres dejà trouvee
+    char seq[1000] = ""; // lettres déjà trouvée
+    char seq_assoc[1000] = ""; // lettres déjà trouvée
     int lg_seq_assoc = 0;
     
     int lg_seq = 0;      // longueur de seq
@@ -338,7 +338,7 @@ void decrypter_txt_crypteSeq(char *txt_crypte, char *txt_decrypte)
 
     char lettre_crypte;
     char lettre_decrypte;
-    char seq[1000] = ""; // lettres dejà trouvee
+    char seq[1000] = ""; // lettres déjà trouvée
     int lg_seq = 0;      // longueur de seq
     int i;
     for (i = 0; txt_crypte[i] != '\0'; i++)

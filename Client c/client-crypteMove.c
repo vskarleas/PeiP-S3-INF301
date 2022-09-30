@@ -10,10 +10,10 @@
 
 
 int main() {
-    char reponse[MAXREP]; // pour stocker la reponse du serveur
+    char reponse[MAXREP]; // pour stocker la réponse du serveur
     //char message[MAXMSG]; // pour stocker le message à envoyer au serveur
 
-    // Affiche les echanges avec le serveur (false pour desactiver)
+    // Affiche les échanges avec le serveur (false pour désactiver)
     mode_debug(true);
 
     // Connexion au serveur AppoLab
