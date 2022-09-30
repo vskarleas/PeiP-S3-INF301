@@ -10,13 +10,13 @@ int main() {
     char reponse[MAXREP];
     char message[MAXMSG];
 
-    // Affiche les échanges avec le serveur (false pour désactiver)
+    // Affiche les echanges avec le serveur (false pour desactiver)
     mode_debug(true);
 
     puts("Bienvenue dans cette introduction à AppoLab !\n"
             "AppoLab est un serveur d'exercices algorithmiques que vous allez devoir \n"
             "utiliser pour vos APPs. Je vais vous guider pas à pas pour que vous \n"
-            "puissiez vous débrouiller tout·e seul·e.");
+            "puissiez vous debrouiller tout·e seul·e.");
 
     attendre();
 
@@ -33,14 +33,14 @@ int main() {
 
     puts("Si tout va bien, vous devez avoir reçu le message de bienvenue d'AppoLab.\n"
             "Si non, arrêtez ce programme (avec Ctrl-C) et demandez de l'aide à un·e enseignant·e.\n"
-            "(Si vous avez des difficultés à lire certains messages, modifiez les couleurs dans client.h et recompilez.)"
+            "(Si vous avez des difficultes à lire certains messages, modifiez les couleurs dans client.h et recompilez.)"
             );
 
     attendre();
 
-    puts("Comme indiqué, commencez par vous loguer avec l'identifiant et le mot de \n"
-            "passe qui vous ont été fournis. Pour les étudiants d'INF301, le login est\n"
-            "votre numéro d'étudiant·e, et le mot de passe votre nom en majuscule.\n"
+    puts("Comme indique, commencez par vous loguer avec l'identifiant et le mot de \n"
+            "passe qui vous ont ete fournis. Pour les etudiants d'INF301, le login est\n"
+            "votre numero d'etudiant·e, et le mot de passe votre nom en majuscule.\n"
             "Entrez les au clavier ainsi :\n"
             "login 12345678 \"MOT DE PASSE\"");
 
@@ -52,17 +52,17 @@ int main() {
         if (strstr(reponse, "Veuillez d'abord") != NULL) {
             puts("Vous devez utiliser la commande 'login'");
         } else if (strstr(reponse, "incorrect") != NULL) {
-            puts("Vu avez du vous tromper dans vos identifiants, réessayez...");
+            puts("Vu avez du vous tromper dans vos identifiants, reessayez...");
         } else if (strstr(reponse, "Bienvenue") != NULL) {
             break;
         } else {
-            puts("Message inconnu, réessayez de vous loguer...");
+            puts("Message inconnu, reessayez de vous loguer...");
         }
     }
 
     puts("Bravo, vous venez de vous identifier auprès du serveur !\n"
             "Comme vous pouvez le voir ce programme trace tout ce que vous envoyez au \n"
-            "serveur sur les lignes commençant par <<<envoi<<<, et tout ce que répond le \n"
+            "serveur sur les lignes commençant par <<<envoi<<<, et tout ce que repond le \n"
             "serveur sur des lignes commençant par >>>recu >>>.");
 
     attendre();
@@ -78,11 +78,11 @@ int main() {
         if (strstr(reponse, "Commande inconnue") != NULL) {
             puts("Vous devez utiliser la commande 'load'");
         } else if (strstr(reponse, "n'existe pas") != NULL) {
-            puts("Vu avez du vous tromper dans le nom de l'exercice, réessayez...");
+            puts("Vu avez du vous tromper dans le nom de l'exercice, reessayez...");
         } else if (strstr(reponse, "Bienvenue") != NULL) {
             break;
         } else {
-            puts("Message inconnu, réessayez de vous loguer...");
+            puts("Message inconnu, reessayez de vous loguer...");
         }
     }
 
@@ -102,7 +102,7 @@ int main() {
 
     if (strstr(reponse, "beaucoup trop lent") != NULL) {
 
-        puts("Bon, finalement vous avez échoué à cet exercice, mais c'était\n"
+        puts("Bon, finalement vous avez echoue à cet exercice, mais c'etait\n"
                 "fait exprès :-)");
         attendre();
         puts("Relancez ce programme et essayez d'être plus rapide cette fois !");
@@ -116,7 +116,7 @@ int main() {
         attendre();
 
         puts("Changez donc de programme et utilisez à la place 'client-tutoriel.c'\n"
-                "Par contre, vous devez tout d'abord éditer le fichier, et y trouver où \n"
+                "Par contre, vous devez tout d'abord editer le fichier, et y trouver où \n"
                 "rentrer votre identifiant et mot de passe.");
 
         attendre();

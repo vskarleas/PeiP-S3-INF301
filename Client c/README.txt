@@ -1,7 +1,7 @@
 Quickstart :
 ============
 
-Pour démarrer la présentation d'AppoLab, commencez par compiler le tout:
+Pour demarrer la presentation d'AppoLab, commencez par compiler le tout:
 > make
 
 Puis lancez le programme d'introduction.
@@ -15,10 +15,10 @@ Liste des fichiers :
 ====================
 
 client-introduction.c
-  => à lancer initialement pour découvrir AppoLab
+  => à lancer initialement pour decouvrir AppoLab
 
 client-tutoriel.c
-  => sera utilisé pendant le tutoriel
+  => sera utilise pendant le tutoriel
 
 client-interactif.c
   => à utiliser plus tard, si besoin de se connecter à nouveau de manière 

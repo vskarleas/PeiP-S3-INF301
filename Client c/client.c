@@ -137,7 +137,7 @@ void deconnexion() {
     if (closesocket(a.sock) == -1)
         perreur("Erreur à la fermeture de la connexion");
     if (a.debug)
-        debug("Vous avez été deconnecté du serveur\n");
+        debug("Vous avez ete deconnecte du serveur\n");
 #if defined (WIN32)
     WSACleanup();
 #endif
@@ -153,10 +153,10 @@ int connexion(char* sname, int port) {
     }
 #endif
 
-    /* Création de la socket */
+    /* Creation de la socket */
     a.sock = socket(AF_INET, SOCK_STREAM, 0);
     if (a.sock == -1) {
-        perreur("Impossible de créer la socket de communication");
+        perreur("Impossible de creer la socket de communication");
         deconnexion();
         exit (1);
     }
@@ -188,9 +188,9 @@ int connexion(char* sname, int port) {
         exit (1);
     }
     if (a.debug)
-        debug("Vous êtes connecté au serveur\n");
+        debug("Vous êtes connecte au serveur\n");
 
-    // On récupère le message de bienvenue du serveur
+    // On recupère le message de bienvenue du serveur
     int taille = recv(a.sock, a.buffer, TAILLEMESSAGE, 0);
     // Le serveur termine son message de bienvenue par "\n\n"
     char end[] = "\n\n";
@@ -206,7 +206,7 @@ int connexion(char* sname, int port) {
             taille = recv(a.sock, a.buffer, TAILLEMESSAGE, 0);
     }
     if (taille == -1) {
-        perreur("Erreur à la réception du message de bienvenue");
+        perreur("Erreur à la reception du message de bienvenue");
         deconnexion();
         return 0;
     }
@@ -255,7 +255,7 @@ int envoyer_recevoir(char *message, char *reponse) {
 
     if (insistent_write(a.sock, &buffer, size+4)) {
         if (a.debug) {
-            /* debug("Message envoyé au serveur :\n"); */
+            /* debug("Message envoye au serveur :\n"); */
             // Pretty print
             message = buffer+4;
             message[size] = '\n';

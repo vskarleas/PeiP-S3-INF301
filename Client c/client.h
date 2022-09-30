@@ -9,13 +9,13 @@
  * RED     - rouge
  * GRN     - vert
  * YEL     - jaune
- * BLU     - bleu foncé
+ * BLU     - bleu fonce
  * BLUBOLD - bleu clair
  * MAG     - magenta
  * CYN     - cyan
  * WHT     - blanc
  */
-#define COL_ENVOI       GRN  /* couleur des messages envoyés */
+#define COL_ENVOI       GRN  /* couleur des messages envoyes */
 #define COL_RECU        MAG  /* couleur des messages reçus   */
 #define COL_ATTENTION   RED  /* couleur des messages importants */
 
@@ -31,18 +31,18 @@
 
 
 
-#define MAXREP 100000 /* taille maximale d'une réponse du serveur */
+#define MAXREP 100000 /* taille maximale d'une reponse du serveur */
 
 /*
  * Permet l'ouverture d'une connection avec le serveur
- * Les paramètres pour accéder au bon serveur sont à donner en argument:
+ * Les paramètres pour acceder au bon serveur sont à donner en argument:
  * nom du serveur et port.
- * si les arguments sont NULL et 0, les valeurs par défaut sont utilisées.
- * Renvoie une valeur nulle (faux) en cas d'échec
+ * si les arguments sont NULL et 0, les valeurs par defaut sont utilisees.
+ * Renvoie une valeur nulle (faux) en cas d'echec
  */
 int connexion(char*, int);
 /*
- * Permet la fermeture de la connection avec le serveur donné en argument
+ * Permet la fermeture de la connection avec le serveur donne en argument
  */
 void deconnexion();
 /*
@@ -51,19 +51,19 @@ void deconnexion();
 void mode_debug(int val);
 
 /*
- * Permet d'attendre que l'utilisateur appuie sur entrée
+ * Permet d'attendre que l'utilisateur appuie sur entree
  */
 void attendre();
 
 /*
- * Demande à l'utilisateur un message qui sera stocké dans la chaine passée en 
+ * Demande à l'utilisateur un message qui sera stocke dans la chaine passee en 
  * argument. Redemande un message tant qu'il est vide.
  */
 void lire_clavier(char *buffer);
 
 /*
- * Permet d'envoyer un message au serveur et de recevoir la réponse.
- * Renvoie le nombre d'octets de la réponse
+ * Permet d'envoyer un message au serveur et de recevoir la reponse.
+ * Renvoie le nombre d'octets de la reponse
  */
 int envoyer_recevoir(char *message, char *reponse);
 
