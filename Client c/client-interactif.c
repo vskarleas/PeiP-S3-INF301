@@ -8,10 +8,10 @@
 
 int main() {
     /*	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        !!! eviter le plus possible de modifier ce fichier !!!
+        !!! Éviter le plus possible de modifier ce fichier !!!
         !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        Modifications autorisees :
+        Modifications autorisées :
             * login et mdp
 
         modifiez les variables ci-dessous: mettez vos identifiant et mot de passe

@@ -7,10 +7,10 @@
 #define MAXMSG MAXREP
 
 int main() {
-    char reponse[MAXREP]; // pour stocker la reponse du serveur
+    char reponse[MAXREP]; // pour stocker la réponse du serveur
     //char message[MAXMSG]; // pour stocker le message à envoyer au serveur
 
-    // Affiche les echanges avec le serveur (false pour desactiver)
+    // Affiche les échanges avec le serveur (false pour désactiver)
     mode_debug(true);
 
     // Connexion au serveur AppoLab
@@ -27,7 +27,7 @@ int main() {
         envoyer_recevoir(messages[i], reponse);
     }
 
-    printf ("Reponse du serveur: %s", reponse);
+    printf ("Réponse du serveur: %s", reponse);
 
     printf ("Fin de la connection au serveur\n");
     return 0;

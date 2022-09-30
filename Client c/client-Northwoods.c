@@ -8,10 +8,10 @@
 #define MAXMSG MAXREP
 
 int main() {
-    char reponse[MAXREP]; // pour stocker la reponse du serveur
+    char reponse[MAXREP]; // pour stocker la réponse du serveur
     //char message[MAXMSG]; // pour stocker le message à envoyer au serveur
 
-    // Affiche les echanges avec le serveur (false pour desactiver)
+    // Affiche les échanges avec le serveur (false pour désactiver)
     mode_debug(true);
 
     // Connexion au serveur AppoLab
@@ -78,7 +78,7 @@ int main() {
     decrypter_txt_crypteSeq(texte_code, texte_decode);
     printf("%s\n", texte_decode);
 */
-    printf ("Reponse du serveur: %s", reponse);
+    printf ("Réponse du serveur: %s", reponse);
 
     printf ("Fin de la connection au serveur\n");
     //#endif
