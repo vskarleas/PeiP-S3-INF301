@@ -25,13 +25,13 @@ int main() {
      // Remplacez <identifiant> et <mot de passe> ci dessous.
     envoyer_recevoir("login 12108112 TREHIN", reponse);
 
-    //ouvre l'exercise NothWoods
+    //ouvre l'exercice NothWoods
     envoyer_recevoir("load Northwoods", reponse);
 
     //envoyer la commande 'aide'
     envoyer_recevoir("aide", reponse);
 
-    //envoyer la commande 'start'. Apres server attend le mot de passe metnione avant
+    //envoyer la commande 'start'. Apres le serveur attend le mot de passe metnione avant
     envoyer_recevoir("start", reponse);
 
     //envoyer mot de page
@@ -46,7 +46,7 @@ int main() {
     //chaque action 'envoyer_recevoir'
     strcpy(texte_code, reponse);
 
-    //decryptage du texte code en utilisant l'alorithme de decryptage crypteSeq
+    //decryptage du texte code en utilisant l'algorithme de decryptage crypteSeq
     decrypter_txt_crypteSeq(texte_code, texte_decode);
 
     //affichage sur l'ecran du message pour qu'on peut le lire
@@ -68,10 +68,10 @@ int main() {
     //chaque action 'envoyer_recevoir'
     strcpy(texte_code, reponse);
 
-    //decryptage du texte code en utilisant l'alorithme de decryptage crypteSeq
+    //decryptage du texte code en utilisant l'algorithme de decryptage crypteSeq
     decrypter_txt_crypteSeq(texte_code, texte_decode);
 
-    //affichage sur l'ecran du message pour qu'on peut le lire
+    //affichage sur l'ecran du message pour qu'on puisse le lire
     printf("%s\n", texte_decode);
 
     //initilisation des tableaux pour faire le cryptage de mot de passe trouve en message precedent
@@ -91,14 +91,14 @@ int main() {
     texte_decode[0] = '\0';
     texte_code[0] = '\0';
     int i;
-    for (i = 0; reponse[i] != 'B'; i++) //On passe tous les autres characters jusque qu'on arrive à B comme le message qu'on doit decrypter commence par le mot Bob
+    for (i = 0; reponse[i] != 'B'; i++) //On passe tous les autres caracteres jusque qu'on arrive à B comme le message qu'on doit decrypter commence par le mot Bob
     {
 
     }
     texte_decode[0] = '\0';
     texte_code[0] = '\0';
     int j;
-    for (j = 0; reponse[j + i] != '\0'; j++) //sauvgarder le message qu'on doit decrypter via un parcours du message code character par character
+    for (j = 0; reponse[j + i] != '\0'; j++) //sauvgarder le message qu'on doit decrypter via un parcours du message code caractere par caractere
     {
         texte_code[j] = reponse[j + i];
     }
@@ -107,7 +107,7 @@ int main() {
     //decryptage du message lu 
     decrypter_txt_crypteSeq(texte_code, texte_decode);
 
-    //affichage du message sur l'ecran pour qu'on peut le lire 
+    //affichage du message sur l'ecran pour qu'on puisse le lire 
     printf("%s\n", texte_decode);
 
     printf ("Réponse du serveur: %s", reponse);

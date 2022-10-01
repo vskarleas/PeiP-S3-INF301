@@ -25,7 +25,7 @@ int main() {
     // utilisez le port 443 en cas de problème sur le 9999
     /* connexion("im2ag-appolab.u-ga.fr", 443); */
 
-    //initilisation du tableau qui stocke les reponses du serveur necessaire comme reponse est utilise comme une variable dynamique
+    //initilisation du tableau qui stocke les reponses du serveur necessaire comme reponse est utilisee comme une variable dynamique
     char texte[10000];
 
     //initilisation du tableau pour stocker le contenu decode
@@ -34,7 +34,7 @@ int main() {
     //initilisation du tableau pour stocker le contenu code
     char texte_code[100000];
 
-    //ECRIRE COMMENTAIRES POUR CETTE PARTIE
+    //La partie à decrypter à été mise dans une dans une variable car il fallait enlever une ligne, on ouvre donc ce fichier et on le décrypte
     FILE *fichier = fopen("texte.txt", "r");
 
     for (int i = 0; !feof(fichier); i++)
@@ -60,13 +60,13 @@ int main() {
     //decodage du texte recu en reponse
     decoder_texte_decrypteMove(texte, texte_decode);
 
-    //affichage sur l'ecran pour qu'on peut le lire
+    //affichage sur l'ecran pour qu'on puisse le lire
     printf("%s\n", texte_decode);
 
     //envoyer la commande 'aide'
     envoyer_recevoir("aide", reponse);
 
-    //envoyer la commande 'start'. Apres server attend notre message crypte
+    //envoyer la commande 'start'. Apres le serveur attend notre message crypte
     envoyer_recevoir("start", reponse);
 
     //re-initiliase les tableaux declares au debut du programme 
@@ -81,10 +81,10 @@ int main() {
     //decrypte en utilisant l'algorithme de decryptage crypteMove
     decoder_texte_decrypteMove(texte_code, texte_decode);
 
-    //affiche sur l'ecran le message pour qu'on peut le lire
+    //affiche sur l'ecran le message pour qu'on puisse le lire
     printf("%s\n", texte_decode);
 
-    //cryptage du texte_decode en utilisant l'alorithme de cryptage crypteSeq
+    //cryptage du texte_decode en utilisant l'algorithme de cryptage crypteSeq
     crypter_txt_crypteSeq(texte_decode, texte_code);
 
     //envoyer le texte_code au server

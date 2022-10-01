@@ -23,7 +23,10 @@ int main() {
 
     // Remplacez <identifiant> et <mot de passe> ci dessous.
     envoyer_recevoir("login 12108112 TREHIN", reponse);
+
+    //ouvre l'exercice OneMillion
     envoyer_recevoir("load OneMillion", reponse);
+
     char texte_code[10000];
     char texte_decode[10000];
     strcpy(texte_code, reponse);

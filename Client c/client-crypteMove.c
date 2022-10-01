@@ -27,16 +27,15 @@ int main() {
     //ouvre l'exercise crypteMove
     envoyer_recevoir("load crypteMove", reponse);
 
-    //envoyer la commande 'aide' pour requpere le texte qu'on doit crypter
+    //envoyer la commande 'aide' pour recupere le texte qu'on doit crypter
     envoyer_recevoir("aide", reponse);
 
     //On fait une copie de la reponse sur la variable texte pour le 
-    //crypter comme la varibale reponse est dynamique et il change en
-    //chaque action 'envoyer_recevoir'
+    //crypter. La varibale reponse est dynamique
     char texte[10000];
     strcpy(texte, reponse);
 
-    //envoyer la commande 'start'. Apres server attend notre message crypte
+    //envoyer la commande 'start'. Apres le serveur attend notre message crypte
     envoyer_recevoir("start", reponse);
 
     //initialisation du tableau pour le texte crypte
@@ -50,7 +49,7 @@ int main() {
 
     printf("Reponse du serveur: %s", reponse);
 
-    //Connection termine
+    //Connection terminee
     printf ("Fin de la connection au serveur\n");
     return 0;
 }

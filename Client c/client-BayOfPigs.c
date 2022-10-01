@@ -23,28 +23,28 @@ int main() {
     char texte[10000];
     envoyer_recevoir("login 12108112 TREHIN", reponse);
 
-    //ouvre l'exercise BayOfPigs
+    //ouvre l'exercice BayOfPigs
     envoyer_recevoir("load BayOfPigs", reponse);
 
-    //la variable reponse est une variable dynamique. C'est pourquoi on utilise strcpy pour recupere le contenu et le traiter
+    //la variable reponse est une variable dynamique. Alors on utilise strcpy pour recupere le contenu et le traiter
     strcpy(texte, reponse);
     //decrypte la reponse en utilisant le l'agorithme de decryptage de cesar
     remplacer_texte_cesar(texte,21); //decalge connue: 5 ~ on a mis 21 comme notre fonction est construit a l'inverse
 
-    //affiche le texte decrypte pour qu'on peut le lire
+    //affiche le texte decrypte pour qu'on puisse le lire
     printf("%s\n", texte);
 
     //envoie la commande 'aide'
     envoyer_recevoir("aide", reponse);
     strcpy(texte, reponse);
 
-    //decrypte la reponse en utilisant le l'agorithme de decryptage de cesar
+    //decrypte la reponse en utilisant l'agorithme de decryptage de cesar
     remplacer_texte_cesar(texte,21); //decalge connue: 5 ~ on a mis 21 comme notre fonction est construit a l'inverse
 
-    //affiche le texte decrypte pour qu'on peut le lire
+    //affiche le texte decrypte pour qu'on puisse le lire
     printf("%s\n", texte);
 
-    //envoie la commande 'start'. Apres server attend notre reponse
+    //envoie la commande 'start'. Apres le serveur attend notre reponse
     envoyer_recevoir("start", reponse);
 
     //initilisation du tableau pour stoquer la phrase crypte
@@ -57,7 +57,7 @@ int main() {
     envoyer_recevoir(texte_decode, reponse);
     */
 
-   //Phrase recupere par le textes decryptes avant
+   //Phrase recupere par le texte decrypte
     strcpy(texte, "Patria o muerte");
 
     //cryptage de la phrase un utilisant l'algorithme crypteMove
@@ -79,7 +79,7 @@ int main() {
     printf ("Réponse du serveur: %s", reponse);
 
 
-    //Connection termine
+    //Connection terminee
     printf ("Fin de la connection au serveur\n");
     return 0;
 }
