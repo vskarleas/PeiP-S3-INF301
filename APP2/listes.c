@@ -9,7 +9,7 @@
 
 
 /*
- *  Auteur(s) :
+ *  Auteur(s) : 
  *  Date :
  *  Suivi des Modifications :
  *
@@ -18,36 +18,46 @@
 bool silent_mode = false;
 
 
-cellule_t* nouvelleCellule (void)
+cellule_t* nouvelleCellule (void) // Créé une nouvelle cellule
 {
-    /* À compléter (utiliser malloc) */
-    printf("\n>>>>>>>>>>> A Faire : liste.c/nouvelleCellule() <<<<<<<<<<<<<<<<\n");
-    return NULL;
+    cellule_t *cell = malloc (sizeof (cellule_t));
+    return cell;
 }
 
 
 void detruireCellule (cellule_t* cel)
 {
-    /* À compléter (utiliser free) */
-    printf("\n>>>>>>>>>>> A Faire : liste.c/detruireCellule() <<<<<<<<<<<<<<<<\n");
+    free(cel);
 }
 
-
-void conversion (char *texte, sequence_t *seq)
+void conversion (char *texte, sequence_t *seq) // Converti une chaine de caractere en sequence (liste chainee) de caracteres
 {
-  /* À compléter */
-    printf("\n>>>>>>>>>>> A Faire : liste.c/conversion() <<<<<<<<<<<<<<<<\n");
+    int lg_texte = strlen(texte);
+    for (int i = lg_texte; i >= 0; i--)
+    {
+        ajout_debut(seq, texte[i]);
+    }
 }
-
-
-
-
-
 
 void afficher (sequence_t* seq)
 {
     assert (seq); /* Le pointeur doit être valide */
-    /* À compléter */
-    printf("\n>>>>>>>>>>> A Faire : liste.c/afficher() <<<<<<<<<<<<<<<<\n");
+    cellule_t *cell_actuelle = seq->tete;
+    while (cell_actuelle != NULL)
+    {
+        printf("%c ", cell_actuelle->command);
+        cell_actuelle = cell_actuelle->suivant;
+    }
+    printf("\n");
 }
 
+void ajout_debut(sequence_t * seq, char commande) // Ajoute une nouvelle cellule avec la commande passée en argument au debut de la sequence
+{
+    // Creation de la cellule a ajouter
+    cellule_t *nouvelle_tete = malloc(sizeof(cellule_t));
+    nouvelle_tete->command = commande;
+
+    // Insertion en modifiant les references
+    nouvelle_tete->suivant = seq->tete;
+    seq->tete = nouvelle_tete;
+}
