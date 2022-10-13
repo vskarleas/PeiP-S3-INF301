@@ -77,11 +77,13 @@ int interprete(sequence_t *seq, bool debug)
             break;
         case 'M':
             mesure(depiler(pile)->valeur.n);
+            break;
         case 'P':
             pose(depiler(pile)->valeur.n);
-
+            break;
         default:
             empiler_int(pile, commande);
+            break;
         }
 
         /* Affichage pour faciliter le debug */
