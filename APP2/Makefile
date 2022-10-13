@@ -1,4 +1,4 @@
-all: main
+all: main Programme_de_tests
 
 
 CC=clang
@@ -16,6 +16,8 @@ CFLAGS= -g -Wall -Wextra -Werror -Wno-unused-parameter
 # Ici, on utilise l'"intelligence" de 'make' qui saura tout seul
 # comment créer les .o à partir des .c
 main: main.o curiosity.o listes.o interprete.o
+
+Programme_de_tests: Programme_de_tests.o listes.o
 
 
 clean:
