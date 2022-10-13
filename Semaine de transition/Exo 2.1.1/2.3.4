@@ -1,0 +1,12 @@
+void suppression_doublons_consecutifs(liste_t *l) {
+  /* votre code ici */
+  cellule_t * cell = l->tete;
+    while (cell != NULL && cell->suivant != NULL){
+        if (cell->valeur == cell->suivant->valeur){
+            cell->suivant = cell->suivant->suivant;
+        }
+        else {
+            cell = cell->suivant;
+        }
+  }
+return;}
