@@ -1,0 +1,25 @@
+void inversion(liste_t *l) {
+cellule_t *nouveaux_suivant = NULL;
+  cellule_t *cellule_actuelle = l->tete;
+  cellule_t *cellule_precedente;
+
+  if (cellule_actuelle == NULL || cellule_actuelle->suivant == NULL)
+  {
+    return;
+  }
+  nouveaux_suivant = cellule_actuelle->suivant;
+  cellule_actuelle->suivant = NULL;
+
+  cellule_precedente = cellule_actuelle;
+  cellule_actuelle = nouveaux_suivant;
+  while (cellule_actuelle->suivant != NULL)
+  {
+    nouveaux_suivant = cellule_actuelle->suivant;
+    cellule_actuelle->suivant = cellule_precedente;
+    cellule_precedente = cellule_actuelle;
+    cellule_actuelle = nouveaux_suivant;
+  }
+
+  cellule_actuelle->suivant = cellule_precedente;
+  l->tete = cellule_actuelle;
+return;}
