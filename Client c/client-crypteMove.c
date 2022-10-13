@@ -23,17 +23,33 @@ int main() {
 
     // Remplacez <identifiant> et <mot de passe> ci dessous.
     envoyer_recevoir("login 12108112 TREHIN", reponse);
+
+    //ouvre l'exercise crypteMove
     envoyer_recevoir("load crypteMove", reponse);
+
+    //envoyer la commande 'aide' pour recupere le texte qu'on doit crypter
     envoyer_recevoir("aide", reponse);
+
+    //On fait une copie de la reponse sur la variable texte pour le 
+    //crypter. La varibale reponse est dynamique
     char texte[10000];
     strcpy(texte, reponse);
+
+    //envoyer la commande 'start'. Apres le serveur attend notre message crypte
     envoyer_recevoir("start", reponse);
+
+    //initialisation du tableau pour le texte crypte
     char texte_code[100000];
+
+    //crypte le texte en utilisant l'algorithme 
     coder_texte_crypteMove(texte, texte_code);
+
+    //envoyer le texte crypte
     envoyer_recevoir(texte_code, reponse);
 
     printf("Reponse du serveur: %s", reponse);
 
+    //Connection terminee
     printf ("Fin de la connection au serveur\n");
     return 0;
 }

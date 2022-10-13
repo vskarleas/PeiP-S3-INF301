@@ -1,5 +1,7 @@
 # Calendrier
 
+> Le projet APP1 est bien terminé. Vous pouvez telecharger le fichier ZIP avec le code de tous les clients, le Makefile et les algos à **http://dev.madebyvasilis.site/inf301-app1.zip**
+
 ## 13/9/2022 Premier seance TD
 
 - Departition des roles

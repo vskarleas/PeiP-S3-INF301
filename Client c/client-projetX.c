@@ -8,7 +8,6 @@
 
 int main() {
     char reponse[MAXREP]; // pour stocker la réponse du serveur
-    //char message[MAXMSG]; // pour stocker le message à envoyer au serveur
 
     // Affiche les échanges avec le serveur (false pour désactiver)
     mode_debug(true);
@@ -20,7 +19,8 @@ int main() {
 
     // Remplacez <identifiant> et <mot de passe> ci dessous.
     envoyer_recevoir("login 12108112 TREHIN", reponse);
-    char messages[100][100] = {"load projetX", "aide", "start", "veni vidi vici"};
+    //On evoie en order les commandes suivantes
+    char messages[100][100] = {"load projetX", "aide", "start", "veni vidi vici"}; //veni vidi vici etait decrypte en utilisant le l'agolirthme decryptage cesar pour le text de caseine
     int messages_len = 4;
     for (int i = 0; i < messages_len; i++)
     {
@@ -31,6 +31,7 @@ int main() {
 
     printf ("Réponse du serveur: %s", reponse);
 
+    //Connection termine
     printf ("Fin de la connection au serveur\n");
     return 0;
 }
