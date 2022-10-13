@@ -20,7 +20,6 @@ bool silent_mode = false;
 
 cellule_t* nouvelleCellule (void)
 {
-    cellule_t *nouvelle_cel=malloc(sizeof(cellule_t));
     /* À compléter (utiliser malloc) */
     printf("\n>>>>>>>>>>> A Faire : liste.c/nouvelleCellule() <<<<<<<<<<<<<<<<\n");
     return NULL;
