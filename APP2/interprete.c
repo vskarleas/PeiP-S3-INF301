@@ -32,7 +32,7 @@ int interprete(sequence_t *seq, bool debug)
     // liste chainee et leur interpretation.
 
     char commande;
-    sequence_t *pile = malloc(sizeof(sequence_t)); //Le pile est traite comme une sequence sur le programme
+    sequence_t *pile = malloc(sizeof(sequence_t)); //Le pile est traite comme une sequence sur le
 
     debug = true; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
 
@@ -46,6 +46,10 @@ int interprete(sequence_t *seq, bool debug)
     printf("\n>>>>>>>>>>> A Faire : interprete.c/interprete() <<<<<<<<<<<<<<<<\n");
     commande = 'A'; //à modifier: premiere commande de la sequence
     int ret;        // utilisée pour les valeurs de retour
+
+    /*
+    int identifiant; //utilisé aux cases de pose et mesurer
+    */
 
     while (true)
     { //à modifier: condition de boucle
@@ -80,6 +84,14 @@ int interprete(sequence_t *seq, bool debug)
             mesure(depiler(pile)->valeur.n);
             break;
         case 'P':
+            /* identifiant = depiler(pile)->valeur.n;
+            switch (identifiant)
+            {
+                case '0':
+                
+                default:
+                    
+            } */
             pose(depiler(pile)->valeur.n);
             break;
         default:
