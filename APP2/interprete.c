@@ -84,14 +84,16 @@ int interprete(sequence_t *seq, bool debug)
             mesure(depiler(pile)->valeur.n);
             break;
         case 'P':
-            /* identifiant = depiler(pile)->valeur.n;
+            /* 
+            identifiant = depiler(pile)->valeur.n;
             switch (identifiant)
             {
                 case '0':
                 
                 default:
                     
-            } */
+            } 
+            */
             pose(depiler(pile)->valeur.n);
             break;
         default:
