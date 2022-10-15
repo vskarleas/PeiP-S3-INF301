@@ -66,6 +66,10 @@ void ajout_debut(sequence_t *seq, cellule_t *nouvelle_tete);
 
 void empiler_int(sequence_t *pile, int n);
 
+void empiler_char(sequence_t *pile, char n);
+
+void empiler_seq(sequence_t *pile, sequence_t *n);
+
 void retirer_tete(sequence_t *seq);
 
 cellule_t* tete(sequence_t *seq);
@@ -73,6 +77,10 @@ cellule_t* tete(sequence_t *seq);
 cellule_t *depiler(sequence_t *seq);
 
 int depiler_int(sequence_t *seq);
+
+char depiler_char(sequence_t *pile);
+
+sequence_t *depiler_seq(sequence_t *pile);
 
 void addition(sequence_t *pile);
 

@@ -25,14 +25,14 @@ void stop(void)
     }
 }
 
-/* Acte I.2, Acte II, Acte III*/
+/* Acte I.2 */
 int interprete(sequence_t *seq, bool debug)
 {
     // Version temporaire a remplacer par une lecture des commandes dans la
     // liste chainee et leur interpretation.
 
     char commande;
-    sequence_t *pile = malloc(sizeof(sequence_t)); //Le pile est traite comme une sequence sur le
+    sequence_t *pile = malloc(sizeof(sequence_t));
 
     debug = true; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
 
@@ -46,10 +46,6 @@ int interprete(sequence_t *seq, bool debug)
     printf("\n>>>>>>>>>>> A Faire : interprete.c/interprete() <<<<<<<<<<<<<<<<\n");
     commande = 'A'; //à modifier: premiere commande de la sequence
     int ret;        // utilisée pour les valeurs de retour
-
-    /*
-    int identifiant; //utilisé aux cases de pose et mesurer
-    */
 
     while (true)
     { //à modifier: condition de boucle
@@ -78,22 +74,12 @@ int interprete(sequence_t *seq, bool debug)
             soustraction(pile); /* Soustraction: depile les deux éléments en haut de la pile, les soustraire, puis ré-empiler le résultat. */
             break;
         case '*':
-            multiplication(pile); /* Multiplication: depile les deux éléments en haut de la pile, les mupliplier, puis ré-empiler le résultat. */
+            multiplication(pile); /* Multiplication: depile les deux éléments en haut de la pile, les sommer, puis ré-empiler le résultat. */
             break;
         case 'M':
             mesure(depiler(pile)->valeur.n);
             break;
         case 'P':
-            /* 
-            identifiant = depiler(pile)->valeur.n;
-            switch (identifiant)
-            {
-                case '0':
-                
-                default:
-                    
-            } 
-            */
             pose(depiler(pile)->valeur.n);
             break;
         default:
