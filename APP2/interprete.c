@@ -25,6 +25,7 @@ void stop(void)
     }
 }
 
+/* Acte I.2 */
 int interprete(sequence_t *seq, bool debug)
 {
     // Version temporaire a remplacer par une lecture des commandes dans la
@@ -66,13 +67,13 @@ int interprete(sequence_t *seq, bool debug)
             droite();
             break;
         case '+':
-            addition(pile);
+            addition(pile); /* Addition: depile les deux éléments en haut de la pile, les sommer, puis ré-empiler le résultat. */
             break;
         case '-':
-            soustraction(pile);
+            soustraction(pile); /* Soustraction: depile les deux éléments en haut de la pile, les soustraire, puis ré-empiler le résultat. */
             break;
         case '*':
-            multiplication(pile);
+            multiplication(pile); /* Multiplication: depile les deux éléments en haut de la pile, les sommer, puis ré-empiler le résultat. */
             break;
         case 'M':
             mesure(depiler_int(pile));
