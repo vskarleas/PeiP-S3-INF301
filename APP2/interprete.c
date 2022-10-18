@@ -81,7 +81,7 @@ int interprete(sequence_t *seq, bool debug)
             pose(depiler_int(pile));
             break;
         default:
-            empiler_int(pile, commande);
+            empiler_int(pile, commande-48); //pas joli !!! (soit faire - '0' soit faire un sscanf!)
             break;
         }
 
