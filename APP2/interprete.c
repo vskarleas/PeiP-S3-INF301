@@ -33,7 +33,7 @@ int interprete(sequence_t *seq, bool debug)
     char commande;
     sequence_t *pile = malloc(sizeof(sequence_t));
 
-    debug = true; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
+    //debug = true; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
 
     printf("Programme:");
     afficher(seq);
@@ -42,11 +42,10 @@ int interprete(sequence_t *seq, bool debug)
         stop();
 
     // À partir d'ici, beaucoup de choses à modifier dans la suite.
-    printf("\n>>>>>>>>>>> A Faire : interprete.c/interprete() <<<<<<<<<<<<<<<<\n");
-    commande = 'A'; //à modifier: premiere commande de la sequence
-    int ret;        // utilisée pour les valeurs de retour
+    commande = depiler(seq)->valeur.l;
+    int ret; // utilisée pour les valeurs de retour
 
-    while (true)
+    while (seq->tete != NULL)
     { //à modifier: condition de boucle
 
         switch (commande)
@@ -76,10 +75,10 @@ int interprete(sequence_t *seq, bool debug)
             multiplication(pile);
             break;
         case 'M':
-            mesure(depiler(pile)->valeur.n);
+            mesure(depiler_int(pile));
             break;
         case 'P':
-            pose(depiler(pile)->valeur.n);
+            pose(depiler_int(pile));
             break;
         default:
             empiler_int(pile, commande);
@@ -93,6 +92,7 @@ int interprete(sequence_t *seq, bool debug)
         printf("\n");
         if (debug)
             stop();
+        commande = depiler(seq)->valeur.l;
     }
 
     /* Si on sort de la boucle sans arriver sur la cible,
