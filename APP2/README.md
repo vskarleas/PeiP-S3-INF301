@@ -25,4 +25,4 @@
 ## 20/10/2022
 
 * On a continué sur l'acte iV
-* On a commencé l'acte
+* On a commencé l'acte V
