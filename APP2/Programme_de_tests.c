@@ -4,12 +4,9 @@
 
 int main()
 {
-    char texte[] = "AAGD321A+D6-";
-    sequence_t * seq = malloc(sizeof(sequence_t));
+    char texte[] = "{ 1 M { D } { A } ? }{XC 32R !C !} C !";
+    sequence_t *seq = malloc(sizeof(sequence_t));
     conversion(texte, seq);
     afficher(seq);
-    empiler_int(seq, 'a');
-    afficher(seq);
-    printf("%c\n", depiler_int(seq));
-    afficher(seq);
+    printf("\n");
 }

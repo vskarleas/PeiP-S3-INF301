@@ -39,7 +39,7 @@ struct cellule
     {
         int n;
         char l;
-        struct sequence * s;
+        struct sequence *s;
     } valeur;
 
     type_valeur_cellule type_valeur;
@@ -72,7 +72,7 @@ void empiler_seq(sequence_t *pile, sequence_t *n);
 
 void retirer_tete(sequence_t *seq);
 
-cellule_t* tete(sequence_t *seq);
+cellule_t *tete(sequence_t *seq);
 
 cellule_t *depiler(sequence_t *seq);
 
@@ -81,6 +81,12 @@ int depiler_int(sequence_t *seq);
 char depiler_char(sequence_t *pile);
 
 sequence_t *depiler_seq(sequence_t *pile);
+
+void vider(sequence_t *seq);
+
+sequence_t *nouvelle_seq();
+
+cellule_t *queue(sequence_t *seq);
 
 void addition(sequence_t *pile);
 

@@ -15,7 +15,7 @@ CFLAGS= -g -Wall -Wextra -Werror -Wno-unused-parameter
 
 # Ici, on utilise l'"intelligence" de 'make' qui saura tout seul
 # comment créer les .o à partir des .c
-main: main.o curiosity.o listes.o interprete.o
+main: main.o curiosity.o listes.o interprete.o commandes.o
 
 Programme_de_tests: Programme_de_tests.o listes.o
 

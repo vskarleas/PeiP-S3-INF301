@@ -5,7 +5,7 @@
       "type": "lldb",
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
-      "args": [],
+      "args": ["-d", "./tests/marques-et-mesures.test"],
       "cwd": "${fileDirname}",
       "preLaunchTask": "makelldb: make"
     }

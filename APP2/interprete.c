@@ -7,6 +7,7 @@
 #endif
 #include "listes.h"
 #include "curiosity.h"
+#include "commandes.h"
 
 /*
  *  Auteur(s) :
@@ -34,7 +35,7 @@ int interprete(sequence_t *seq, bool debug)
     char commande;
     sequence_t *pile = malloc(sizeof(sequence_t));
 
-    //debug = true; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
+    // debug = true; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
 
     printf("Programme:");
     afficher(seq);
@@ -43,46 +44,72 @@ int interprete(sequence_t *seq, bool debug)
         stop();
 
     // À partir d'ici, beaucoup de choses à modifier dans la suite.
-    commande = depiler(seq)->valeur.l;
+    cellule_t *cell_actuelle = depiler(seq);
+    cellule_t *cell_a_ajouter = NULL;
+
     int ret; // utilisée pour les valeurs de retour
 
     while (seq->tete != NULL)
     { //à modifier: condition de boucle
-
-        switch (commande)
+        switch (cell_actuelle->type_valeur)
         {
-            /* Ici on avance tout le temps, à compléter pour gérer d'autres commandes */
+        case INT:
+            empiler_int(pile, cell_actuelle->valeur.n);
+            break;
+        case CHAR:
+            commande = cell_actuelle->valeur.l;
+            switch (commande)
+            {
+                /* Ici on avance tout le temps, à compléter pour gérer d'autres commandes */
 
-        case 'A':
-            ret = avance();
-            if (ret == VICTOIRE)
-                return VICTOIRE; /* on a atteint la cible */
-            if (ret == RATE)
-                return RATE; /* tombé dans l'eau ou sur un rocher */
-            break;           /* à ne jamais oublier !!! */
-        case 'G':
-            gauche();
+            case 'A':
+                ret = avance();
+                if (ret == VICTOIRE)
+                    return VICTOIRE; /* on a atteint la cible */
+                if (ret == RATE)
+                    return RATE; /* tombé dans l'eau ou sur un rocher */
+                break;           /* à ne jamais oublier !!! */
+            case 'G':
+                gauche();
+                break;
+            case 'D':
+                droite();
+                break;
+            case '+':
+                /* Addition: depile les deux éléments
+                en haut de la pile, les sommer, puis ré-empiler le
+                résultat.
+                */
+                addition(pile);
+                break;
+            case '-':
+                /* Soustraction: depile les deux éléments en haut
+                de la pile, les soustraire, puis ré-empiler
+                le résultat.
+                */
+                soustraction(pile);
+                break;
+            case '*':
+                /* Multiplication: depile les deux éléments
+                en haut de la pile, les sommer, puis
+                ré-empiler le résultat.
+                */
+                multiplication(pile);
+                break;
+            case 'M':
+                empiler_int(pile,mesure(depiler_int(pile)));
+                break;
+            case 'P':
+                pose(depiler_int(pile));
+                break;
+            case '?':
+                execution_coditionnelle(seq, pile);
+            }
             break;
-        case 'D':
-            droite();
-            break;
-        case '+':
-            addition(pile); /* Addition: depile les deux éléments en haut de la pile, les sommer, puis ré-empiler le résultat. */
-            break;
-        case '-':
-            soustraction(pile); /* Soustraction: depile les deux éléments en haut de la pile, les soustraire, puis ré-empiler le résultat. */
-            break;
-        case '*':
-            multiplication(pile); /* Multiplication: depile les deux éléments en haut de la pile, les sommer, puis ré-empiler le résultat. */
-            break;
-        case 'M':
-            mesure(depiler_int(pile));
-            break;
-        case 'P':
-            pose(depiler_int(pile));
-            break;
-        default:
-            empiler_int(pile, commande-48); //pas joli !!! (soit faire - '0' soit faire un sscanf!)
+        case CHAR_LISTE:
+            cell_a_ajouter = nouvelleCellule();
+            cell_a_ajouter->valeur.s = cell_actuelle->valeur.s;
+            empiler(pile, cell_a_ajouter);
             break;
         }
 
@@ -93,7 +120,7 @@ int interprete(sequence_t *seq, bool debug)
         printf("\n");
         if (debug)
             stop();
-        commande = depiler(seq)->valeur.l;
+        cell_actuelle = depiler(seq);
     }
 
     /* Si on sort de la boucle sans arriver sur la cible,

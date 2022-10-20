@@ -54,8 +54,9 @@ void launch (bool debug, int carte_num)
         }
 
         /* curiosity_reset (cur); */
-
-        conversion(program,&prog_seq);
+        char program_local[4000000]; ////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        strcpy (program_local, program); ////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        conversion(program, &prog_seq);
 
         switch (interprete (&prog_seq, debug)) { //interprete le programme lu jusqu'a la fin de son execution 
 
