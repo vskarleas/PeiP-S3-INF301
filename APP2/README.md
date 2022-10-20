@@ -16,4 +16,13 @@
 ## 15/10/2022
 
 * Commentaires etaient ajouté sur les codes (pas finis)
-* Continuation sur l'acte III
+* Des fucntions pour l'acte V etait ajouté
+
+## 18/10/2022
+
+* Pendant le TP on a reflichi sur le traitment des accolades imbrqiues pour l'acte IV
+
+## 20/10/2022
+
+* On a continué sur l'acte IV
+* On a commencé l'acte V
