@@ -171,7 +171,7 @@ void clone(sequence_t *pile)
 */
 
 /*
-//Il me semble beaucoup à la fonctionalité retirer_tete
+//Il me semble beaucoup à la fonctionalité retirer_tete . JE NE SAIS PAS 
 void ignore(sequence_t *pile)
 {
     retirer_tete(pile);
