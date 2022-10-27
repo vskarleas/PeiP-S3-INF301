@@ -104,11 +104,31 @@ int interprete(sequence_t *seq, bool debug)
                 break;
             case '?':
                 execution_coditionnelle(seq, pile);
+                break;
+            case 'X':
+                echange(pile);
+                break;
+            case '!':
+                exec(seq, pile);
+                break;
+            case 'C':
+                clone(pile);
+                break;
+            case 'I':
+                ignore(pile);
+                break;
+            case 'B':
+                boucle(seq, pile);
+                break;
+            case 'R':
+                rotation(pile);
+                break;
             }
             break;
         case CHAR_LISTE:
             cell_a_ajouter = nouvelleCellule();
             cell_a_ajouter->valeur.s = cell_actuelle->valeur.s;
+            cell_a_ajouter->type_valeur = CHAR_LISTE;
             empiler(pile, cell_a_ajouter);
             break;
         }
@@ -117,6 +137,9 @@ int interprete(sequence_t *seq, bool debug)
         afficherCarte();
         printf("Programme:");
         afficher(seq);
+        printf("\n");
+        printf("Pile : ");
+        afficher(pile);
         printf("\n");
         if (debug)
             stop();

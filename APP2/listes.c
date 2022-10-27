@@ -256,3 +256,30 @@ cellule_t *queue(sequence_t *seq)
         return cell;
     }
 }
+
+sequence_t *copie_sequence(sequence_t *seq)
+{
+    cellule_t *cell = seq->tete;
+    cellule_t *nvelle_cell;
+    sequence_t *nvelle_seq = nouvelle_seq();
+    if (cell == NULL)
+    {
+        nvelle_seq->tete = NULL;
+        return nvelle_seq;
+    }
+    nvelle_cell = nouvelleCellule();
+    nvelle_cell->valeur = cell->valeur;
+    nvelle_cell->type_valeur = cell->type_valeur;
+    nvelle_seq->tete = nvelle_cell;
+
+    while (cell->suivant != NULL)
+    {
+        nvelle_cell->suivant = nouvelleCellule();
+        nvelle_cell->suivant->valeur = cell->suivant->valeur;
+        nvelle_cell->suivant->type_valeur = cell->suivant->type_valeur;
+        nvelle_cell = nvelle_cell->suivant;
+        cell = cell->suivant;
+    }
+    nvelle_cell->suivant = NULL;
+    return nvelle_seq;
+}

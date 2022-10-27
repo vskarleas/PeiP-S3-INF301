@@ -90,10 +90,6 @@ void inserer_liste_debut(sequence_t *seq, sequence_t *seq_a_inserer);
 
 cellule_t *queue(sequence_t *seq);
 
-void addition(sequence_t *pile);
-
-void soustraction(sequence_t *pile);
-
-void multiplication(sequence_t *pile);
+sequence_t *copie_sequence(sequence_t *seq);
 
 #endif
