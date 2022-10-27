@@ -24,23 +24,25 @@ void multiplication(sequence_t *pile) // Multiplication entre deux elements de l
     empiler_int(pile, x * y);
 }
 
-void execution_coditionnelle(sequence_t *routine, sequence_t *pile)
+void   execution_coditionnelle(sequence_t *routine, sequence_t *pile)
 {
     sequence_t *commande_1 = depiler_seq(pile);
     sequence_t *commande_2 = depiler_seq(pile);
     int x = depiler_int(pile);
     if (x == 0)
     {
-        empiler_seq(routine, commande_1);
+        inserer_liste_debut(routine, commande_1);
     }
     else
     {
-        empiler_seq(routine, commande_2);
+        inserer_liste_debut(routine, commande_2);
     }
 }
 
+#define ACTE_V
+#ifdef ACTE_V
 /* Acte V */
-/*
+
 void clone(sequence_t *pile)
 {
     if (depiler(pile)->type_valeur == INT){
@@ -55,17 +57,13 @@ void clone(sequence_t *pile)
 
     }
 }
-*/
 
-/*
 //Il me semble beaucoup à la fonctionalité retirer_tete
 void ignore(sequence_t *pile)
 {
     retirer_tete(pile);
 }
-*/
 
-/*
 void echange(sequence_t *pile)
 {
     if (depiler(pile)->type_valeur == INT){
@@ -88,4 +86,4 @@ void echange(sequence_t *pile)
         empiler_seq(pile, cell1);
     }
 }
-*/
+#endif

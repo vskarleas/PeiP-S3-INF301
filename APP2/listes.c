@@ -11,6 +11,8 @@
 #ifdef AAAAAAh
 #include <stdébile.h>
 #endif
+#define PROGSIZE 400000096
+#include <time.h>
 
 /*
  *  Auteur(s) :
@@ -35,11 +37,36 @@ void detruireCellule(cellule_t *cel)
 /* Acte I.1 */
 void conversion(char *texte, sequence_t *seq) // Converti une chaine de caractere en sequence (liste chainee) de caracteres
 {
+    //int nb_accolades = 0;
+    //printf("%s\n", texte);
+    //time_t start = time(NULL);
+    /*for (int i = 0; i<PROGSIZE; i++)
+    {
+        if (texte[i] == '{')
+        {
+            nb_accolades++;
+        }
+        else if (texte[i] == '}')
+        {
+            nb_accolades--;
+        }
+        else if (texte[i] == '\0' && nb_accolades > 0)
+        {
+            texte[i] = '}';
+            nb_accolades--;
+        }
+    }
+    */
+    //time_t end = time(NULL);
+    //printf("temps : %ld\n", end-start);
+    //printf("%s\n", texte);
+
     cellule_t *cell;
     char c;
     bool est_dans_accolade = false;
     char *contenu_accolade;
     int compteur_accolades = 0;
+    int indice_accolade_fermante;
     sequence_t *accolade = NULL;
     int lg_texte = strlen(texte);
     for (int i = lg_texte; i >= 0; i--)
@@ -59,7 +86,7 @@ void conversion(char *texte, sequence_t *seq) // Converti une chaine de caracter
             {
                 est_dans_accolade = true;
                 texte[i] = '\0';
-                // nouvelle_seq(accolade);
+                indice_accolade_fermante = i;
                 accolade = nouvelle_seq();
             }
         }
@@ -70,6 +97,7 @@ void conversion(char *texte, sequence_t *seq) // Converti une chaine de caracter
                 est_dans_accolade = false;
                 contenu_accolade = &texte[i + 1];
                 conversion(contenu_accolade, accolade);
+                texte[indice_accolade_fermante] = '}';
                 cell = nouvelleCellule();
                 cell->valeur.s = accolade;
                 cell->type_valeur = CHAR_LISTE;
@@ -107,16 +135,16 @@ void afficher(sequence_t *seq)
 {
     assert(seq); /* Le pointeur doit être valide */
     cellule_t *cell_actuelle = seq->tete;
-    printf("[ ");
+    printf("[");
     while (cell_actuelle != NULL)
     {
         if (cell_actuelle->type_valeur == INT)
         {
-            printf("%d ", cell_actuelle->valeur.n);
+            printf("%d", cell_actuelle->valeur.n);
         }
         if (cell_actuelle->type_valeur == CHAR)
         {
-            printf("%c ", cell_actuelle->valeur.l);
+            printf("%c", cell_actuelle->valeur.l);
         }
         if (cell_actuelle->type_valeur == CHAR_LISTE)
         {
