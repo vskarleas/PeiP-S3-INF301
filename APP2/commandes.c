@@ -52,26 +52,6 @@ void   execution_coditionnelle(sequence_t *routine, sequence_t *pile)
 #endif
 void echange(sequence_t *pile)
 {
-    /*
-    if (depiler(pile)->type_valeur == INT){
-        int x = depiler_int(pile);
-        int y = depiler_int(pile);
-        empiler_int(pile, x);
-        empiler_int(pile, y);
-    }
-    else if (depiler(pile)->type_valeur == CHAR){
-        char xi = depiler_char(pile);
-        char yi = depiler_char(pile);
-        empiler_char(pile, xi);
-        empiler_char(pile, yi);
-    }
-    else if (depiler(pile)->type_valeur == CHAR_LISTE)
-    {
-        cellule_t *cell1 = depiler_seq(pile);
-        cellule_t *cell2 = depiler_seq(pile);
-        empiler_seq(pile, cell1);
-        empiler_seq(pile, cell2);
-    }*/
     cellule_t *cell1 = depiler(pile);
     cellule_t *cell2 = depiler(pile);
     empiler(pile, cell1);
