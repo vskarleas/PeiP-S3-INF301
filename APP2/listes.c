@@ -15,7 +15,7 @@
 #include <time.h>
 
 /*
- *  Auteur(s) :
+ *  Auteur(s) : 
  *  Date :
  *  Suivi des Modifications :
  *
@@ -146,15 +146,15 @@ void afficher(sequence_t *seq)
     {
         if (cell_actuelle->type_valeur == INT)
         {
-            printf("%d", cell_actuelle->valeur.n);
+            printf("%d", cell_actuelle->valeur.n); //Affichage du typage INT
         }
         if (cell_actuelle->type_valeur == CHAR)
         {
-            printf("%c", cell_actuelle->valeur.l);
+            printf("%c", cell_actuelle->valeur.l); //Affichage du typage CHAR
         }
         if (cell_actuelle->type_valeur == CHAR_LISTE)
         {
-            afficher(cell_actuelle->valeur.s);
+            afficher(cell_actuelle->valeur.s); //Affichage du typage CHAR_LISTE / Liste chainee
         }
         cell_actuelle = cell_actuelle->suivant;
     }
@@ -170,6 +170,7 @@ void ajout_debut(sequence_t *seq, cellule_t *nouvelle_tete)
     seq->tete = nouvelle_tete;
 }
 
+/*----------*/
 /* Acte II */
 
 /*Ajoute au sommet de la pile un entier*/
@@ -289,17 +290,17 @@ sequence_t *copie_sequence(sequence_t *seq)
     cellule_t *cell = seq->tete;
     cellule_t *nvelle_cell;
     sequence_t *nvelle_seq = nouvelle_seq();
-    if (cell == NULL)
+    if (cell == NULL) //Traitment de cas ou la sequence est vide -> nouvelle_sequence vide aussi
     {
         nvelle_seq->tete = NULL;
         return nvelle_seq;
     }
-    nvelle_cell = nouvelleCellule();
-    nvelle_cell->valeur = cell->valeur;
-    nvelle_cell->type_valeur = cell->type_valeur;
-    nvelle_seq->tete = nvelle_cell;
+    nvelle_cell = nouvelleCellule(); //Initialisation du cellule vide / Il va lire les elements de la sequence pour le mettre dans la nouvelle sequence (une copie)
+    nvelle_cell->valeur = cell->valeur; //Premier element de la sequence passé dans la cellue
+    nvelle_cell->type_valeur = cell->type_valeur; //Le typage du premier element de la sequence passé dans le typage du cellule
+    nvelle_seq->tete = nvelle_cell; //Initialisation de la tete de la nouvelle sequence
 
-    while (cell->suivant != NULL)
+    while (cell->suivant != NULL) //Parcourir le reste de las sequence pour l'ajouter a la nouvelle sequence (copie)
     {
         nvelle_cell->suivant = nouvelleCellule();
         nvelle_cell->suivant->valeur = cell->suivant->valeur;
@@ -307,6 +308,6 @@ sequence_t *copie_sequence(sequence_t *seq)
         nvelle_cell = nvelle_cell->suivant;
         cell = cell->suivant;
     }
-    nvelle_cell->suivant = NULL;
-    return nvelle_seq;
+    nvelle_cell->suivant = NULL; //Indication du fin de la sequence
+    return nvelle_seq; //Envoie la nouvelle sequence (copie)
 }
