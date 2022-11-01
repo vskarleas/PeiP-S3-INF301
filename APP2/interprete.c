@@ -77,50 +77,63 @@ int interprete(sequence_t *seq, bool debug)
                 break;
             case '+':
                 /* Addition: depile les deux éléments
-                en haut de la pile, les sommer, puis ré-empiler le
-                résultat.
-                */
+                en haut de la pile, les somme, puis ré-empile le
+                résultat.*/
                 addition(pile);
                 break;
             case '-':
                 /* Soustraction: depile les deux éléments en haut
-                de la pile, les soustraire, puis ré-empiler
-                le résultat.
-                */
+                de la pile, les soustrait, puis ré-empiler
+                le résultat.*/
                 soustraction(pile);
                 break;
             case '*':
                 /* Multiplication: depile les deux éléments
-                en haut de la pile, les sommer, puis
-                ré-empiler le résultat.
-                */
+                en haut de la pile, les multiplis, puis
+                ré-empiler le résultat.*/
                 multiplication(pile);
                 break;
             case 'M':
+                /*Mesure : effectue une mesure dans une certaine direction
+                et empile le numéro de la direction associé*/
                 empiler_int(pile,mesure(depiler_int(pile)));
                 break;
             case 'P':
+                /*Pose ou enleve une marque au sol*/
                 pose(depiler_int(pile));
                 break;
             case '?':
+                /*Selon l'entier au sommet de la pile, 
+                un groupe de commande délimité par des 
+                accolades sera empiler puis exécuté*/
                 execution_coditionnelle(seq, pile);
                 break;
             case 'X':
+                /*Echange les deux elements au
+                sommet de la pile*/
                 echange(pile);
                 break;
             case '!':
+                /*Extrait l'élement au sommet 
+                de la pile, le met dans la routine 
+                est l'exécute*/
                 exec(seq, pile);
                 break;
             case 'C':
+                /*Clone le sommet de la pile*/
                 clone(pile);
                 break;
             case 'I':
+                /*Ignore l'élément en haut de la pile*/
                 ignore(pile);
                 break;
             case 'B':
+                /*Exécute une commande n fois*/
                 boucle(seq, pile);
                 break;
             case 'R':
+                /*Effectue une rotation de certains éléments 
+                en haut de la pile vers la gauche*/
                 rotation(pile);
                 break;
             }

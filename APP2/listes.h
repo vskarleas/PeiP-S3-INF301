@@ -53,43 +53,68 @@ struct sequence
 };
 typedef struct sequence sequence_t;
 
+/*Créé une nouvelle cellule*/
 cellule_t *nouvelleCellule(void);
 
+/*Detruit une cellule*/
 void detruireCellule(cellule_t *);
 
+/*Converti une chaine de caractere en sequence 
+(liste chainee) de caracteres*/
 void conversion(char *texte, sequence_t *seq);
 
+/*Affiche la séquence*/
 void afficher(sequence_t *seq);
 
+/*Ajoute une nouvelle cellule avec la commande 
+passée en argument au debut de la sequence*/
 void ajout_debut(sequence_t *seq, cellule_t *nouvelle_tete);
 #define empiler ajout_debut
 
+/*Ajoute au sommet de la pile un entier*/
 void empiler_int(sequence_t *pile, int n);
 
+/*Ajoute au sommet de la pile un charactere*/
 void empiler_char(sequence_t *pile, char n);
 
+/*Ajoute au sommet de la pile une sequence*/
 void empiler_seq(sequence_t *pile, sequence_t *n);
 
+/*Supprime la tete de la sequence en definissant comme 
+tete l'element suivant de la sequence*/
 void retirer_tete(sequence_t *seq);
 
+/*Retourne la tete de notre sequence comme une cellule*/
 cellule_t *tete(sequence_t *seq);
 
+/*Dépile le sommet*/
 cellule_t *depiler(sequence_t *seq);
 
+/*Supprime le premier element (entier) 
+de la pile tout en retournant sa valeur*/
 int depiler_int(sequence_t *seq);
 
+/*Supprime le premier element (charactere)
+de la pile tout en retournant sa valeur*/
 char depiler_char(sequence_t *pile);
 
+/*Supprime le premier element (sequence) 
+de la pile tout en retournant sa valeur*/
 sequence_t *depiler_seq(sequence_t *pile);
 
+/*Vide la séquence*/
 void vider(sequence_t *seq);
 
+/*Créé une nouvelle séquence*/
 sequence_t *nouvelle_seq();
 
+/*Insere une sequence au debut d'une autre sequence*/
 void inserer_liste_debut(sequence_t *seq, sequence_t *seq_a_inserer);
 
+/*Retourne la queue de la séquence*/
 cellule_t *queue(sequence_t *seq);
 
+/*Fais une copie de la séquence donnée en argument*/
 sequence_t *copie_sequence(sequence_t *seq);
 
 #endif

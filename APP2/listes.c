@@ -23,19 +23,24 @@
 
 bool silent_mode = false;
 
-cellule_t *nouvelleCellule(void) // Créé une nouvelle cellule
+/*Créé une nouvelle cellule*/
+cellule_t *nouvelleCellule(void) 
 {
     cellule_t *cell = malloc(sizeof(cellule_t));
     return cell;
 }
 
+/*Detruit une cellule*/
 void detruireCellule(cellule_t *cel)
 {
     free(cel);
 }
 
 /* Acte I.1 */
-void conversion(char *texte, sequence_t *seq) // Converti une chaine de caractere en sequence (liste chainee) de caracteres
+
+/*Converti une chaine de caractere en sequence 
+(liste chainee) de caracteres*/
+void conversion(char *texte, sequence_t *seq)
 {
     //int nb_accolades = 0;
     //printf("%s\n", texte);
@@ -131,6 +136,7 @@ void conversion(char *texte, sequence_t *seq) // Converti une chaine de caracter
 }
 /* ----------- */
 
+/*Affiche la séquence*/
 void afficher(sequence_t *seq)
 {
     assert(seq); /* Le pointeur doit être valide */
@@ -155,7 +161,9 @@ void afficher(sequence_t *seq)
     printf("]");
 }
 
-void ajout_debut(sequence_t *seq, cellule_t *nouvelle_tete) // Ajoute une nouvelle cellule avec la commande passée en argument au debut de la sequence
+/*Ajoute une nouvelle cellule avec la commande 
+passée en argument au debut de la sequence*/
+void ajout_debut(sequence_t *seq, cellule_t *nouvelle_tete) 
 {
     // Insertion en modifiant les references
     nouvelle_tete->suivant = seq->tete;
@@ -163,83 +171,101 @@ void ajout_debut(sequence_t *seq, cellule_t *nouvelle_tete) // Ajoute une nouvel
 }
 
 /* Acte II */
-void empiler_int(sequence_t *pile, int n) // Ajout au debut de notre pile un entier
+
+/*Ajoute au sommet de la pile un entier*/
+void empiler_int(sequence_t *pile, int n) 
 {
     cellule_t *cell = nouvelleCellule();
     cell->valeur.n = n;
-    cell->type_valeur = INT; // definit que le typage de notre action d'empilage est un entier
+    cell->type_valeur = INT; // definit l'élément à insérer comme un entier
     empiler(pile, cell);
 }
 
-void empiler_char(sequence_t *pile, char n) // Ajout au debut de notre pile un caracter
+/*Ajoute au sommet de la pile un charactere*/
+void empiler_char(sequence_t *pile, char n)
 {
     cellule_t *cell = nouvelleCellule();
     cell->valeur.l = n;
-    cell->type_valeur = CHAR; // definit que le typage de notre action d'empilage est un caracter
+    cell->type_valeur = CHAR; //  definit l'élément à insérer comme un entier charactere
     empiler(pile, cell);
 }
 
-void empiler_seq(sequence_t *pile, sequence_t *n) // Ajout au debut de notre pile une sequence
+/*Ajoute au sommet de la pile une sequence*/
+void empiler_seq(sequence_t *pile, sequence_t *n)
 {
     cellule_t *cell = nouvelleCellule();
     cell->valeur.s = n;
-    cell->type_valeur = CHAR_LISTE; // definit que le typage de notre action d'empilage est une sequence
+    cell->type_valeur = CHAR_LISTE; //  definit l'élément à insérer comme une sequence
     empiler(pile, cell);
 }
 
-void retirer_tete(sequence_t *seq) // Supprime le tete de la sequence en definisant comme tete l'ement suivant de la sequence
+/*Supprime la tete de la sequence en definissant comme 
+tete l'element suivant de la sequence*/
+void retirer_tete(sequence_t *seq)
 {
     cellule_t *suivant = seq->tete->suivant;
-    seq->tete = suivant;
+    seq->tete = suivant; //initialisation de la nouvelle tete
 }
 
-cellule_t *tete(sequence_t *seq) // Retourne le tete de notre sequence comme une cellule
+/*Retourne la tete de notre sequence comme une cellule*/
+cellule_t *tete(sequence_t *seq)
 {
     return seq->tete;
 }
 
-cellule_t *depiler(sequence_t *seq) //
+/*Dépile le sommet*/
+cellule_t *depiler(sequence_t *seq)
 {
     cellule_t *cell = tete(seq);
     retirer_tete(seq);
     return cell;
 }
 
-int depiler_int(sequence_t *pile) // Suprime le premier element (entier) par le pile tout en retournant sa valeur
+/*Supprime le premier element (entier)
+de la pile tout en retournant sa valeur*/
+int depiler_int(sequence_t *pile)
 {
     return depiler(pile)->valeur.n;
 }
 
-char depiler_char(sequence_t *pile) // Suprime le premier element (character) par le pile tout en retournant sa valeur
+/*Supprime le premier element (charactere)
+de la pile tout en retournant sa valeur*/
+char depiler_char(sequence_t *pile) 
 {
     return depiler(pile)->valeur.l;
 }
 
-sequence_t *depiler_seq(sequence_t *pile) // Suprime le premier element (character) par le pile tout en retournant sa valeur
+/*Supprime le premier element (sequence) 
+de la pile tout en retournant sa valeur*/
+sequence_t *depiler_seq(sequence_t *pile)
 {
     return depiler(pile)->valeur.s;
 }
 
+/*Vide la séquence*/
 void vider(sequence_t *seq)
 {
     seq->tete = NULL;
 }
 
+/*Créé une nouvelle séquence*/
 sequence_t *nouvelle_seq()
 {
     return malloc(sizeof(sequence_t));
 }
 
+/*Insere une sequence au debut d'une autre sequence*/
 void inserer_liste_debut(sequence_t *seq, sequence_t *seq_a_inserer)
 {
     cellule_t *dernier_elem = queue(seq_a_inserer);
     if (dernier_elem != NULL)
     {
-        dernier_elem->suivant = seq->tete;
-        seq->tete = seq_a_inserer->tete;
+        dernier_elem->suivant = seq->tete; //le suivant de la queue de la sequence à inserer est la tete de la sequence initiale
+        seq->tete = seq_a_inserer->tete; //initialisation de la nouvelle tete
     }
 }
 
+/*Retourne la queue de la séquence*/
 cellule_t *queue(sequence_t *seq)
 {
     cellule_t *cell = seq->tete;
@@ -257,6 +283,7 @@ cellule_t *queue(sequence_t *seq)
     }
 }
 
+/*Fais une copie de la séquence donnée en argument*/
 sequence_t *copie_sequence(sequence_t *seq)
 {
     cellule_t *cell = seq->tete;
