@@ -81,7 +81,7 @@ le met dans la routine est l'exécute
 */
 void exec(sequence_t *routine, sequence_t *pile)
 {
-    /*On une séquence pour prendre en compte tout les cas possible 
+    /*On a une séquence pour prendre en compte tout les cas possible 
     (un caractere ou une chaine de caractere)*/
     sequence_t *seq = depiler_seq(pile);
     inserer_liste_debut(routine, seq);
