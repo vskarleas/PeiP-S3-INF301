@@ -15,9 +15,36 @@ TREHIN - Gwendal : ....
 Si vous avez des commentaires, remarques etc. pour le rendu, vous pouvez les 
 mettre ici:
 
-...
-...
-...
+********************************
+** Complexité                 **
+********************************
+
+conversion(texte, routine)
+   compter_accolade = 0
+   pour chaque c dans texte à l'inverse                              x n
+      si compter_accolade = 0                                       o(1)
+         si c est caractere et c different que '}'
+            ajouter_debut_letre(c, routine)                       o(1)
+         si c est chifre et c different que '}'
+            ajouter_debut_chifre(c, routine)                      o(1)
+      si c est '}'                                                  o(1)
+         compter_accolade++                                       o(1)
+      sinon 
+         si c = '{'                                                  o(1)
+            compter_accolade--                                       ο(n) 
+            si compter_accolade = 0                               ο(n)
+               ajout_debut(conversion(contenu_accolade, routine))
+            sinon                                                    o(1)
+               contenu_accolade += c                              0(1)
+
+n x (o(1)+o(1)+o(n)+o(1)) = o(n^2)
+
+
+afficher(routine)
+
+      
+
+
 
 
 
