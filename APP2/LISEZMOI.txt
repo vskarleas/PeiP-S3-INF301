@@ -39,11 +39,101 @@ conversion(texte, routine)
 
 n x (o(1)+o(1)+o(n)+o(1)) = o(n^2)
 
+/*----------------------------------------------------------------*/
 
 afficher(routine)
+   init cel = routine->tete                      o(1)
+   afficher '['                                  o(1)
+   tant que cel different que NULL               x n
+      si cel->type_valeur est chifre           o(1)
+         afficher_chifre(cel)                o(1)
+      si cel->type_valeur est caractere        o(1)
+         afficher_caracter(cel)              o(1)
+      si cel->type_valeur est sequence         o(1)
+         afficher_sequence(cel)              o(1)
+      cel = cel->suivant                       o(1)
+   fin tant que
+   afficher ']'                                  o(1)
 
+   o(1) + o(1) + n x (o(1)+o(1)+o(1)) + o(1) = o(n)
       
+/*----------------------------------------------------------------*/
 
+ajout_debut(sequence, cel) //Il s'agit de la fonction d'empilage pour un pile
+   cel->suivant = sequence->tete           o(1)
+   sequence->tete = cel                    o(1)
+
+o(1) + o(1) = 2o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+retirer_tete(sequence)
+   init cel                               o(1)
+   cel = sequence->tete->suivant          o(1)
+   sequence->tete = cel                   o(1)
+
+
+o(1) + o(1) + o(1) = 3o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+depiler(sequence)
+   init cel                            o(1)
+   cel = sequence->tete                o(1)
+   retirer_tete(sequence)              o(1)
+
+o(1) + o(1) + o(1) = 3o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+vider(sequence)
+   sequence->tete = NULL               o(1)
+
+/*----------------------------------------------------------------*/
+
+queue(sequence)
+   init cel                                       o(1)
+   cel = sequence->tete                           o(1)
+   si cel est NULL                                o(1)
+      retourner NULL                            o(1)
+   sinon                                          O(n)
+      tant que cel est different que NULL        x n
+         cel = cel->suivant                   o(1)
+      retourner cel                             O(1)
+
+o(1) + o(1) + o(1) + (n(o(1)) + o(1)) = 3o(1) + o(n) ~ o(n)
+
+/*----------------------------------------------------------------*/
+
+inserer_liste_debut(sequence, sequence_2)
+   cel = queue(sequence_2)                     o(n)     
+   si cel est different que NULL               o(1)
+      cel->suivant = sequence->tete         o(1)
+      sequence->tete = sequence_2->tete     o(1)
+
+o(n) + (o(1) + o(1)) = o(n) + 2o(1) ~ o(n)
+
+/*----------------------------------------------------------------*/
+
+copie_sequence(sequence)
+   int cel = sequence->tete                                 o(1)                      
+   si sequence->tete est NULL                               o(1)
+      retourner nouvelle_sequence = NULL              o(1)
+   sinon                                                    o(n)
+      nouvelle_sequence<-tete = cel                   o(1)
+      tant que cel est different que NULL             x n
+         init nouvelle_cel                        o(1)
+         nouvelle_cel->suivant = cel->suivant     o(1)
+         cel = cel->suivant                       o(1)
+      retourner nouvelle_sequence                     o(1)
+      
+o(1) + o(1) + ((n x (o(1) + o(1) + o(1))) + o(1)) = 2o(1) + o(n) ~ o(n)
+
+
+********************************
+** Conclusion                 **
+********************************
+/*Par rapport les graphes*/
 
 
 
