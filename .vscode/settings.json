@@ -2,5 +2,6 @@
     "files.associations": {
         "stdlib.h": "c",
         "listes.h": "c"
-    }
+    },
+    "cSpell.language": "fr-FR"
 }

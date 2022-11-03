@@ -26,7 +26,7 @@ Echange les deux elements au sommet de la pile
 void echange(sequence_t *pile);
 
 /*
-Extrait l'élement au sommet de la pile, le met dans la routine est l'exécute
+Extrait l’élément au sommet de la pile, le met dans la routine est l'exécute
 */
 void exec(sequence_t *routine, sequence_t *pile);
 
@@ -49,3 +49,5 @@ void boucle(sequence_t *routine, sequence_t *pile);
 Effectue une rotation de certains éléments en haut de la pile vers la gauche
 */
 void rotation(sequence_t *pile);
+
+void operation_Z(sequence_t *pile);

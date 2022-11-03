@@ -136,6 +136,9 @@ int interprete(sequence_t *seq, bool debug)
                 en haut de la pile vers la gauche*/
                 rotation(pile);
                 break;
+            case 'Z':
+                operation_Z(pile);
+                break;
             }
             break;
         case CHAR_LISTE:

@@ -5,7 +5,7 @@
       "type": "lldb",
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
-      "args": ["./tests/rotations.test"],
+      "args": ["./tests/mysterieuZe.test"],
       "cwd": "${fileDirname}",
       "preLaunchTask": "makelldb: make"
     }

@@ -41,16 +41,18 @@ void   execution_coditionnelle(sequence_t *routine, sequence_t *pile)
 {
     sequence_t *commande_1 = depiler_seq(pile);
     sequence_t *commande_2 = depiler_seq(pile);
+    sequence_t *commande_a_ajouter;
     int x = depiler_int(pile);
     /*Selon la valeur de x, on n'exécute pas le même bloc de commande*/
     if (x == 0)
     {
-        inserer_liste_debut(routine, commande_1);
+        commande_a_ajouter = copie_sequence(commande_1);
     }
     else
     {
-        inserer_liste_debut(routine, commande_2);
+        commande_a_ajouter = copie_sequence(commande_2);
     }
+    inserer_liste_debut(routine, commande_a_ajouter);
 }
 
 //#define ACTE_V
@@ -198,4 +200,9 @@ void rotation(sequence_t *pile)
         empiler(pile, cell2);
         cell = cell->suivant;
     }
+}
+
+void operation_Z(sequence_t * pile)
+{
+    retourner_sequence(pile);
 }
