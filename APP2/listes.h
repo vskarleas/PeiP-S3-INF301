@@ -120,6 +120,9 @@ cellule_t *queue(sequence_t *seq);
 /*Fais une copie de la séquence donnée en argument*/
 sequence_t *copie_sequence(sequence_t *seq);
 
+/*
+
+*/
 void retourner_sequence(sequence_t *seq);
 
 #endif

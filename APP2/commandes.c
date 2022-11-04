@@ -199,6 +199,11 @@ void rotation(sequence_t *pile)
     }
 }
 
+/*
+Challenge: "mysterieuZe"
+Effectue des rotations de la pile pour trouver le bloc de(s) commande(s)
+pouir suivre apres le bloc de(s) commande(s) avant.
+*/
 void operation_Z(sequence_t *pile)
 {
     retourner_sequence(pile);

@@ -323,10 +323,13 @@ cellule_t *copie_cellule(cellule_t *cell)
     return nvelle_cell;
 }
 
+/*
+
+*/
 void retourner_sequence(sequence_t *seq)
 {
-    sequence_t *seq_retournee = nouvelle_seq();
-    cellule_t *cell = seq->tete;
+    sequence_t *seq_retournee = nouvelle_seq(); //Tete de la sequence passé à la cellule pour effectuer le parcours
+    cellule_t *cell = seq->tete; //Parcourir tout la sequence jusque la fin
     while (cell != NULL)
     {
         ajout_debut(seq_retournee, copie_cellule(cell));

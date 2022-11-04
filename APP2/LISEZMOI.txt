@@ -133,7 +133,12 @@ o(1) + o(1) + ((n x (o(1) + o(1) + o(1))) + o(1)) = 2o(1) + o(n) ~ o(n)
 ********************************
 ** Conclusion                 **
 ********************************
-/*Par rapport les graphes*/
+On arrive aux graphes base, memfree et piiile d'avoir une representation lineaire. Ça s'explique par le fait que 
+les fonctionnes sont lineaires. Aussi le mode de stockage des donness est les listes chaines. À chaque operation on effectue
+une addition et une sustraction des donness par les listes chaines. La consomation des ressources est dynamique par rapport
+le nombre des donnees et comme la complexité generale de la majorite des fonctionnes est o(n). Si on utilisait des tables pour
+stocker les donnees, la representation serait des droits stables (pas lineaire). Même si la fonction de conversion a une 
+complexité de o(n^2), les graphes restent lineaires, qui s'explique par le fait que  c'est une application recursif.
 
 
 
