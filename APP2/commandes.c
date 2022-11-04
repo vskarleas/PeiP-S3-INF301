@@ -12,10 +12,10 @@ void addition(sequence_t *pile)
     empiler_int(pile, x + y);
 }
 
-/*Soustraction entre deux elements 
-de la pile (le resulat est empile 
+/*Soustraction entre deux elements
+de la pile (le resulat est empile
 sur la pile)*/
-void soustraction(sequence_t *pile) 
+void soustraction(sequence_t *pile)
 {
     int x = depiler_int(pile);
     int y = depiler_int(pile);
@@ -23,7 +23,7 @@ void soustraction(sequence_t *pile)
 }
 
 /*Multiplication entre deux elements
-de la pile (le resulat est empile sur 
+de la pile (le resulat est empile sur
 la pile)*/
 void multiplication(sequence_t *pile)
 {
@@ -34,10 +34,10 @@ void multiplication(sequence_t *pile)
 
 /*
 Selon l'entier au sommet de la pile,
-un groupe de commande délimité par 
+un groupe de commande délimité par
 des accolades sera empiler puis exécuté
 */
-void   execution_coditionnelle(sequence_t *routine, sequence_t *pile)
+void execution_coditionnelle(sequence_t *routine, sequence_t *pile)
 {
     sequence_t *commande_1 = depiler_seq(pile);
     sequence_t *commande_2 = depiler_seq(pile);
@@ -59,9 +59,7 @@ void   execution_coditionnelle(sequence_t *routine, sequence_t *pile)
 #ifdef ACTE_V
 /* Acte V */
 
-
-
-//Il me semble beaucoup à la fonctionalité retirer_tete
+// Il me semble beaucoup à la fonctionalité retirer_tete
 
 #endif
 
@@ -78,12 +76,12 @@ void echange(sequence_t *pile)
 }
 
 /*
-Extrait l'élement au sommet de la pile, 
+Extrait l'élement au sommet de la pile,
 le met dans la routine est l'exécute
 */
 void exec(sequence_t *routine, sequence_t *pile)
 {
-    /*On a une séquence pour prendre en compte tout les cas possible 
+    /*On a une séquence pour prendre en compte tout les cas possible
     (un caractere ou une chaine de caractere)*/
     sequence_t *seq = depiler_seq(pile);
     inserer_liste_debut(routine, seq);
@@ -132,7 +130,7 @@ void boucle(sequence_t *routine, sequence_t *pile)
     cellule_t *cell_n = depiler(pile);
     /*On dépile la commande à exécuter*/
     sequence_t *cmd = depiler_seq(pile);
-    
+
     if (cell_n->valeur.n > 0)
     {
         /*décrémente n de 1*/
@@ -155,7 +153,7 @@ void boucle(sequence_t *routine, sequence_t *pile)
 }
 
 /*
-Effectue une rotation de certains 
+Effectue une rotation de certains
 éléments en haut de la pile vers la gauche
 */
 void rotation(sequence_t *pile)
@@ -163,7 +161,8 @@ void rotation(sequence_t *pile)
     int x = depiler_int(pile);
     int n = depiler_int(pile);
     /*Un décalage de 1 element vers la gauche ne change pas la séquence*/
-    if (n == 1){
+    if (n == 1)
+    {
         return;
     }
     cellule_t *cell;
@@ -175,12 +174,10 @@ void rotation(sequence_t *pile)
         cell = depiler(pile);
         ajout_debut(seq, cell);
     }
-    afficher(seq);
-    printf("\n");
     cell = seq->tete;
     for (int i = 0; i < n; i++)
     {
-        
+
         if (i >= x)
         {
             cell2 = nouvelleCellule();
@@ -188,11 +185,11 @@ void rotation(sequence_t *pile)
             cell2->type_valeur = cell->type_valeur;
             empiler(pile, cell2);
         }
-        cell = cell->suivant; 
+        cell = cell->suivant;
     }
 
     cell = seq->tete;
-    for (int i = 0; i <x; i++)
+    for (int i = 0; i < x; i++)
     {
         cell2 = nouvelleCellule();
         cell2->valeur = cell->valeur;
@@ -202,7 +199,7 @@ void rotation(sequence_t *pile)
     }
 }
 
-void operation_Z(sequence_t * pile)
+void operation_Z(sequence_t *pile)
 {
     retourner_sequence(pile);
 }

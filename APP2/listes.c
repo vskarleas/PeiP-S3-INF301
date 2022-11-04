@@ -36,35 +36,19 @@ void detruireCellule(cellule_t *cel)
     free(cel);
 }
 
+/*Detruit une sequence*/
+void detruire_seq(sequence_t *seq)
+{
+    free(seq);
+}
+
 /* Acte I.1 */
 
 /*Converti une chaine de caractere en sequence
 (liste chainee) de caracteres*/
 void conversion(char *texte, sequence_t *seq)
 {
-    // int nb_accolades = 0;
-    // printf("%s\n", texte);
-    // time_t start = time(NULL);
-    /*for (int i = 0; i<PROGSIZE; i++)
-    {
-        if (texte[i] == '{')
-        {
-            nb_accolades++;
-        }
-        else if (texte[i] == '}')
-        {
-            nb_accolades--;
-        }
-        else if (texte[i] == '\0' && nb_accolades > 0)
-        {
-            texte[i] = '}';
-            nb_accolades--;
-        }
-    }
-    */
-    // time_t end = time(NULL);
-    // printf("temps : %ld\n", end-start);
-    // printf("%s\n", texte);
+    unsigned long compteur_passages = 0;
 
     cellule_t *cell;
     char c;
@@ -76,6 +60,8 @@ void conversion(char *texte, sequence_t *seq)
     int lg_texte = strlen(texte);
     for (int i = lg_texte; i >= 0; i--)
     {
+        compteur_passages++;
+
         c = texte[i];
         if (isspace(c))
         {
@@ -133,6 +119,7 @@ void conversion(char *texte, sequence_t *seq)
             ajout_debut(seq, cell);
         }
     }
+    //printf("\n%lu\n\n", compteur_passages);
 }
 /* ----------- */
 
@@ -226,25 +213,34 @@ cellule_t *depiler(sequence_t *seq)
 de la pile tout en retournant sa valeur*/
 int depiler_int(sequence_t *pile)
 {
-    return depiler(pile)->valeur.n;
+    cellule_t *cell = depiler(pile);
+    int retour = cell->valeur.n;
+    //detruireCellule(cell); //FIXME: fuite de memoire, on devrait pouvoir detruire la cellule ici mais ca casse tout...
+    return retour;
 }
 
 /*Supprime le premier element (charactere)
 de la pile tout en retournant sa valeur*/
 char depiler_char(sequence_t *pile)
 {
-    return depiler(pile)->valeur.l;
+    cellule_t *cell = depiler(pile);
+    char retour = cell->valeur.l;
+    // detruireCellule(cell); //FIXME: fuite de memoire, on devrait pouvoir detruire la cellule ici mais ca casse tout...
+    return retour;
 }
 
 /*Supprime le premier element (sequence)
 de la pile tout en retournant sa valeur*/
 sequence_t *depiler_seq(sequence_t *pile)
 {
-    return depiler(pile)->valeur.s;
+    cellule_t *cell = depiler(pile);
+    sequence_t *retour = cell->valeur.s;
+    // detruireCellule(cell); //FIXME: fuite de memoire, on devrait pouvoir detruire la cellule ici mais ca casse tout...
+    return retour;
 }
 
 /*Vide la séquence*/
-void vider(sequence_t *seq)
+void vider(sequence_t *seq) // FIXME: ne libere pas la memoire!
 {
     seq->tete = NULL;
 }
@@ -264,6 +260,7 @@ void inserer_liste_debut(sequence_t *seq, sequence_t *seq_a_inserer)
         dernier_elem->suivant = seq->tete; // le suivant de la queue de la sequence à inserer est la tete de la sequence initiale
         seq->tete = seq_a_inserer->tete;   // initialisation de la nouvelle tete
     }
+    detruire_seq(seq_a_inserer);    
 }
 
 /*Retourne la queue de la séquence*/

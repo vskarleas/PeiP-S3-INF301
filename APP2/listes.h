@@ -59,7 +59,10 @@ cellule_t *nouvelleCellule(void);
 /*Detruit une cellule*/
 void detruireCellule(cellule_t *);
 
-/*Converti une chaine de caractere en sequence 
+/*Detruit une sequence*/
+void detruire_seq(sequence_t *seq);
+
+/*Converti une chaine de caractere en sequence
 (liste chainee) de caracteres*/
 void conversion(char *texte, sequence_t *seq);
 
