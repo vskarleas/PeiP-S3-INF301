@@ -314,9 +314,10 @@ sequence_t *copie_sequence(sequence_t *seq)
     return nvelle_seq;           // Envoie la nouvelle sequence (copie)
 }
 
+//Retourne une copie d'une cellule passé en argument
 cellule_t *copie_cellule(cellule_t *cell)
 {
-    cellule_t *nvelle_cell = malloc(sizeof(cellule_t));
+    cellule_t *nvelle_cell = malloc(sizeof(cellule_t)); //Position en endroit de la memoire pour la nouvelle cellule
     nvelle_cell->valeur = cell->valeur;
     nvelle_cell->suivant = cell->suivant;
     nvelle_cell->type_valeur = cell->type_valeur;
@@ -324,13 +325,13 @@ cellule_t *copie_cellule(cellule_t *cell)
 }
 
 /*
-
+Il fa
 */
 void retourner_sequence(sequence_t *seq)
 {
-    sequence_t *seq_retournee = nouvelle_seq(); //Tete de la sequence passé à la cellule pour effectuer le parcours
-    cellule_t *cell = seq->tete; //Parcourir tout la sequence jusque la fin
-    while (cell != NULL)
+    sequence_t *seq_retournee = nouvelle_seq(); 
+    cellule_t *cell = seq->tete; //Tete de la sequence passé à la cellule pour effectuer le parcours
+    while (cell != NULL) //Parcourir tout la sequence jusque la fin
     {
         ajout_debut(seq_retournee, copie_cellule(cell));
         cell = cell->suivant;

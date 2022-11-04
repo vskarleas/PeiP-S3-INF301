@@ -120,6 +120,8 @@ cellule_t *queue(sequence_t *seq);
 /*Fais une copie de la séquence donnée en argument*/
 sequence_t *copie_sequence(sequence_t *seq);
 
+/*Retourne une copie d'une cellule passé en argument*/
+cellule_t *copie_cellule(cellule_t *cell);
 /*
 
 */
