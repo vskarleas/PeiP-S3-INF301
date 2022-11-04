@@ -325,7 +325,7 @@ cellule_t *copie_cellule(cellule_t *cell)
 }
 
 /*
-Il fa
+
 */
 void retourner_sequence(sequence_t *seq)
 {
