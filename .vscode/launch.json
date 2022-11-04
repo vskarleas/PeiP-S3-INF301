@@ -5,7 +5,7 @@
       "type": "lldb",
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
-      "args": ["../../test_perf_app2/perfs/testnested2000.test"],
+      "args": ["../../test_perf_app2/perfs/testlong2000.test"],
       "cwd": "${fileDirname}",
       "preLaunchTask": "makelldb: make"
     }

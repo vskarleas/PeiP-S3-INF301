@@ -37,7 +37,7 @@ Selon l'entier au sommet de la pile,
 un groupe de commande délimité par
 des accolades sera empiler puis exécuté
 */
-void execution_coditionnelle(sequence_t *routine, sequence_t *pile)
+void execution_coditionnelle(sequence_t *routine, sequence_t *pile) // FIXME: il faudrait libérer l'espace des deux commandes mais ça cause problème
 {
     sequence_t *commande_1 = depiler_seq(pile);
     sequence_t *commande_2 = depiler_seq(pile);

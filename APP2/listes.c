@@ -92,6 +92,7 @@ void conversion(char *texte, sequence_t *seq)
                 cell = nouvelleCellule();
                 cell->valeur.s = accolade;
                 cell->type_valeur = CHAR_LISTE;
+                cell->suivant = NULL;
                 ajout_debut(seq, cell);
             }
             else
@@ -110,11 +111,13 @@ void conversion(char *texte, sequence_t *seq)
             {
                 cell->valeur.n = texte[i] - '0';
                 cell->type_valeur = INT;
+                cell->suivant = NULL;
             }
             else
             {
                 cell->valeur.l = texte[i];
                 cell->type_valeur = CHAR;
+                cell->suivant = NULL;
             }
             ajout_debut(seq, cell);
         }
@@ -143,6 +146,7 @@ void afficher(sequence_t *seq)
         {
             afficher(cell_actuelle->valeur.s); // Affichage du typage CHAR_LISTE / Liste chainee
         }
+        fflush(stdout);
         cell_actuelle = cell_actuelle->suivant;
     }
     printf("]");
@@ -189,7 +193,7 @@ void empiler_seq(sequence_t *pile, sequence_t *n)
 
 /*Supprime la tete de la sequence en definissant comme
 tete l'element suivant de la sequence*/
-void retirer_tete(sequence_t *seq)
+void retirer_tete(sequence_t *seq) //FIXME: potentielle fuite de mémoire
 {
     cellule_t *suivant = seq->tete->suivant;
     seq->tete = suivant; // initialisation de la nouvelle tete
@@ -284,6 +288,7 @@ cellule_t *queue(sequence_t *seq)
 /*Fais une copie de la séquence donnée en argument*/
 sequence_t *copie_sequence(sequence_t *seq)
 {
+    afficher(seq);
     cellule_t *cell = seq->tete;
     cellule_t *nvelle_cell;
     sequence_t *nvelle_seq = nouvelle_seq();
