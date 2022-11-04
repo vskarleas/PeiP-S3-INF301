@@ -30,3 +30,19 @@
 ## 25/10/2022
 
 - On a rendu le tableau
+
+## 1/11/2022
+
+* Ajoute des commentaires
+
+## 2/11/2022
+
+* Corrections des bugs
+* Optimisation du programme
+
+## 4/11/2022
+
+* Verifications des commenatires ajoutés
+* Discussion sur la destruction des cellules en cas d'un depilage_int, depiler_char etc.
+* Explication du comportement de la focntion de opertion_z pour le chanllenge mysterieuseZe
+* Optimisation des tests
