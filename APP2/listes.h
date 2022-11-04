@@ -34,7 +34,7 @@ typedef enum
 
 struct cellule
 {
-    /* vous pouvez rajouter d'autres champs ici */
+    /*On utilise une union pour les differents types des donnes qu'on traite sur les fonctionnes*/
     union
     {
         int n;
@@ -122,6 +122,7 @@ sequence_t *copie_sequence(sequence_t *seq);
 
 /*Retourne une copie d'une cellule passé en argument*/
 cellule_t *copie_cellule(cellule_t *cell);
+
 /*
 
 */
