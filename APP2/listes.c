@@ -329,7 +329,7 @@ Il fa
 */
 void retourner_sequence(sequence_t *seq)
 {
-    sequence_t *seq_retournee = nouvelle_seq(); 
+    sequence_t *seq_retournee = nouvelle_seq(); //Initiliasation d'une sequence (liste chainee)
     cellule_t *cell = seq->tete; //Tete de la sequence passé à la cellule pour effectuer le parcours
     while (cell != NULL) //Parcourir tout la sequence jusque la fin
     {
