@@ -129,6 +129,146 @@ copie_sequence(sequence)
       
 o(1) + o(1) + ((n x (o(1) + o(1) + o(1))) + o(1)) = 2o(1) + o(n) ~ o(n)
 
+/*----------------------------------------------------------------*/
+
+addition(sequence)
+   x <- depiler_nombre(sequence)     o(1)
+   y <- depiler_nombre(sequence)     o(1)
+   empiler_nombre(sequence, x+y)     o(1)
+
+   o(1) + o(1) + o(1) = 3o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+soustraction(sequence)
+   x <- depiler_nombre(sequence) o(1)
+   y <- depiler_nombre(sequence) o(1)
+   empiler_nombre(sequence, y-x) o(1)
+
+   o(1) + o(1) + o(1) = 3o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+multiplication(sequence)
+   x <- depiler_nombre(sequence)   o(1)
+   y <- depiler_nombre(sequence)   o(1)
+   empiler_nombre(sequence, x * y) o(1)
+
+   o(1) + o(1) + o(1) = 3o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+execution_coditionnelle(routine, sequence)
+{
+   commande_1 = depiler_seq(sequence)                      o(1)
+   commande_2 = depiler_seq(sequence)                      o(1)
+   x <- depiler_int(sequence)                              o(1)
+   si x = 0 alors                                         o(1)
+      commande_a_ajouter <- copie_sequence(commande_1) o(1)
+   sinon                                                  o(1)
+      commande_a_ajouter <- copie_sequence(commande_2) o(1)
+   inserer_liste_debut(routine, commande_a_ajouter)        o(1)
+
+o(1) + o(1) + o(1) + o(1) + o(1) = 5o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+echange(sequence)
+
+   cell1 <- depiler(sequence)    o(1)
+   cell2 <- depiler(sequence)    o(1)
+   ajout_debut(sequence, cell1)  o(1)
+   ajout_debut(sequence, cell2)  o(1)
+
+o(1) + o(1) + o(1) + o(1) = 4o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+exec(routine, sequence)
+   seq <- depiler_sequence(sequence) o(1)
+   inserer_liste_debut(routine, seq) o(1)
+
+o(1) + o(1) = 2o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+clone(sequence)
+   cell <- tete(sequence)                      o(1)
+   si type_valeur(cell) est liste chainee      o(1)
+        cell2 <- copie_sequence(cell)         o(1)
+   sinon                                       o(1)
+        cell2 <- cell                         o(1)
+   type_valeur(cell2) <- type_valeur(cell)     o(1)
+   cell2->suivant = NULL                       o(1)
+   empiler(seuence, cell2)                     o(1)
+
+o(1) + o(1) + o(1) + o(1) + o(1) + o(1) = 6o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+ignore(sequence)
+    retirer_tete(sequence) o(1)
+
+o(1)
+
+/*----------------------------------------------------------------*/
+
+boucle(routine, sequence)
+   cell_n <- depiler(sequence)                               o(1)
+   cmd <- depiler_seq(sequence)                              o(1)
+   si type_valeur(cell_n) est nombre & cell_n > 0 alors      11o(1) ~ o(1)
+      cell_n <- cell_n -1                                  o(1)
+      cell_cmd <- cmd                                      o(1)
+      type_valeur(cell_cmd) <- liste chainee               o(1)
+      cell_cmd->suivant = NULL                             o(1)
+
+      empiler(sequence, cell_cmd)                          o(1)
+      empiler(sequence, cell_n)                            o(1)
+      cell_B <- 'B'                                        o(1)
+      type_valeur(cell_B) <- charactere                    o(1)
+      cell_B->suivant = NULL                               o(1)
+      empiler(routine, cell_B)                             o(1)
+      inserer_liste_debut(routine, copie_sequence(cmd))    o(1)
+
+o(1) + o(1) + o(1) = 3o(1) ~ o(1)
+
+/*----------------------------------------------------------------*/
+
+rotation(sequence)
+   x = depiler_int(sequence)                                  o(1)
+   n = depiler_int(sequence)                                  o(1)
+   si n = 1 alors                                             o(1)
+        arreter(rotation)                                 o(1)
+   seq <- nouvelle_seq()                                      o(1)
+   pour i de 0 à n faire                                      n x 2o(1) ~ o(n)
+      cell = depiler(sequence)                            o(1)
+      ajout_debut(seq, cell)                              o(1)
+   cell <- tete(seq)                                          o(1)
+   pour i de 0 à n faire                                      n x 5o(1) ~ o(n)
+      si i >= x                                           4o(1)
+         cell2 = nouvelleCellule()                    o(1)
+         cell2 <- cell                                o(1)
+         type_valeur(cell2) <- type_valeur(cell)      o(1)
+         empiler(sequence, cell2)                     o(1)
+      cell <- cell->suivant                                o(1)
+
+   cell <- tete(seq)                                          o(1)
+   pour i de 0 à x faire                                      X x 5o(1) ~ o(x)
+      cell2 = nouvelleCellule();                           o(1)
+      cell2 <- cell                                        o(1)
+      type_valeur(cell2) <- type_valeur(cell)              o(1)
+      empiler(sequence, cell2)                             o(1)
+      cell <- cell->suivant                                o(1)
+
+o(1) + o(1) + o(1) + o(1) + o(n) + o(1) + o(n) + o(1) + o(x) = 6o(1) + 2o(n) + o(x) ~ o(1) + o(n) + o(x) ~ o(n) comme n > x
+
+/*----------------------------------------------------------------*/
+
+operation_Z(sequence)
+   retourner_sequence(sequence)       o(1)
+
+o(1)
+   
 
 ********************************
 ** Conclusion                 **
