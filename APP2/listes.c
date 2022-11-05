@@ -146,7 +146,6 @@ void afficher(sequence_t *seq)
         {
             afficher(cell_actuelle->valeur.s); // Affichage du typage CHAR_LISTE / Liste chainee
         }
-        fflush(stdout);
         cell_actuelle = cell_actuelle->suivant;
     }
     printf("]");
@@ -288,7 +287,6 @@ cellule_t *queue(sequence_t *seq)
 /*Fais une copie de la séquence donnée en argument*/
 sequence_t *copie_sequence(sequence_t *seq)
 {
-    afficher(seq);
     cellule_t *cell = seq->tete;
     cellule_t *nvelle_cell;
     sequence_t *nvelle_seq = nouvelle_seq();
