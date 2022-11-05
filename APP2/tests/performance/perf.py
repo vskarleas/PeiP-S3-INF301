@@ -100,7 +100,7 @@ time = time.decode().rstrip()
 # timecmd = " time -f '\tTemps: %es  Mémoire max: %MKb' "
 timecmd = time + " -f '%e;%M' "
 # timeout = 60
-timeout = 10
+timeout = 60
 timeoutcmd = "timeout " + str(timeout) + "s "
 
 def drawgraph(x, temps, memoire=None, mode=None):

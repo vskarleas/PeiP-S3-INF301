@@ -15,7 +15,7 @@
 #include <time.h>
 
 /*
- *  Auteur(s) : 
+ *  Auteur(s) :
  *  Date :
  *  Suivi des Modifications :
  *
@@ -24,7 +24,7 @@
 bool silent_mode = false;
 
 /*Créé une nouvelle cellule*/
-cellule_t *nouvelleCellule(void) 
+cellule_t *nouvelleCellule(void)
 {
     cellule_t *cell = malloc(sizeof(cellule_t));
     return cell;
@@ -36,35 +36,19 @@ void detruireCellule(cellule_t *cel)
     free(cel);
 }
 
+/*Detruit une sequence*/
+void detruire_seq(sequence_t *seq)
+{
+    free(seq);
+}
+
 /* Acte I.1 */
 
-/*Converti une chaine de caractere en sequence 
+/*Converti une chaine de caractere en sequence
 (liste chainee) de caracteres*/
 void conversion(char *texte, sequence_t *seq)
 {
-    //int nb_accolades = 0;
-    //printf("%s\n", texte);
-    //time_t start = time(NULL);
-    /*for (int i = 0; i<PROGSIZE; i++)
-    {
-        if (texte[i] == '{')
-        {
-            nb_accolades++;
-        }
-        else if (texte[i] == '}')
-        {
-            nb_accolades--;
-        }
-        else if (texte[i] == '\0' && nb_accolades > 0)
-        {
-            texte[i] = '}';
-            nb_accolades--;
-        }
-    }
-    */
-    //time_t end = time(NULL);
-    //printf("temps : %ld\n", end-start);
-    //printf("%s\n", texte);
+    unsigned long compteur_passages = 0;
 
     cellule_t *cell;
     char c;
@@ -76,6 +60,8 @@ void conversion(char *texte, sequence_t *seq)
     int lg_texte = strlen(texte);
     for (int i = lg_texte; i >= 0; i--)
     {
+        compteur_passages++;
+
         c = texte[i];
         if (isspace(c))
         {
@@ -106,6 +92,7 @@ void conversion(char *texte, sequence_t *seq)
                 cell = nouvelleCellule();
                 cell->valeur.s = accolade;
                 cell->type_valeur = CHAR_LISTE;
+                cell->suivant = NULL;
                 ajout_debut(seq, cell);
             }
             else
@@ -124,15 +111,18 @@ void conversion(char *texte, sequence_t *seq)
             {
                 cell->valeur.n = texte[i] - '0';
                 cell->type_valeur = INT;
+                cell->suivant = NULL;
             }
             else
             {
                 cell->valeur.l = texte[i];
                 cell->type_valeur = CHAR;
+                cell->suivant = NULL;
             }
             ajout_debut(seq, cell);
         }
     }
+    // printf("\n%lu\n\n", compteur_passages);
 }
 /* ----------- */
 
@@ -146,24 +136,24 @@ void afficher(sequence_t *seq)
     {
         if (cell_actuelle->type_valeur == INT)
         {
-            printf("%d", cell_actuelle->valeur.n); //Affichage du typage INT
+            printf("%d", cell_actuelle->valeur.n); // Affichage du typage INT
         }
         if (cell_actuelle->type_valeur == CHAR)
         {
-            printf("%c", cell_actuelle->valeur.l); //Affichage du typage CHAR
+            printf("%c", cell_actuelle->valeur.l); // Affichage du typage CHAR
         }
         if (cell_actuelle->type_valeur == CHAR_LISTE)
         {
-            afficher(cell_actuelle->valeur.s); //Affichage du typage CHAR_LISTE / Liste chainee
+            afficher(cell_actuelle->valeur.s); // Affichage du typage CHAR_LISTE / Liste chainee
         }
         cell_actuelle = cell_actuelle->suivant;
     }
     printf("]");
 }
 
-/*Ajoute une nouvelle cellule avec la commande 
+/*Ajoute une nouvelle cellule avec la commande
 passée en argument au debut de la sequence*/
-void ajout_debut(sequence_t *seq, cellule_t *nouvelle_tete) 
+void ajout_debut(sequence_t *seq, cellule_t *nouvelle_tete)
 {
     // Insertion en modifiant les references
     nouvelle_tete->suivant = seq->tete;
@@ -174,7 +164,7 @@ void ajout_debut(sequence_t *seq, cellule_t *nouvelle_tete)
 /* Acte II */
 
 /*Ajoute au sommet de la pile un entier*/
-void empiler_int(sequence_t *pile, int n) 
+void empiler_int(sequence_t *pile, int n)
 {
     cellule_t *cell = nouvelleCellule();
     cell->valeur.n = n;
@@ -200,12 +190,12 @@ void empiler_seq(sequence_t *pile, sequence_t *n)
     empiler(pile, cell);
 }
 
-/*Supprime la tete de la sequence en definissant comme 
+/*Supprime la tete de la sequence en definissant comme
 tete l'element suivant de la sequence*/
-void retirer_tete(sequence_t *seq)
+void retirer_tete(sequence_t *seq) // FIXME: potentielle fuite de mémoire
 {
     cellule_t *suivant = seq->tete->suivant;
-    seq->tete = suivant; //initialisation de la nouvelle tete
+    seq->tete = suivant; // initialisation de la nouvelle tete
 }
 
 /*Retourne la tete de notre sequence comme une cellule*/
@@ -226,25 +216,34 @@ cellule_t *depiler(sequence_t *seq)
 de la pile tout en retournant sa valeur*/
 int depiler_int(sequence_t *pile)
 {
-    return depiler(pile)->valeur.n;
+    cellule_t *cell = depiler(pile);
+    int retour = cell->valeur.n;
+    // detruireCellule(cell); //FIXME: fuite de memoire, on devrait pouvoir detruire la cellule ici mais ca casse tout...
+    return retour;
 }
 
 /*Supprime le premier element (charactere)
 de la pile tout en retournant sa valeur*/
-char depiler_char(sequence_t *pile) 
+char depiler_char(sequence_t *pile)
 {
-    return depiler(pile)->valeur.l;
+    cellule_t *cell = depiler(pile);
+    char retour = cell->valeur.l;
+    // detruireCellule(cell); //FIXME: fuite de memoire, on devrait pouvoir detruire la cellule ici mais ca casse tout...
+    return retour;
 }
 
-/*Supprime le premier element (sequence) 
+/*Supprime le premier element (sequence)
 de la pile tout en retournant sa valeur*/
 sequence_t *depiler_seq(sequence_t *pile)
 {
-    return depiler(pile)->valeur.s;
+    cellule_t *cell = depiler(pile);
+    sequence_t *retour = cell->valeur.s;
+    // detruireCellule(cell); //FIXME: fuite de memoire, on devrait pouvoir detruire la cellule ici mais ca casse tout...
+    return retour;
 }
 
 /*Vide la séquence*/
-void vider(sequence_t *seq)
+void vider(sequence_t *seq) // FIXME: ne libere pas la memoire!
 {
     seq->tete = NULL;
 }
@@ -261,9 +260,10 @@ void inserer_liste_debut(sequence_t *seq, sequence_t *seq_a_inserer)
     cellule_t *dernier_elem = queue(seq_a_inserer);
     if (dernier_elem != NULL)
     {
-        dernier_elem->suivant = seq->tete; //le suivant de la queue de la sequence à inserer est la tete de la sequence initiale
-        seq->tete = seq_a_inserer->tete; //initialisation de la nouvelle tete
+        dernier_elem->suivant = seq->tete; // le suivant de la queue de la sequence à inserer est la tete de la sequence initiale
+        seq->tete = seq_a_inserer->tete;   // initialisation de la nouvelle tete
     }
+    detruire_seq(seq_a_inserer);
 }
 
 /*Retourne la queue de la séquence*/
@@ -290,17 +290,17 @@ sequence_t *copie_sequence(sequence_t *seq)
     cellule_t *cell = seq->tete;
     cellule_t *nvelle_cell;
     sequence_t *nvelle_seq = nouvelle_seq();
-    if (cell == NULL) //Traitment de cas ou la sequence est vide -> nouvelle_sequence vide aussi
+    if (cell == NULL) // Traitment de cas ou la sequence est vide -> nouvelle_sequence vide aussi
     {
         nvelle_seq->tete = NULL;
         return nvelle_seq;
     }
-    nvelle_cell = nouvelleCellule(); //Initialisation du cellule vide / Il va lire les elements de la sequence pour le mettre dans la nouvelle sequence (une copie)
-    nvelle_cell->valeur = cell->valeur; //Premier element de la sequence passé dans la cellue
-    nvelle_cell->type_valeur = cell->type_valeur; //Le typage du premier element de la sequence passé dans le typage du cellule
-    nvelle_seq->tete = nvelle_cell; //Initialisation de la tete de la nouvelle sequence
+    nvelle_cell = nouvelleCellule();              // Initialisation du cellule vide / Il va lire les elements de la sequence pour le mettre dans la nouvelle sequence (une copie)
+    nvelle_cell->valeur = cell->valeur;           // Premier element de la sequence passé dans la cellue
+    nvelle_cell->type_valeur = cell->type_valeur; // Le typage du premier element de la sequence passé dans le typage du cellule
+    nvelle_seq->tete = nvelle_cell;               // Initialisation de la tete de la nouvelle sequence
 
-    while (cell->suivant != NULL) //Parcourir le reste de las sequence pour l'ajouter a la nouvelle sequence (copie)
+    while (cell->suivant != NULL) // Parcourir le reste de las sequence pour l'ajouter a la nouvelle sequence (copie)
     {
         nvelle_cell->suivant = nouvelleCellule();
         nvelle_cell->suivant->valeur = cell->suivant->valeur;
@@ -308,12 +308,12 @@ sequence_t *copie_sequence(sequence_t *seq)
         nvelle_cell = nvelle_cell->suivant;
         cell = cell->suivant;
     }
-    nvelle_cell->suivant = NULL; //Indication du fin de la sequence
-    return nvelle_seq; //Envoie la nouvelle sequence (copie)
+    nvelle_cell->suivant = NULL; // Indication du fin de la sequence
+    return nvelle_seq;           // Envoie la nouvelle sequence (copie)
 }
 
 // Retourne une copie d'une cellule passé en argument
-cellule_t *copie_cellula(cellule_t *cell)
+cellule_t *copie_cellule(cellule_t *cell)
 {
     cellule_t *nvelle_cell = malloc(sizeof(cellule_t)); // Position en endroit de la memoire pour la nouvelle cellule
     nvelle_cell->valeur = cell->valeur;
@@ -322,13 +322,16 @@ cellule_t *copie_cellula(cellule_t *cell)
     return nvelle_cell;
 }
 
+/*
+
+*/
 void retourner_sequence(sequence_t *seq)
 {
     sequence_t *seq_retournee = nouvelle_seq(); // Initiliasation d'une sequence (liste chainee)
     cellule_t *cell = seq->tete;                // Tete de la sequence passé à la cellule pour effectuer le parcours
     while (cell != NULL)                        // Parcourir tout la sequence jusque la fin
     {
-        ajout_debut(seq_retournee, copie_cellula(cell));
+        ajout_debut(seq_retournee, copie_cellule(cell));
         cell = cell->suivant;
     }
     seq->tete = seq_retournee->tete;

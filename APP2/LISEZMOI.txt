@@ -282,6 +282,8 @@ complexité de o(n^2), les graphes restent lineaires, qui s'explique par le fait
 
 
 
+
+
 ****************************************************************
 **  Langage Python                                            **
 ****************************************************************
@@ -335,5 +337,6 @@ Tests fonctionnels :
 
 Batterie de tests de performance (avec generation de courbes):
 > ./tests/performance/perf.py c
+
 
 
