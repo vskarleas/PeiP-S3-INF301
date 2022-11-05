@@ -280,6 +280,10 @@ le nombre des donnees et comme la complexité generale de la majorite des foncti
 stocker les donnees, la representation serait des droits stables (pas lineaire). Même si la fonction de conversion a une 
 complexité de o(n^2), les graphes restent lineaires, qui s'explique par le fait que  c'est une application recursif.
 
+Les tests long et nested provoquent une seg fault tous deux pour une taille de deux mille. C'est erreur n'arrive qu'a cet endroit,
+et on ne comprends donc pas trop ce qu'il s'y passe. Une des adresse de la cellul suivante est invalide a un certain moment, peut
+etre une adresse qui n'est pas mise a NULL la ou elle devrait. 
+
 
 
 
@@ -337,6 +341,5 @@ Tests fonctionnels :
 
 Batterie de tests de performance (avec generation de courbes):
 > ./tests/performance/perf.py c
-
 
 

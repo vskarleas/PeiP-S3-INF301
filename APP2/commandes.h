@@ -50,8 +50,4 @@ Effectue une rotation de certains éléments en haut de la pile vers la gauche
 */
 void rotation(sequence_t *pile);
 
-/*
-Effectue des rotations de la pile pour trouver le bloc de(s) commande(s)
-pouir suivre apres le bloc de(s) commande(s) avant.
-*/
 void operation_Z(sequence_t *pile);

@@ -29,8 +29,6 @@ void stop(void)
 /* Acte I.2 */
 int interprete(sequence_t *seq, bool debug)
 {
-
-    unsigned long index = 0;
     // Version temporaire a remplacer par une lecture des commandes dans la
     // liste chainee et leur interpretation.
 
@@ -40,7 +38,7 @@ int interprete(sequence_t *seq, bool debug)
     // debug = true; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
 
     printf("Programme:");
-    // afficher(seq);
+    afficher(seq);
     printf("\n");
     if (debug)
         stop();
@@ -67,16 +65,10 @@ int interprete(sequence_t *seq, bool debug)
             case 'A':
                 ret = avance();
                 if (ret == VICTOIRE)
-                {
-                    detruire_seq(pile); // on libere la mémoire avant de sortir du programme pour ne pas avoir de fuites
-                    return VICTOIRE;
-                } /* on a atteint la cible */
+                    return VICTOIRE; /* on a atteint la cible */
                 if (ret == RATE)
-                {
-                    detruire_seq(pile); // on libere la mémoire avant de sortir du programme pour ne pas avoir de fuites
-                    return RATE;
-                }      /* tombé dans l'eau ou sur un rocher */
-                break; /* à ne jamais oublier !!! */
+                    return RATE; /* tombé dans l'eau ou sur un rocher */
+                break;           /* à ne jamais oublier !!! */
             case 'G':
                 gauche();
                 break;
@@ -104,15 +96,15 @@ int interprete(sequence_t *seq, bool debug)
             case 'M':
                 /*Mesure : effectue une mesure dans une certaine direction
                 et empile le numéro de la direction associé*/
-                empiler_int(pile, mesure(depiler_int(pile)));
+                empiler_int(pile,mesure(depiler_int(pile)));
                 break;
             case 'P':
                 /*Pose ou enleve une marque au sol*/
                 pose(depiler_int(pile));
                 break;
             case '?':
-                /*Selon l'entier au sommet de la pile,
-                un groupe de commande délimité par des
+                /*Selon l'entier au sommet de la pile, 
+                un groupe de commande délimité par des 
                 accolades sera empiler puis exécuté*/
                 execution_coditionnelle(seq, pile);
                 break;
@@ -122,8 +114,8 @@ int interprete(sequence_t *seq, bool debug)
                 echange(pile);
                 break;
             case '!':
-                /*Extrait l'élement au sommet
-                de la pile, le met dans la routine
+                /*Extrait l'élement au sommet 
+                de la pile, le met dans la routine 
                 est l'exécute*/
                 exec(seq, pile);
                 break;
@@ -140,7 +132,7 @@ int interprete(sequence_t *seq, bool debug)
                 boucle(seq, pile);
                 break;
             case 'R':
-                /*Effectue une rotation de certains éléments
+                /*Effectue une rotation de certains éléments 
                 en haut de la pile vers la gauche*/
                 rotation(pile);
                 break;
@@ -167,16 +159,13 @@ int interprete(sequence_t *seq, bool debug)
         afficher(pile);
         printf("\n");
         */
-        index++;
         if (debug)
             stop();
-        detruireCellule(cell_actuelle); // on libere la mémoire avant de sortir du programme pour ne pas avoir de fuites
         cell_actuelle = depiler(seq);
     }
 
-    detruire_seq(pile); // on libere la mémoire avant de sortir du programme pour ne pas avoir de fuites
-
     /* Si on sort de la boucle sans arriver sur la cible,
      * c'est raté :-( */
+
     return CIBLERATEE;
 }
