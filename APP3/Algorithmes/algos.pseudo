@@ -1,0 +1,39 @@
+fonction nb_carac(arbre a)
+    si a == NULL alors
+        retourne 0
+    sinon si a.gauche == NULL et a.droit == NULL alors
+        retourne 0
+    sinon
+        retourne 1 + nb_carac(a.gauche) + nb_carac(a.droit)
+
+
+fonction nb_animaux(arbre a)
+    si a == NULL alors
+        retourne 0
+    sinon si a.gauche == NULL et a.droit == NULL alors
+        retourne 1
+    sinon
+        retourne nb_carac(a.gauche) + nb_carac(a.droit)
+
+fonction creer_graph(arbre a, nom_fichier)
+    f = ouvrir_fichier(nom_fichier)
+    ecrire_fichier(f, "digraph arbre {\n")
+    ecrire_arbre(a, f)
+    ecrire_fichier(f, "}")
+    fermer(f)
+
+fonction ecrire_arbre(arbre a, fichier f)
+    si a == NULL alors
+        return;
+    si a.gauche != NULL alors
+        ecrire_fichier(f, a.valeur + "->" + a.gauche.valeur + " [label : non]")
+        ecrire_arbre(a.gauche)
+    si a.droit != NULL alors
+        ecrire_fichier(f, a.valeur + "->" + a.droit.valeur + " [label : oui]")
+
+fonction afficher_carac_espece(arbre a, espece e)
+    p:pile
+    est_animal_trouve = carac_espece(a, p, e)
+    si est_animal_trouve alors
+        afficher(p)
+    
