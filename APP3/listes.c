@@ -7,8 +7,7 @@
 /* fichier à compléter au besoin */
 
 void init_liste_vide(liste_t* L) {
-   printf ("<<<<< À faire: fonction init_liste_vide fichier " __FILE__ "\n >>>>>");
-    /* a completer */
+    L->tete = "";
 }
 
 void liberer_liste(liste_t* L) {
@@ -18,6 +17,9 @@ void liberer_liste(liste_t* L) {
 
 
 int ajouter_tete(liste_t* L, string c) { /* retourne 0 si OK, 1 sinon  */
+    string k = L->tete;
+    L->tete = c;
+    L->tete->suivant = k;
    printf ("<<<<< À faire: fonction ajouter_tete fichier " __FILE__ " >>>>>\n");
     /* a completer */
         return 1;
