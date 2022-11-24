@@ -9,13 +9,18 @@
  */
 void analyse_arbre (arbre racine, int* nb_esp, int* nb_carac);
 
-/* Recherche une espèce dans l'arbre et remplit seq avec la séquence de ses 
+void compte_esp_carac(arbre racine, int *nb_esp, int *nb_carac);
+
+void creer_graph(arbre a, char *nom_fichier);
+
+void ecrire_arbre(arbre a, FILE *f);
+
+/* Recherche une espèce dans l'arbre et remplit seq avec la séquence de ses
  * caractéristiques.
  *
  * Doit retourner 0 si l'espèce a été retrouvée, 1 sinon.
  */
-int rechercher_espece (arbre racine, char *espece, liste_t* seq);
-
+int rechercher_espece(arbre racine, char *espece, liste_t *seq);
 
 int ajouter_espece (arbre* racine, char *espece, cellule_t* seq);
 

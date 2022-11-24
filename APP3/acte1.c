@@ -61,6 +61,10 @@ int main(int argc, char** argv) {
 		printf("Erreur : pas de nombre de caractéristiques dans le fichier test\n");
 		return 1;
 	}
-
+	char *filename_2;
+	filename_2 = malloc(strlen(filename) + 4 * sizeof(char));
+	strcpy(filename_2, filename);
+	strcat(filename_2, ".dot");
+	creer_graph(a, filename_2);
 	return test_nb_esp_caracs(a, filename, expected_nb_esp, expected_nb_carac);
 }
