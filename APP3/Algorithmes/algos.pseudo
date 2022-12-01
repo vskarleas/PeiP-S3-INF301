@@ -1,3 +1,4 @@
+##### Seance TD1 #####
 fonction nb_carac(arbre a)
     si a == NULL alors
         retourne 0
@@ -37,6 +38,7 @@ fonction afficher_carac_espece(arbre a, espece e)
     si est_animal_trouve alors
         afficher(p)
 
+##### Seance TD2 #####
 fonction afficher_par_niveau (arbre racine, FILE *tout)
     index_noeud = 0
     nb_noeud_passes = 0
