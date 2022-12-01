@@ -36,4 +36,27 @@ fonction afficher_carac_espece(arbre a, espece e)
     est_animal_trouve = carac_espece(a, p, e)
     si est_animal_trouve alors
         afficher(p)
+
+fonction afficher_par_niveau (arbre racine, FILE *tout)
+    index_noeud = 0
+    nb_noeud_passes = 0
+    nb_noeud_niveau_prochaine = 0
+    file = {racine}
+    tant que file != VIDE faire
+        n <- pop(file)
+        index_noeud++
+        si index_noeud == nb_noeud_passes + 1
+            nb_noeud_passes += nb_noeud_niveau_prochaine
+            nb_noeud_niveau_prochaine = 0
+            ecrire(\n)
+        si (est_carac(n))
+            si n.gauche != NULL
+                nb_noeud_niveau_prochaine++
+                append(file, n.gauche)
+            si n.droit != NULL 
+                nb_noeud_niveau_prochaine++
+                append(file, n.droit)
+
+                
+            
     
