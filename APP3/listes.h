@@ -17,6 +17,11 @@ struct liste {
 	cellule_t *tete;
 };
 
+struct file_t {
+	cellule_t *tete;
+	cellule_t *queue;
+};
+
 typedef struct liste liste_t;
 
 /* cree une nouvelle liste, initialement vide */
