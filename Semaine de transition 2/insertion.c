@@ -2,26 +2,28 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-/* Somme des valeurs de l'arbre */
-bool present(arbre a, int n) {
-    if (a != NULL)
+arbre inserer_rec(arbre a) //, int n
+{
+    return a;
+}
+
+void inserer_abr(arbre *a_p, int n) {
+    noeud *tmp = NULL;
+    if (!(*a_p))
     {
-        if (n == a->valeur)
-        {
-            return true;
-        }
-        else 
-        {
-            if (present(a->gauche, n))
-            {
-                return true;
-            }
-            else if (present(a->droit, n))
-            {
-                return true;
-            }
-            
-        }
+        tmp = (noeud *)malloc(sizeof(noeud));
+        tmp->gauche = NULL;
+        tmp->droit = NULL;
+        tmp->valeur = n;
+        *a_p = tmp;
+        return;
     }
-    return false;
+    if (n < (*a_p)->valeur)
+    {
+        inserer_abr(&(*a_p)->gauche, n);
+    }
+    else if (n > (*a_p)->valeur)
+    {
+        inserer_abr(&(*a_p)->droit, n);
+    }
 }
