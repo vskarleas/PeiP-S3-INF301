@@ -99,3 +99,8 @@ void affiche_arbre (noeud *racine)
     /* à remplir */
 }
 
+void modifier_valeur_noeud(noeud *n, char * val)
+{
+    n->valeur = malloc(sizeof(char) * strlen(val));
+    strcpy(n->valeur, val);
+}

@@ -1,6 +1,8 @@
 #ifndef ARBRESPHYLO_H
 #define ARBRESPHYLO_H
 
+#include <stdbool.h>
+
 #include "listes.h"
 
 
@@ -22,7 +24,9 @@ void ecrire_arbre(arbre a, FILE *f);
  */
 int rechercher_espece(arbre racine, char *espece, liste_t *seq);
 
-int ajouter_espece (arbre* racine, char *espece, cellule_t* seq);
+bool carac_espece(arbre a, liste_t *seq, char *espece);
+
+int ajouter_espece(arbre *racine, char *espece, cellule_t *seq);
 
 void afficher_par_niveau(arbre racine, FILE* fout);
 

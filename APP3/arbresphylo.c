@@ -2,9 +2,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <stdbool.h>
 #include "arbres.h"
 #include "arbresphylo.h"
 #include "listes.h"
+
+#define eprintf(...) fprintf(stderr, __VA_ARGS__)
 
 void analyse_arbre(arbre racine, int *nb_esp, int *nb_carac)
 {
@@ -31,7 +34,7 @@ void compte_esp_carac(arbre racine, int *nb_esp, int *nb_carac)
    }
 }
 
-void creer_graph(arbre a, char* nom_fichier)
+void creer_graph(arbre a, char *nom_fichier)
 {
    FILE *f = fopen(nom_fichier, "w");
    fprintf(f, "digraph arbre {\n");
@@ -57,33 +60,121 @@ void ecrire_arbre(arbre a, FILE *f)
    }
 }
 
-    /* ACTE II */
-    /* Recherche l'espece dans l'arbre. Modifie la liste passée en paramètre pour y mettre les
-     * caractéristiques. Retourne 0 si l'espèce a été retrouvée, 1 sinon.
-     */
-    int rechercher_espece(arbre racine, char *espece, liste_t *seq)
+/* ACTE II */
+/* Recherche l'espece dans l'arbre. Modifie la liste passée en paramètre pour y mettre les
+ * caractéristiques. Retourne 0 si l'espèce a été retrouvée, 1 sinon.
+ */
+int rechercher_espece(arbre racine, char *espece, liste_t *seq)
 {
-   /* à compléter */
-   return 1;
+   init_liste_vide(seq);
+   bool est_animal_trouve = carac_espece(racine, seq, espece);
+   if (est_animal_trouve)
+   {
+      afficher_liste_t(seq);
+      return 0;
+   }
+   else
+   {
+      printf("%s n'existe pas dans l'arbre.\n", espece);
+      return 1;
+   }
+
+   
 }
 
-/* Doit renvoyer 0 si l'espece a bien ete ajoutee, 1 sinon, et ecrire un
+bool carac_espece(arbre a, liste_t *seq, char *espece)
+{
+   if (a == NULL)
+   {
+      return false;
+   }
+   if (strcmp(espece, a->valeur) == 0)
+   {
+      return true;
+   }
+   if (a->gauche != NULL)
+   {
+      if (carac_espece(a->gauche, seq, espece))
+      {
+         return true;
+      }
+      if (carac_espece(a->droit, seq, espece))
+      {
+         ajouter_tete(seq, a->valeur);
+         return true;
+      }
+   }
+   return false;
+}
+
+/* Doit renvoyer 0 si l’espèce a bien ete ajoutee, 1 sinon, et ecrire un
  * message d'erreur.
  */
 int ajouter_espece(arbre *a, char *espece, cellule_t *seq)
 {
-
+   if (*a == NULL)
+   {
+      noeud *n = nouveau_noeud();
+      if (seq==NULL)
+      {
+         modifier_valeur_noeud(n, espece);
+         *a = n;
+         return 0;
+      }
+      else
+      {
+         modifier_valeur_noeud(n, seq->val);
+         *a = n;
+         return ajouter_espece(&(*a)->droit, espece, seq->suivant);
+      }
+      
+   }
+   else if ((*a)->gauche==NULL && (*a)->droit==NULL)
+   {
+      if (seq==NULL)
+      {
+         eprintf("Ne peut ajouter %s : possède les mêmes caractères que %s", espece, (*a)->valeur);
+         return 1;
+      }
+      noeud *n = nouveau_noeud();
+      modifier_valeur_noeud(n, seq->val);
+      n->gauche = *a;
+      *a = n;
+      return ajouter_espece(&(*a)->droit, espece, seq->suivant);
+   }
+   else if (strcmp(valeur(seq), (*a)->valeur)==0)
+   {
+      return ajouter_espece(&(*a)->droit, espece, seq->suivant);
+   }
+   else
+   {
+      return ajouter_espece(&(*a)->gauche, espece, seq);
+   }
    return 1;
+}
+
+bool est_carac(noeud *n){
+   if(n == NULL)
+      return false;
+   return n->gauche != NULL || n->droit != NULL;
 }
 
 /* Doit afficher la liste des caractéristiques niveau par niveau, de gauche
  * à droite, dans le fichier fout.
  * Appeler la fonction avec fout=stdin pour afficher sur la sortie standard.
  */
-void afficher_par_niveau(arbre racine, FILE *fout)
+/*
+void afficher_par_niveau(arbre racine, FILE* fout)
 {
-   printf("<<<<< À faire: fonction afficher_par_niveau fichier " __FILE__ "\n >>>>>");
+   if (racine!=NULL)
+   {
+      int index_noeud = 0;
+      int nb_noeuds_passes = 0;
+      int nb_noeud_niveau_prochaine = 0;
+
+   }
 }
+*/
 
 // Acte 4
 

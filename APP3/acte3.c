@@ -234,6 +234,8 @@ int main(int argc, char** argv) {
 		if (present != 0) {
 			fprintf(stderr, "\033[0;31mERREUR\033[0m %s n'est pas présent dans l'arbre %s après insertion\n",
 					esp_car.espece, nom_fichier);
+			fprintf(stderr, "\033[0;31mAAAAAA\033[0m");
+			creer_graph(a, strcat(nom_fichier, ".dot"));
 			return 1;
 		}
 		if (test_list_carac(esp_car.nb_caracs, esp_car.caracs, seq) != 0) {
@@ -244,6 +246,6 @@ int main(int argc, char** argv) {
 		free( esp_car.caracs);
 		liberer_liste(&seq);
 	}
-
+	creer_graph(a, strcat(nom_fichier, ".dot"));
 	return 0;
 }

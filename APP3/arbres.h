@@ -31,6 +31,7 @@ arbre lire_arbre (FILE *f);
 /* Fonction d'affichage, à remplir */
 void affiche_arbre (arbre);
 
+void modifier_valeur_noeud(noeud *n, char *val);
 
 /* Macros pour de l'affichage uniquement si DEBUG est != 0 */
 extern int DEBUG;

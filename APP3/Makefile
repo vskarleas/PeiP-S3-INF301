@@ -1,10 +1,10 @@
-all: main acte1 acte2 acte3 acte3b acte4
 
 
+PROGS=main acte1 acte2 acte3 acte3b acte4
 CC=clang
-CFLAGS=-g -Wall -Wextra -Werror -Wno-unused-parameter
+CFLAGS=-g -Wall -Wextra -Wno-unused-parameter
 
-
+all: $(PROGS)
 
 tests_acte1: acte1
 	@set -e; for f in `ls tests_acte1`; do ./acte1 tests_acte1/$$f; done; printf "\033[0;32mSuccès\033[0m sur l'acte I !\n"; for f in `ls tests/*.test`; do dot -Tsvg -o $$f.svg $$f.dot; tycat $$f.svg; done
@@ -35,4 +35,4 @@ acte4: acte4.o $(OBJS)
 main: main.o arbresphylo.o arbres.o listes.o
 
 clean:
-	rm -f main *.o
+	rm -f $(PROGS) *.o
