@@ -230,11 +230,12 @@ int main(int argc, char** argv) {
 		init_liste_vide(&seq);
 		espece_caracs_t esp_car = especes_caracs[i];
 		printf("Testing %s\n", esp_car.espece);
+		int tmp=esp_car.espece[0];
 		int present = rechercher_espece(a, esp_car.espece, &seq);
 		if (present != 0) {
 			fprintf(stderr, "\033[0;31mERREUR\033[0m %s n'est pas présent dans l'arbre %s après insertion\n",
 					esp_car.espece, nom_fichier);
-			fprintf(stderr, "\033[0;31mAAAAAA\033[0m");
+			fprintf(stderr, "\033[0;31mcreation du graph .dot\n\033[0m");
 			creer_graph(a, strcat(nom_fichier, ".dot"));
 			return 1;
 		}

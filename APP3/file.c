@@ -9,6 +9,14 @@ cellule *nvelle_cellule()
     return cell;
 }
 
+file* nvelle_file()
+{
+    file *f = malloc(sizeof(file));
+    f->tete = NULL;
+    f->queue = NULL;
+    return f;
+}
+
 void ajouter_fin(file *f, char *s)
 {
     cellule *cell = nvelle_cellule();

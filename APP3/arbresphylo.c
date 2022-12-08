@@ -98,6 +98,9 @@ bool carac_espece(arbre a, liste_t *seq, char *espece)
       {
          return true;
       }
+   }
+   if (a->droit != NULL)
+   {
       if (carac_espece(a->droit, seq, espece))
       {
          ajouter_tete(seq, a->valeur);
@@ -142,13 +145,13 @@ int ajouter_espece(arbre *a, char *espece, cellule_t *seq)
       *a = n;
       return ajouter_espece(&(*a)->droit, espece, seq->suivant);
    }
+   else if (seq == NULL || strcmp(valeur(seq), (*a)->valeur) != 0)
+   {
+      return ajouter_espece(&(*a)->gauche, espece, seq);
+   }
    else if (strcmp(valeur(seq), (*a)->valeur)==0)
    {
       return ajouter_espece(&(*a)->droit, espece, seq->suivant);
-   }
-   else
-   {
-      return ajouter_espece(&(*a)->gauche, espece, seq);
    }
    return 1;
 }
@@ -163,7 +166,7 @@ bool est_carac(noeud *n){
  * à droite, dans le fichier fout.
  * Appeler la fonction avec fout=stdin pour afficher sur la sortie standard.
  */
-/*
+
 void afficher_par_niveau(arbre racine, FILE* fout)
 {
    if (racine!=NULL)
@@ -171,10 +174,10 @@ void afficher_par_niveau(arbre racine, FILE* fout)
       int index_noeud = 0;
       int nb_noeuds_passes = 0;
       int nb_noeud_niveau_prochaine = 0;
-
+      
    }
 }
-*/
+
 
 // Acte 4
 

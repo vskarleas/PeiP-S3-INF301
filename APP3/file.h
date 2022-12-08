@@ -15,7 +15,7 @@ typedef struct
 
 cellule *nvelle_cellule();
 
-
+file *nvelle_file();
 
 void ajouter_fin(file *f, char *s);
 
