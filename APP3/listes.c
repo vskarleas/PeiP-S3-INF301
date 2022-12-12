@@ -29,15 +29,15 @@ void liberer_liste(liste_t *L)
 int ajouter_tete(liste_t *L, string c)
 { /* retourne 0 si OK, 1 sinon  */
     // renvoyer 1 si les mallocs renvoient null (plus assez de memoire)c 
-    cellule_t *nv_tete = malloc(sizeof(cellule_t));
+    cellule_t *nv_tete = calloc(1,sizeof(cellule_t));
     if (nv_tete == NULL)
     {
         return 1;
     }
-    if (c!=NULL && c[0] == '\0')
+    if (strlen(c) != 0)
     {
 
-        nv_tete->val = malloc(sizeof(char) * strlen(c));
+        nv_tete->val = malloc(sizeof(char) * (strlen(c)+1));
         strcpy(nv_tete->val, c);
     }
     else

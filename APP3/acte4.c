@@ -208,6 +208,7 @@ int main(int argc, char** argv) {
 
 	printf("Test %s : Ajoute %s dans l'arbre %s\n", fichier_test, nom_carac, nom_fichier);
 	if (!ajouter_carac(&a, nom_carac, seq.tete)) {
+		creer_graph(a, strcat(nom_fichier, ".dot"));
 		if (!possible) {
 			printf("Impossible d'insérer %s dans %s comme prévu : \033[0;32mOK\033[0m\n",
 					nom_carac, nom_fichier);

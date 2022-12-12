@@ -7,6 +7,7 @@
 #include "arbresphylo.h"
 #include "listes.h"
 #include "file.h"
+#include "file_a.h"
 
 #define eprintf(...) fprintf(stderr, __VA_ARGS__)
 
@@ -79,8 +80,6 @@ int rechercher_espece(arbre racine, char *espece, liste_t *seq)
       printf("%s n'existe pas dans l'arbre.\n", espece);
       return 1;
    }
-
-   
 }
 
 bool carac_espece(arbre a, liste_t *seq, char *espece)
@@ -119,7 +118,7 @@ int ajouter_espece(arbre *a, char *espece, cellule_t *seq)
    if (*a == NULL)
    {
       noeud *n = nouveau_noeud();
-      if (seq==NULL)
+      if (seq == NULL)
       {
          modifier_valeur_noeud(n, espece);
          *a = n;
@@ -131,11 +130,10 @@ int ajouter_espece(arbre *a, char *espece, cellule_t *seq)
          *a = n;
          return ajouter_espece(&(*a)->droit, espece, seq->suivant);
       }
-      
    }
-   else if ((*a)->gauche==NULL && (*a)->droit==NULL)
+   else if ((*a)->gauche == NULL && (*a)->droit == NULL)
    {
-      if (seq==NULL)
+      if (seq == NULL)
       {
          eprintf("Ne peut ajouter %s : possède les mêmes caractères que %s", espece, (*a)->valeur);
          return 1;
@@ -150,15 +148,16 @@ int ajouter_espece(arbre *a, char *espece, cellule_t *seq)
    {
       return ajouter_espece(&(*a)->gauche, espece, seq);
    }
-   else if (strcmp(valeur(seq), (*a)->valeur)==0)
+   else if (strcmp(valeur(seq), (*a)->valeur) == 0)
    {
       return ajouter_espece(&(*a)->droit, espece, seq->suivant);
    }
    return 1;
 }
 
-bool est_carac(noeud *n){
-   if(n == NULL)
+bool est_carac(noeud *n)
+{
+   if (n == NULL)
       return false;
    return n->gauche != NULL || n->droit != NULL;
 }
@@ -168,9 +167,9 @@ bool est_carac(noeud *n){
  * Appeler la fonction avec fout=stdin pour afficher sur la sortie standard.
  */
 
-void afficher_par_niveau(arbre racine, FILE* fout)
+void afficher_par_niveau(arbre racine, FILE *fout)
 {
-   if (racine!=NULL)
+   if (racine != NULL)
    {
       int index_noeud = 0;
       int nb_noeuds_passes = 1;
@@ -192,14 +191,14 @@ void afficher_par_niveau(arbre racine, FILE* fout)
          noeud *n = tete_file(fl);
          supprimer_tete(fl);
          index_noeud++;
-         
+
          if (est_carac(n))
          {
             fprintf(fout, "%s ", n->valeur);
             if (n->gauche != NULL)
             {
                nb_noeuds_niveau_prochain++;
-               ajouter_fin(fl, n->gauche); 
+               ajouter_fin(fl, n->gauche);
             }
             if (n->droit != NULL)
             {
@@ -217,7 +216,6 @@ void afficher_par_niveau(arbre racine, FILE* fout)
    }
 }
 
-
 // Acte 4
 
 int ajouter_carac(arbre *a, char *carac, cellule_t *seq)
@@ -225,44 +223,42 @@ int ajouter_carac(arbre *a, char *carac, cellule_t *seq)
    bool tout_dedans;
    bool que_ca;
    bool ajoute = false;
-   file *fl = nvelle_file();
+   file_a *fl = nvelle_file_a();
    liste_t *animaux = malloc(sizeof(liste_t));
    init_liste_vide(animaux);
-   ajouter_fin(fl, *a);
-   while (!est_vide_file(fl) && !ajoute)
+   ajouter_fin_a(fl, a);
+   while (!est_vide_file_a(fl) && !ajoute)
    {
-      noeud *n = tete_file(fl);
-      supprimer_tete(fl);
-      liste_animaux(&n, animaux);
+      arbre *a1 = tete_file_a(fl);
+      supprimer_tete_a(fl);
+      liste_animaux(a1, animaux);
       tout_dedans = est_tout_dedans(animaux, seq);
       if (tout_dedans)
       {
          que_ca = est_que_ca(animaux, seq);
          if (que_ca)
          {
-            inserer_cara(&n, carac);
+            inserer_cara(a1, carac);
             ajoute = true;
-            return 0;
+            return 1;
          }
-         else if (n->gauche != NULL)
+         if ((*a1)->gauche != NULL)
          {
-            ajouter_fin(fl, n->gauche);
+            ajouter_fin_a(fl, &((*a1)->gauche));
          }
-         else if (n->droit != NULL)
+         if ((*a1)->droit != NULL)
          {
-            ajouter_fin(fl, n->droit);
+            ajouter_fin_a(fl, &((*a1)->droit));
          }
       }
-
    }
    if (!ajoute)
    {
       eprintf("Ne peut ajouter %s : ne forme pas un sous-arbre\n", carac);
-      return 1;
+      return 0;
    }
-   return 0;
+   return 1;
 }
-
 
 void liste_animaux(arbre *a, liste_t *liste)
 {
@@ -271,14 +267,15 @@ void liste_animaux(arbre *a, liste_t *liste)
       if ((*a)->gauche != NULL)
       {
          liste_animaux(&(*a)->gauche, liste);
-         return;
       }
       if ((*a)->droit != NULL)
       {
          liste_animaux(&(*a)->droit, liste);
-         return;
       }
-      ajouter_tete(liste, (*a)->valeur);
+      if ((*a)->gauche == NULL && (*a)->droit == NULL)
+      {
+         ajouter_tete(liste, (*a)->valeur);
+      }
    }
 }
 
@@ -288,44 +285,52 @@ bool est_tout_dedans(liste_t *liste, cellule_t *seq)
    {
       return true;
    }
-   return est_dedans(liste->tete, seq->val) && est_tout_dedans(liste, seq->suivant);
+   bool a = est_dedans(liste->tete, seq->val);
+   if (!a)
+      return false;
+   bool b = est_tout_dedans(liste, seq->suivant);
+   return a && b;
 }
 
-bool est_dedans(cellule_t *liste, char* espece)
+bool est_dedans(cellule_t *liste, char *espece)
 {
-   if(liste == NULL)
+   if (liste == NULL)
    {
       return false;
    }
-   return (strcmp(liste->val, espece)) || est_dedans(liste->suivant, espece);
+   bool a = (strcmp(liste->val, espece) == 0);
+   if (a)
+      return true;
+   bool b = est_dedans(liste->suivant, espece);
+   if (b)
+      return true;
+   return false;
 }
 
 bool est_que_ca(liste_t *liste, cellule_t *seq)
 {
    int lg_seq = 0;
    cellule_t *cell = seq;
-   while(cell != NULL)
+   while (cell != NULL)
    {
       lg_seq++;
       cell = cell->suivant;
    }
-   cell = liste->tete;
-   for (int i = 0; i < lg_seq; i++)
+   cellule_t *cell2 = liste->tete;
+   int lg_liste = 0;
+   while (cell2 != NULL)
    {
-      if(cell == NULL)
-      {
-         return false;
-      }
-      cell = cell->suivant;
+      lg_liste++;
+      cell2 = cell2->suivant;
    }
-   return cell == NULL;
+   return lg_seq == lg_liste;
 }
 
 void inserer_cara(arbre *a, char *carac)
 {
    noeud *n = nouveau_noeud();
-   n->valeur = malloc(sizeof(char)*512);
+   n->valeur = malloc(sizeof(char) * 512);
    strcpy(n->valeur, carac);
-   n->gauche = *a;
+   n->droit = *a;
    *a = n;
 }

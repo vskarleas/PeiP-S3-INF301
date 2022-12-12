@@ -21,18 +21,18 @@ tests_acte3b: acte3b
 tests_acte4: acte4
 	set -e; for f in `ls tests_acte4`; do ./acte4 tests_acte4/$$f; done; printf "\033[0;32mSuccès\033[0m sur l'acte IV !\n"
 
-OBJS= arbres.o arbresphylo.o listes.o common_tests.o file.o
+OBJS= arbres.o arbresphylo.o listes.o common_tests.o file.o file_a.o
 acte1: acte1.o $(OBJS)
 acte2: acte2.o $(OBJS)
 acte3: acte3.o $(OBJS)
 acte3b: acte3b.o $(OBJS)
 acte4: acte4.o $(OBJS)
 
-.PHONY: tests_acte1 tests_acte2 tests_acte3 tests_acte3b tests_acte4
+.PHONY: tests_acte1 tests_acte2 tests_acte3 tests_acte3b tests_acte4 
 
 # Ici, on utilise l'"intelligence" de 'make' qui saura tout seul
 # comment créer les .o à partir des .c
-main: main.o arbresphylo.o arbres.o listes.o file.o
+main: main.o arbresphylo.o arbres.o listes.o file.o file_a.o
 
 clean:
 	rm -f $(PROGS) *.o
