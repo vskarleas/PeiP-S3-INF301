@@ -80,4 +80,11 @@ fonction carac_espece(arbre a, pile p, espece e)
             retourne vrai
         sinon retourne faux
 
-
+fontion ajouter_carac(arbre *a, char *carac, cellule_t *seq)
+    bool: tout_debut
+    bool: que_ca
+    bool: ajoute
+    file <- {racine}
+    tant que file pas VIDE faire 
+        n <- pop(file)
+        .
