@@ -87,4 +87,4 @@ fontion ajouter_carac(arbre *a, char *carac, cellule_t *seq)
     file <- {racine}
     tant que file pas VIDE faire 
         n <- pop(file)
-        ...
+        .
