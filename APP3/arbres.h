@@ -1,6 +1,8 @@
 #ifndef ARBRES_H
 #define ARBRES_H
 
+#include <stdio.h>
+
 /* Structure d'un noeud d'arbre */
 struct noeud_s;
 typedef struct noeud_s noeud;

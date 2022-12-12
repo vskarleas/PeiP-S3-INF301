@@ -28,12 +28,26 @@ void liberer_liste(liste_t *L)
 
 int ajouter_tete(liste_t *L, string c)
 { /* retourne 0 si OK, 1 sinon  */
-    // renvoyer 1 si les mallocs renvoient null (plus assez de memoire)
+    // renvoyer 1 si les mallocs renvoient null (plus assez de memoire)c 
     cellule_t *nv_tete = malloc(sizeof(cellule_t));
-    nv_tete->val = malloc(sizeof(char) * strlen(c));
+    if (nv_tete == NULL)
+    {
+        return 1;
+    }
+    if (c!=NULL && c[0] == '\0')
+    {
+
+        nv_tete->val = malloc(sizeof(char) * strlen(c));
+        strcpy(nv_tete->val, c);
+    }
+    else
+    {
+    nv_tete->val = malloc(1);
+    nv_tete->val[0] = '\0';
+    }
     nv_tete->suivant = L->tete;
-    strcpy(nv_tete->val, c);
     L->tete = nv_tete;
+
     return 0;
 }
 
@@ -63,9 +77,7 @@ string depiler(liste_t *L)
 {
     string ret = malloc(sizeof(strlen(L->tete->val)));
     strcpy(ret, L->tete->val);
-    cellule_t *tete = L->tete;
     L->tete = L->tete->suivant;
-    //free(tete);
     return ret;
 }
 

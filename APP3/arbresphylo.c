@@ -6,6 +6,7 @@
 #include "arbres.h"
 #include "arbresphylo.h"
 #include "listes.h"
+#include "file.h"
 
 #define eprintf(...) fprintf(stderr, __VA_ARGS__)
 
@@ -172,9 +173,47 @@ void afficher_par_niveau(arbre racine, FILE* fout)
    if (racine!=NULL)
    {
       int index_noeud = 0;
-      int nb_noeuds_passes = 0;
-      int nb_noeud_niveau_prochaine = 0;
-      
+      int nb_noeuds_passes = 1;
+      int nb_noeuds_niveau_prochain = 0;
+      /*
+      if (racine->gauche != NULL)
+      {
+         nb_noeuds_niveau_prochain++;
+      }
+      if (racine->droit != NULL)
+      {
+         nb_noeuds_niveau_prochain++;
+      }
+      */
+      file *fl = nvelle_file();
+      ajouter_fin(fl, racine);
+      while (!est_vide_file(fl))
+      {
+         noeud *n = tete_file(fl);
+         supprimer_tete(fl);
+         index_noeud++;
+         
+         if (est_carac(n))
+         {
+            fprintf(fout, "%s ", n->valeur);
+            if (n->gauche != NULL)
+            {
+               nb_noeuds_niveau_prochain++;
+               ajouter_fin(fl, n->gauche); 
+            }
+            if (n->droit != NULL)
+            {
+               nb_noeuds_niveau_prochain++;
+               ajouter_fin(fl, n->droit);
+            }
+         }
+         if (index_noeud == nb_noeuds_passes)
+         {
+            nb_noeuds_passes += nb_noeuds_niveau_prochain;
+            nb_noeuds_niveau_prochain = 0;
+            fprintf(fout, "\n");
+         }
+      }
    }
 }
 
@@ -183,6 +222,110 @@ void afficher_par_niveau(arbre racine, FILE* fout)
 
 int ajouter_carac(arbre *a, char *carac, cellule_t *seq)
 {
-   printf("<<<<< À faire: fonction ajouter_carac fichier " __FILE__ "\n >>>>>");
+   bool tout_dedans;
+   bool que_ca;
+   bool ajoute = false;
+   file *fl = nvelle_file();
+   liste_t *animaux = malloc(sizeof(liste_t));
+   init_liste_vide(animaux);
+   ajouter_fin(fl, *a);
+   while (!est_vide_file(fl) && !ajoute)
+   {
+      noeud *n = tete_file(fl);
+      supprimer_tete(fl);
+      liste_animaux(&n, animaux);
+      tout_dedans = est_tout_dedans(animaux, seq);
+      if (tout_dedans)
+      {
+         que_ca = est_que_ca(animaux, seq);
+         if (que_ca)
+         {
+            inserer_cara(&n, carac);
+            ajoute = true;
+            return 0;
+         }
+         else if (n->gauche != NULL)
+         {
+            ajouter_fin(fl, n->gauche);
+         }
+         else if (n->droit != NULL)
+         {
+            ajouter_fin(fl, n->droit);
+         }
+      }
+
+   }
+   if (!ajoute)
+   {
+      eprintf("Ne peut ajouter %s : ne forme pas un sous-arbre\n", carac);
+      return 1;
+   }
    return 0;
+}
+
+
+void liste_animaux(arbre *a, liste_t *liste)
+{
+   if (a != NULL)
+   {
+      if ((*a)->gauche != NULL)
+      {
+         liste_animaux(&(*a)->gauche, liste);
+         return;
+      }
+      if ((*a)->droit != NULL)
+      {
+         liste_animaux(&(*a)->droit, liste);
+         return;
+      }
+      ajouter_tete(liste, (*a)->valeur);
+   }
+}
+
+bool est_tout_dedans(liste_t *liste, cellule_t *seq)
+{
+   if (seq == NULL)
+   {
+      return true;
+   }
+   return est_dedans(liste->tete, seq->val) && est_tout_dedans(liste, seq->suivant);
+}
+
+bool est_dedans(cellule_t *liste, char* espece)
+{
+   if(liste == NULL)
+   {
+      return false;
+   }
+   return (strcmp(liste->val, espece)) || est_dedans(liste->suivant, espece);
+}
+
+bool est_que_ca(liste_t *liste, cellule_t *seq)
+{
+   int lg_seq = 0;
+   cellule_t *cell = seq;
+   while(cell != NULL)
+   {
+      lg_seq++;
+      cell = cell->suivant;
+   }
+   cell = liste->tete;
+   for (int i = 0; i < lg_seq; i++)
+   {
+      if(cell == NULL)
+      {
+         return false;
+      }
+      cell = cell->suivant;
+   }
+   return cell == NULL;
+}
+
+void inserer_cara(arbre *a, char *carac)
+{
+   noeud *n = nouveau_noeud();
+   n->valeur = malloc(sizeof(char)*512);
+   strcpy(n->valeur, carac);
+   n->gauche = *a;
+   *a = n;
 }

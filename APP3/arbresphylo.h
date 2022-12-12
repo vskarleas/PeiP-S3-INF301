@@ -38,5 +38,14 @@ void afficher_par_niveau(arbre racine, FILE* fout);
 // espèces/feuilles.
 int ajouter_carac(arbre* a, char* carac, cellule_t* seq);
 
+void liste_animaux(arbre *a, liste_t *liste);
+
+bool est_tout_dedans(liste_t *liste, cellule_t *seq);
+
+bool est_dedans(cellule_t *liste, char *espece);
+
+bool est_que_ca(liste_t *liste, cellule_t *seq);
+
+void inserer_cara(arbre *a, char *carac);
 
 #endif
