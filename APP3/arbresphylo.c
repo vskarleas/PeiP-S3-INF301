@@ -18,6 +18,7 @@ void analyse_arbre(arbre racine, int *nb_esp, int *nb_carac)
    compte_esp_carac(racine, nb_esp, nb_carac);
 }
 
+/*Trouve le nombre des especes et des caracteristiques sur un arbre donné*/
 void compte_esp_carac(arbre racine, int *nb_esp, int *nb_carac)
 {
    if (racine != NULL)
@@ -36,11 +37,13 @@ void compte_esp_carac(arbre racine, int *nb_esp, int *nb_carac)
    }
 }
 
+/*Fonction principale qui ouvre le fichier ou 
+l'arbre en format dot va être sauvegradé*/
 void creer_graph(arbre a, char *nom_fichier)
 {
    FILE *f = fopen(nom_fichier, "w");
    fprintf(f, "digraph arbre {\n");
-   ecrire_arbre(a, f);
+   ecrire_arbre(a, f); //Analyse de l'arbre qui le transform en format dot
    fprintf(f, "}\n");
    fclose(f);
 }
@@ -88,12 +91,13 @@ bool carac_espece(arbre a, liste_t *seq, char *espece)
 {
    if (a == NULL)
    {
-      return false;
+      return false; //Par definition si l'arbre est vide, il est impossible que l'espece existe
    }
    if (strcmp(espece, a->valeur) == 0)
    {
       return true;
    }
+   /*On verifie les valeurs des fils recursivement*/
    if (a->gauche != NULL)
    {
       if (carac_espece(a->gauche, seq, espece))
@@ -113,7 +117,7 @@ bool carac_espece(arbre a, liste_t *seq, char *espece)
 }
 
 /* Doit renvoyer 0 si l’espèce a bien ete ajoutee, 1 sinon, et ecrire un
- * message d'erreur.
+ * message d'erreur. Objectif: Ajouter un espece dans un arbre phylogenetique
  */
 int ajouter_espece(arbre *a, char *espece, cellule_t *seq)
 {
@@ -252,6 +256,7 @@ int ajouter_carac(arbre *a, char *carac, cellule_t *seq)
    liste_t *animaux = malloc(sizeof(liste_t));
    init_liste_vide(animaux);
    ajouter_fin_a(fl, a);
+   /**/
    while (!est_vide_file_a(fl) && !ajoute)
    {
       arbre *a1 = tete_file_a(fl);
@@ -261,6 +266,10 @@ int ajouter_carac(arbre *a, char *carac, cellule_t *seq)
       if (tout_dedans)
       {
          que_ca = est_que_ca(animaux, seq);
+         /* FIXME: Si cette fonction renvoi true, alors on admet qu'il que l'espece qu'on
+a commencé la verification dans la liste. Ici on ne verifie que le 
+longueur de la liste et de la sequence, comme on a déjà verifié que l'espece est 
+dans la liste via la fonction "est_tout_dedans". */
          if (que_ca)
          {
             //FIXME:Si dans la sequence, il y a tous les elements est pas plus alors on ajoute la caractéristique
@@ -288,6 +297,8 @@ int ajouter_carac(arbre *a, char *carac, cellule_t *seq)
 }
 
 //FIXME: je ne sais plus exactement
+/*Creation d'une liste des especes par un arbre
+passé en argument.*/
 void liste_animaux(arbre *a, liste_t *liste)
 {
    if (a != NULL)
@@ -302,12 +313,15 @@ void liste_animaux(arbre *a, liste_t *liste)
       }
       if ((*a)->gauche == NULL && (*a)->droit == NULL)
       {
+         /*On a trouvé un espece, alors on l'ajout sur la 
+         liste ou on a son addresse memoire en argument de 
+         la fonction "liste_animaux"*/
          ajouter_tete(liste, (*a)->valeur);
       }
    }
 }
 
-/*REvoi true si tous les elements de la sequence sont dans la liste, false sinon*/
+/*Revoi true si tous les elements de la sequence sont dans la liste, false sinon*/
 bool est_tout_dedans(liste_t *liste, cellule_t *seq)
 {
    if (seq == NULL)
@@ -321,17 +335,18 @@ bool est_tout_dedans(liste_t *liste, cellule_t *seq)
    return a && b;
 }
 
-/*Renvoi true si l'espece est dans la liste, false sinon*/
+/*Renvoi true si l'espece est dans la 
+liste passé en argument, false sinon*/
 bool est_dedans(cellule_t *liste, char *espece)
 {
    if (liste == NULL)
    {
-      return false;
+      return false; //Par definition, si la liste est vide, alors impossible que l'espece est dans la liste
    }
-   bool a = (strcmp(liste->val, espece) == 0);
+   bool a = (strcmp(liste->val, espece) == 0); //Comparaison avec la tete de la liste
    if (a)
       return true;
-   bool b = est_dedans(liste->suivant, espece);
+   bool b = est_dedans(liste->suivant, espece);//Comparaison avec la reste de la liste recursivement
    if (b)
       return true;
    return false;
@@ -341,20 +356,24 @@ bool est_dedans(cellule_t *liste, char *espece)
 si dans le liste et la séquence il n'y a pas plus d'elements, false sinon*/
 bool est_que_ca(liste_t *liste, cellule_t *seq)
 {
+   //Initialisation des variables
    int lg_seq = 0;
+   int lg_liste = 0;
    cellule_t *cell = seq;
+   //Parcours de la liste
    while (cell != NULL)
    {
       lg_seq++;
       cell = cell->suivant;
    }
    cellule_t *cell2 = liste->tete;
-   int lg_liste = 0;
+   //Parcours de la sequence
    while (cell2 != NULL)
    {
       lg_liste++;
       cell2 = cell2->suivant;
    }
+   //Comparaison des resultats des parcours
    return lg_seq == lg_liste;
 }
 
@@ -364,6 +383,8 @@ void inserer_cara(arbre *a, char *carac)
    noeud *n = nouveau_noeud();
    n->valeur = malloc(sizeof(char) * 512);
    strcpy(n->valeur, carac);
+   /*On doit l'insere à doit par defintion de l'arbre 
+   phylogenetqiue de l'APP3*/
    n->droit = *a;
    *a = n;
 }

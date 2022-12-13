@@ -1,3 +1,5 @@
+/*Calendrier des seances et algos discutes pendant les seances du TD*/
+
 ##### Seance TD1 #####
 fonction nb_carac(arbre a)
     si a == NULL alors
