@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <string.h>
 
+/*Meme explications suplementaires qu'on
+trouve sue file.c */
+
 /*Cree une nouvelle cellule*/
 cellule_f_a *nvelle_cellule_a()
 {
@@ -55,8 +58,8 @@ void supprimer_tete_a(file_a *fl)
     }
 }
 
-/*Renvoi la tete de la file*/
-arbre *tete_file_a(file_a *fl)
+/*Renvoi la tete de la file (du type arbre)*/
+arbre *tete_file_a(file_a *fl) //<- Ici on renvoi un arbre au lieu d'un noeud comme on faisait sue file.c
 {
     return fl->tete->valeur;
 }

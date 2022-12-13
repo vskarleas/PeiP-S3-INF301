@@ -28,13 +28,13 @@ void ajouter_fin(file *fl, noeud *n)
 {
     cellule_f *cell = nvelle_cellule();
     cell->valeur = n;
-    if (est_vide_file(fl))
+    if (est_vide_file(fl)) //Verification si la file est vide
     {
         fl->queue = cell;
         fl->tete = cell;
     }
     else
-    {
+    {//Si file pas vide, alors tete est change et nouvelle cellule est ajouté dans le queue
         fl->queue->suivant = cell;
         cell->precedent = fl->queue;
         fl->queue = cell;
@@ -55,7 +55,7 @@ void supprimer_tete(file *fl)
     }
 }
 
-/*Renvoi la tete de la file*/
+/*Renvoi la tete de la file (du type noeud)*/
 noeud *tete_file(file *fl)
 {
     return fl->tete->valeur;
@@ -64,12 +64,12 @@ noeud *tete_file(file *fl)
 /*Renvoi true si la file est vide, false sinon*/
 bool est_vide_file(file *fl)
 {
-    if (fl->tete == NULL)
+    if (fl->tete == NULL) //Verification que la tete est video
     {
-        if (fl->queue == NULL)
+        if (fl->queue == NULL)//Verification que la queue de la file vide aussi
         {
-            return true;
-        }
+            return true; //Allor retourne true
+        } //sinon par definition, si queue de la file n'est pas NULL, il y auccun moyenne que la tete est vide aussi
         fprintf(stderr, "\033[0;31mTete de la file vide mais queue non vide !\n\033[0m");
 
         exit(1);

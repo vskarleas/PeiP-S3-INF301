@@ -8,15 +8,17 @@ A lire absolument !
 
 Renseignez ici les noms des membres de votre binôme :
 
-Nom1 - prénom1 : ....
-Nom2 - prénom2 : ....
+Nom1 - prénom1 : Simon Noan
+Nom2 - prénom2 : Trehin Gwendal
+Nom3 - prénom3 : Skarleas Vasileios
 
 Si vous avez des commentaires, remarques etc. pour le rendu, vous pouvez les 
 mettre ici:
 
-...
-...
-...
+On a ajouté les suivantes fichiers:
+- liste.c (liste.h): Fonctions utilisés pour traiter des listes chaines
+- file.c (file.h): Fonctions utilisés pour manipuler des files comme en Acte 3B avec le parcours en largeur
+- file_a.c (file_a.h): Changement de structure de la file qui accepte un arbre comme valeur au lieu d'un noeud
 
 
 
