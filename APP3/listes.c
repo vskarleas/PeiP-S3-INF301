@@ -7,11 +7,13 @@
 
 /* fichier à complvaléter au besoin */
 
+/*Initialisation de la liste*/
 void init_liste_vide(liste_t *L)
 {
     L->tete = NULL;
 }
 
+/*Libere la liste*/
 void liberer_liste(liste_t *L)
 {
     if (L != NULL)
@@ -26,6 +28,7 @@ void liberer_liste(liste_t *L)
     }
 }
 
+/*Ajoute un string à la liste*/
 int ajouter_tete(liste_t *L, string c)
 { /* retourne 0 si OK, 1 sinon  */
     // renvoyer 1 si les mallocs renvoient null (plus assez de memoire)c 
@@ -51,6 +54,7 @@ int ajouter_tete(liste_t *L, string c)
     return 0;
 }
 
+/*Affiche la liste*/
 void afficher_liste_t(liste_t *L)
 {
     printf("[ ");
@@ -59,6 +63,7 @@ void afficher_liste_t(liste_t *L)
     printf("]\n");
 }
 
+/*Affiche la valeur de la cellule*/
 void afficher_aaaa(cellule_t *cell)
 {
     if (cell != NULL)
@@ -68,11 +73,13 @@ void afficher_aaaa(cellule_t *cell)
     }
 }
 
+/*Revoi true si la liste est vide, false sinon*/
 bool est_vide(liste_t *L)
 {
     return (L->tete == NULL);
 }
 
+/*Depile la premiere valeur de la liste*/
 string depiler(liste_t *L)
 {
     string ret = malloc(sizeof(strlen(L->tete->val)));
@@ -81,11 +88,13 @@ string depiler(liste_t *L)
     return ret;
 }
 
+/*Renvoi la tete de la liste*/
 cellule_t *tete(liste_t *L)
 {
     return L->tete;
 }
 
+/*Renvoi la valeur de la cellule*/
 char *valeur(cellule_t *cell)
 {
     return cell->val;

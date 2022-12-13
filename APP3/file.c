@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
+/*Cree une nouvelle cellule*/
 cellule_f *nvelle_cellule()
 {
     cellule_f *cell = malloc(sizeof(cellule_f));
@@ -13,6 +14,7 @@ cellule_f *nvelle_cellule()
     return cell;
 }
 
+/*Cree une nouvelle file*/
 file *nvelle_file()
 {
     file *fl = malloc(sizeof(file));
@@ -21,6 +23,7 @@ file *nvelle_file()
     return fl;
 }
 
+/*Ajoute une valeur à la fin de la file */
 void ajouter_fin(file *fl, noeud *n)
 {
     cellule_f *cell = nvelle_cellule();
@@ -38,6 +41,7 @@ void ajouter_fin(file *fl, noeud *n)
     }
 }
 
+/*Supprime la tete de la file quand on l'enleve de la file*/
 void supprimer_tete(file *fl)
 {
     if (fl->tete == fl->queue)
@@ -51,11 +55,13 @@ void supprimer_tete(file *fl)
     }
 }
 
+/*Renvoi la tete de la file*/
 noeud *tete_file(file *fl)
 {
     return fl->tete->valeur;
 }
 
+/*Renvoi true si la file est vide, false sinon*/
 bool est_vide_file(file *fl)
 {
     if (fl->tete == NULL)

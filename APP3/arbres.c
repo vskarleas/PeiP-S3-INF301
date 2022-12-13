@@ -7,6 +7,7 @@
 
 #include "arbres.h"
 
+/*Initialise un nouveau noeud*/
 noeud* nouveau_noeud(void)
 {
     noeud *n = (noeud*)malloc(sizeof(noeud));
