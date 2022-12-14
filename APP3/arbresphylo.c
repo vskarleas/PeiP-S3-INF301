@@ -194,16 +194,6 @@ void afficher_par_niveau(arbre racine, FILE *fout)
       int index_noeud = 0;
       int nb_noeuds_passes = 1;
       int nb_noeuds_niveau_prochain = 0;
-      /*
-      if (racine->gauche != NULL)
-      {
-         nb_noeuds_niveau_prochain++;
-      }
-      if (racine->droit != NULL)
-      {
-         nb_noeuds_niveau_prochain++;
-      }
-      */
       /*Creation de la file et ajout de la racine dans la file*/
       file *fl = nvelle_file();
       ajouter_fin(fl, racine);
@@ -296,26 +286,26 @@ dans la liste via la fonction "est_tout_dedans". */
    return 1;
 }
 
-//FIXME: je ne sais plus exactement
-/*Creation d'une liste des especes par un arbre
-passé en argument.*/
-void liste_animaux(arbre *a, liste_t *liste)
+/* Ajoute toutes les especes de l'arbre passé en argument dans la liste passée en argument*/
+void liste_especes(arbre *a, liste_t *liste)
 {
    if (a != NULL)
    {
       if ((*a)->gauche != NULL)
       {
-         liste_animaux(&(*a)->gauche, liste);
+         liste_especes(&(*a)->gauche, liste);
       }
       if ((*a)->droit != NULL)
       {
-         liste_animaux(&(*a)->droit, liste);
+         liste_especes(&(*a)->droit, liste);
       }
       if ((*a)->gauche == NULL && (*a)->droit == NULL)
       {
-         /*On a trouvé un espece, alors on l'ajout sur la 
-         liste ou on a son addresse memoire en argument de 
-         la fonction "liste_animaux"*/
+         /*
+         On est arrivé a une feuille,
+         donc on a trouvé une espece, alors on l'ajout sur la
+         liste ou on a son addresse memoire en argument de
+         la fonction "liste_especes"*/
          ajouter_tete(liste, (*a)->valeur);
       }
    }

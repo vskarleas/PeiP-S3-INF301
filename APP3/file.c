@@ -64,7 +64,7 @@ noeud *tete_file(file *fl)
 /*Renvoi true si la file est vide, false sinon*/
 bool est_vide_file(file *fl)
 {
-    if (fl->tete == NULL) //Verification que la tete est video
+    if (fl->tete == NULL) //Verification que la tete est vide
     {
         if (fl->queue == NULL)//Verification que la queue de la file vide aussi
         {

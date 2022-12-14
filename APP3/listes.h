@@ -41,7 +41,7 @@ int ajouter_tete(liste_t *L, string c);
 
 void afficher_liste_t(liste_t *L);
 
-void afficher_aaaa(cellule_t *cell);
+void afficher_cellule(cellule_t *cell);
 
 bool est_vide(liste_t *L);
 

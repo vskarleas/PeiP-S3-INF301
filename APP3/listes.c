@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include "listes.h"
 
-/* fichier à complvaléter au besoin */
+/* fichier à compléléter au besoin */
 
 /*Initialisation de la liste*/
 void init_liste_vide(liste_t *L)
@@ -58,18 +58,18 @@ int ajouter_tete(liste_t *L, string c)
 void afficher_liste_t(liste_t *L)
 {
     printf("[ ");
-    afficher_aaaa(L->tete);
+    afficher_cellule(L->tete);
 
     printf("]\n");
 }
 
 /*Affiche la valeur de la cellule*/
-void afficher_aaaa(cellule_t *cell)
+void afficher_cellule(cellule_t *cell)
 {
     if (cell != NULL)
     {
         printf("%s, ", cell->val);
-        afficher_aaaa(cell->suivant);
+        afficher_cellule(cell->suivant);
     }
 }
 
