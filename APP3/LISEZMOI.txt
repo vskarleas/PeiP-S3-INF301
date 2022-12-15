@@ -22,23 +22,22 @@ On a ajouté les suivantes fichiers:
 
 
 *************************** Acte 5 *****************************
-Pour l'acte 5 on a decidé qu'on utilisera un fichier en format csv pour faire la lecture. C'est pourquoi, on
-devrait manipuler la lecture d'un fichier de ce format. Grace à la librairie <curses.h>, on etait capable
+Pour l'acte 5 on a decidé d'utiliser un fichier en format csv réussir à faire la lecture de la table. Grace à la librairie <curses.h>, on est capable
 d'utiliser le comportment de fgets() pour faciliter la manipulation de la lecture. 
 
-L'idee principal est de cree deux listes. Une qui inclut les caracteristiques et une qui inclut le nombre des oui deux
-pour chaque espece dans le fichier. Aussi, on etait focailisé sur la creation d'une liste chaine de liste chaine qui 
-inclut les especes de chaque caracteristique.
+L'idee principal est de cree deux listes. Une qui inclut les caracteristiques et une qui inclut le nombre de oui
+pour chaque espece dans le fichier. Aussi, on a crée une liste chaine de liste chaine dans laquelle les especes 
+sont associées à leur caracteristiques.
 
-Quand on a construit ces trois listes, c'est le moment de filtrer les donnes et reconstruire le tableu du corespondance.
+Quand on a construit ces trois listes, c'est le moment de filtrer les donnes et reconstruire le tableau de correspondance.
 
 Alors on a l'algoritme suivant:
 //FIXME: Ajouter le pseudocde de l'algo
 
-Malheursmenent, on n'avait pas le temps de deboger chaque fonction de l'Acte 5 et ainsi le code n'est pas fonctionnel.
-Le comportment general serait que en execution de l'acte5, il prendra un fichier csv en argument ainsi que le nombre
-des caracteristiques. Apres la construction de l'arbre, il faisait une construction d'un fichier en format .dot pour 
-qu'on peut visualiser l'arbre.
+Malheuresement, on n'a pas ey le temps de deboger chaque fonction de l'Acte 5 et ainsi le code n'est pas fonctionnel.
+Le comportement general serait que en execution de l'acte5, il prend un fichier csv en argument ainsi que le nombre
+de caracteristique. Apres la construction de l'arbre, il fait une construction d'un fichier en format .dot pour 
+qu'on puisse visualiser l'arbre.
 
 
 Travail à effectuer:
