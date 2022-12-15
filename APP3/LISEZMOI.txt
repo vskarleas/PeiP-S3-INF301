@@ -31,8 +31,109 @@ sont associées à leur caracteristiques.
 
 Quand on a construit ces trois listes, c'est le moment de filtrer les donnes et reconstruire le tableau de correspondance.
 
-Alors on a l'algoritme suivant:
-//FIXME: Ajouter le pseudocde de l'algo
+Alors on a l'algoritme suivant (implication en c sur le fichier table_phylo.c):
+  liste chaine: caracteristiques <- {}
+  liste chaine: nb_oui <- {}
+  liste chaine: table <- {}
+  arbre racine <- nouvel_arbre()
+  lire_fichier(fichier_csv, nb_carac, caracteristiques, table)
+  cell_table <- nouvelle cellule
+  cell_table = table->tete;
+  tant que cell_table != NULL faire
+      ajouter_espece(racine, cell_table->carac, cell_table->especes->tete);
+      cell_table = cell_table->suivant;
+  fin tant que
+  afficher_arbre(racine)
+
+
+
+lire_fichier(string: nom_fichier, int: nb_carac, liste chaine: caracs, liste chaine: table)
+    char ligne[TAILLE_MAX_LIGNE];
+    int index_colonne <- 0
+    string contenu_case <- NULL
+    tant que index_colonne < nb_carac faire
+        si index_colonne == 0
+            continue;
+        fin si
+        ajouter_tete(caracs, contenu_case)
+        index_colonne++
+    fin tant que
+    cell_carac <- nouvelle cellule
+    tant que LIGNE pas VIDE faire
+        cell_carac = caracs->tete
+        lire contenu_case
+        tant que index_colonne < nb_carac faire
+          si index_colonne == 0
+            ajouter_tete_p(table, contenu_case)
+          fin si
+          si contenu_case == "oui" alors
+            ajouter_tete(cell_carac->especes, contenu_case)
+            cell_carac->nb_especes++
+          fin si
+          index_colonne++
+          cell_carac = cell_carac->suivant;
+        fin tant que
+    fin tant que
+    tri_liste(caracs)
+    cell_especes <- nouvelle cellule
+    cell_carac = caracs->tete
+    tant que cell_carac pas NULL faire
+        cell_especes = cell_carac->especes->tete
+        tant que cell_especes pas NULL faire
+            ajouter_carac_a_espece(table, cell_especes->val, cell_carac->carac)
+            cell_especes = cell_especes->suivant
+        fin tant que
+        cell_carac = cell_carac->suivant
+    fin tant que
+
+
+
+ajouter_carac_a_espece(liste chaine: table, string espece, string carac)
+    cell <- nouvelle cellule
+    cell = table->tete
+    tant que cell->carac != espece
+        cell = cell->suivant
+    fin tant que
+    ajouter_tete(cell->especes, carac)
+
+
+
+tri_liste(liste chaine: caracs)
+  cell <- nouvelle cellule
+  cell = l->tete;
+  si l->tete != NULL
+    l->tete = l->tete->suivant;
+  fin si
+  l_tmp <- nouvelle liste chaine
+  l_tmp.tete = NULL
+  tant que cell pas NULL faire
+      cell->suivant = NULL
+      insertion_trie_croissant(l_tmp, cell)
+      cell = l->tete
+      si l->tete != NULL
+        l->tete = l->tete->suivant
+      fin si
+    l->tete = l_tmp.tete
+  fin tant que
+
+
+
+insertion_trie_croissant(liste chaine: l, cellule: cell)
+   cell_l <- nouvelle cellule
+   cell_l = l->tete
+   si cell_l == NULL
+        l->tete = cell
+        exit
+    fin si
+    si cell->nb_especes < cell_l->nb_especes
+        cell->suivant = l->tete
+        l->tete = cell
+    fin si
+    tant que (cell_l->suivant != NULL) && (cell_l->nb_especes < cell_l->suivant->nb_especes)
+        cell_l = cell_l->suivant;
+    fin tant que
+    cell->suivant = cell_l->suivant
+    cell_l->suivant = cell
 
 Malheuresement, on n'a pas ey le temps de deboger chaque fonction de l'Acte 5 et ainsi le code n'est pas fonctionnel.
 Le comportement general serait que en execution de l'acte5, il prend un fichier csv en argument ainsi que le nombre
