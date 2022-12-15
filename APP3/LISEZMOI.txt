@@ -39,7 +39,7 @@ Alors on a l'algoritme suivant (implication en c sur le fichier table_phylo.c):
   lire_fichier(fichier_csv, nb_carac, caracteristiques, table)
   cell_table <- nouvelle cellule
   cell_table = table->tete;
-  tant que cell_table != NULL faire
+  tant que cell_table != NULL faire           # ce parcours devrait d'ailleurs etre fait dans l'ordre decroissant du nombre de caractéristiques
       ajouter_espece(racine, cell_table->carac, cell_table->especes->tete);
       cell_table = cell_table->suivant;
   fin tant que
