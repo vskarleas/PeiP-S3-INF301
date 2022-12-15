@@ -21,6 +21,25 @@ On a ajouté les suivantes fichiers:
 - file_a.c (file_a.h): Changement de structure de la file qui accepte un arbre comme valeur au lieu d'un noeud
 
 
+*************************** Acte 5 *****************************
+Pour l'acte 5 on a decidé qu'on utilisera un fichier en format csv pour faire la lecture. C'est pourquoi, on
+devrait manipuler la lecture d'un fichier de ce format. Grace à la librairie <curses.h>, on etait capable
+d'utiliser le comportment de fgets() pour faciliter la manipulation de la lecture. 
+
+L'idee principal est de cree deux listes. Une qui inclut les caracteristiques et une qui inclut le nombre des oui deux
+pour chaque espece dans le fichier. Aussi, on etait focailisé sur la creation d'une liste chaine de liste chaine qui 
+inclut les especes de chaque caracteristique.
+
+Quand on a construit ces trois listes, c'est le moment de filtrer les donnes et reconstruire le tableu du corespondance.
+
+Alors on a l'algoritme suivant:
+//FIXME: Ajouter le pseudocde de l'algo
+
+Malheursmenent, on n'avait pas le temps de deboger chaque fonction de l'Acte 5 et ainsi le code n'est pas fonctionnel.
+Le comportment general serait que en execution de l'acte5, il prendra un fichier csv en argument ainsi que le nombre
+des caracteristiques. Apres la construction de l'arbre, il faisait une construction d'un fichier en format .dot pour 
+qu'on peut visualiser l'arbre.
+
 
 Travail à effectuer:
 ====================
