@@ -7,7 +7,9 @@ CFLAGS=-g -Wall -Wextra -Wno-unused-parameter
 all: $(PROGS)
 
 tests_acte1: acte1
-	@set -e; for f in `ls tests_acte1`; do ./acte1 tests_acte1/$$f; done; printf "\033[0;32mSuccès\033[0m sur l'acte I !\n"; for f in `ls tests/*.test`; do dot -Tsvg -o $$f.svg $$f.dot; tycat $$f.svg; done
+	@set -e; for f in `ls tests_acte1`; do ./acte1 tests_acte1/$$f; done; printf "\033[0;32mSuccès\033[0m sur l'acte I !\n";\
+
+# 	for f in `ls tests/*.test`; do dot -Tsvg -o $$f.svg $$f.dot; tycat $$f.svg; done
 
 tests_acte2: acte2
 	@set -e; for f in `ls tests_acte2`; do ./acte2 tests_acte2/$$f; done; printf "\033[0;32mSuccès\033[0m sur l'acte II !\n"
