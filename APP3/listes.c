@@ -31,8 +31,8 @@ void liberer_liste(liste_t *L)
 /*Ajoute un string à la liste*/
 int ajouter_tete(liste_t *L, string c)
 { /* retourne 0 si OK, 1 sinon  */
-    // renvoyer 1 si les mallocs renvoient null (plus assez de memoire)c 
-    cellule_t *nv_tete = calloc(1,sizeof(cellule_t));
+    // renvoyer 1 si les mallocs renvoient null (plus assez de memoire)c
+    cellule_t *nv_tete = calloc(1, sizeof(cellule_t));
     if (nv_tete == NULL)
     {
         return 1;
@@ -40,13 +40,13 @@ int ajouter_tete(liste_t *L, string c)
     if (strlen(c) != 0)
     {
 
-        nv_tete->val = malloc(sizeof(char) * (strlen(c)+1));
+        nv_tete->val = malloc(sizeof(char) * (strlen(c) + 1));
         strcpy(nv_tete->val, c);
     }
     else
     {
-    nv_tete->val = malloc(1);
-    nv_tete->val[0] = '\0';
+        nv_tete->val = malloc(1);
+        nv_tete->val[0] = '\0';
     }
     nv_tete->suivant = L->tete;
     L->tete = nv_tete;
@@ -98,4 +98,18 @@ cellule_t *tete(liste_t *L)
 char *valeur(cellule_t *cell)
 {
     return cell->val;
+}
+
+/*Renvoi la longueur de la liste qui commence par cette cellule*/
+int longueur(cellule_t *tete)
+{
+    int lg_liste = 0;
+    cellule_t *cell = tete;
+    // Parcours de la liste
+    while (cell != NULL)
+    {
+        lg_liste++;
+        cell = cell->suivant;
+    }
+    return lg_liste;
 }

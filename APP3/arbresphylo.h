@@ -58,7 +58,7 @@ int ajouter_carac(arbre* a, char* carac, cellule_t* seq);
 //FIXME: je ne sais plus exactement
 /*Creation d'une liste des especes par un arbre
 passé en argument.*/
-void liste_animaux(arbre *a, liste_t *liste);
+void liste_especes(arbre *a, liste_t *liste);
 
 /*Revoi true si tous les elements de la sequence sont dans la liste, false sinon*/
 bool est_tout_dedans(liste_t *liste, cellule_t *seq);

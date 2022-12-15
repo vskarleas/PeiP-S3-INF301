@@ -238,24 +238,29 @@ void afficher_par_niveau(arbre racine, FILE *fout)
 /*Ajouter une caractéristique dans un arbre*/
 int ajouter_carac(arbre *a, char *carac, cellule_t *seq)
 {
+   if (*a == NULL)
+   {
+      return 0;
+   }
    /*Initialisation des variables, liste, file*/
    bool tout_dedans;
    bool que_ca;
    bool ajoute = false;
    file_a *fl = nvelle_file_a();
-   liste_t *animaux = malloc(sizeof(liste_t));
-   init_liste_vide(animaux);
+   liste_t *especes = malloc(sizeof(liste_t));
+   init_liste_vide(especes);
    ajouter_fin_a(fl, a);
    /**/
    while (!est_vide_file_a(fl) && !ajoute)
    {
       arbre *a1 = tete_file_a(fl);
       supprimer_tete_a(fl);
-      liste_animaux(a1, animaux);
-      tout_dedans = est_tout_dedans(animaux, seq);
+      init_liste_vide(especes);
+      liste_especes(a1, especes);
+      tout_dedans = est_tout_dedans(especes, seq);
       if (tout_dedans)
       {
-         que_ca = est_que_ca(animaux, seq);
+         que_ca = est_que_ca(especes, seq);
          /* FIXME: Si cette fonction renvoi true, alors on admet qu'il que l'espece qu'on
 a commencé la verification dans la liste. Ici on ne verifie que le 
 longueur de la liste et de la sequence, comme on a déjà verifié que l'espece est 
@@ -347,22 +352,9 @@ si dans le liste et la séquence il n'y a pas plus d'elements, false sinon*/
 bool est_que_ca(liste_t *liste, cellule_t *seq)
 {
    //Initialisation des variables
-   int lg_seq = 0;
-   int lg_liste = 0;
-   cellule_t *cell = seq;
-   //Parcours de la liste
-   while (cell != NULL)
-   {
-      lg_seq++;
-      cell = cell->suivant;
-   }
-   cellule_t *cell2 = liste->tete;
-   //Parcours de la sequence
-   while (cell2 != NULL)
-   {
-      lg_liste++;
-      cell2 = cell2->suivant;
-   }
+   int lg_seq = longueur(seq);
+   int lg_liste = longueur(liste->tete);
+
    //Comparaison des resultats des parcours
    return lg_seq == lg_liste;
 }

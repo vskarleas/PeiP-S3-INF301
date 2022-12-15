@@ -8,6 +8,8 @@ typedef struct liste liste_t;
 
 typedef char* string;
 
+typedef struct tableau tableau_t;
+
 struct cellule {
 	string val;
 	struct cellule* suivant;
@@ -17,11 +19,6 @@ typedef struct cellule cellule_t;
 
 struct liste {
 	cellule_t *tete;
-};
-
-struct file_t {
-	cellule_t *tete;
-	cellule_t *queue;
 };
 
 typedef struct liste liste_t;
@@ -50,6 +47,8 @@ string depiler(liste_t *L);
 cellule_t *tete(liste_t *L);
 
 char *valeur(cellule_t *cell);
+
+int longueur(cellule_t *tete);
 
 #endif /* _LISTES_H */
 
