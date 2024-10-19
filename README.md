@@ -5,4 +5,4 @@ Vous pouvez acceder à chaque dossier pour voir les fichiers associé. Les dossi
 * Calendar: Tous les details sur le probleme d'APP, notes et discussions
 * Schema de l'algorithme
 
-Le dossier Programs inclue des programs qui etaient presenté pendant l'amphi. Ils sont ecrit en Python ou en C.
+Le dossier Programs inclue des programs qui etaient presenté pendant l'amphi. Ils sont ecrit en Python ou en C
